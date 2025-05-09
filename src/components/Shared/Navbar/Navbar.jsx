@@ -1,149 +1,113 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import "./Navbar.css";
+import AuthContext from "../../../providers/AuthContext";
+import logo from "/logo.png";
+import profile from "../../../assets/user.jpg";
 
 const Navbar = () => {
-  const li = (
-    <>
-      <li className="text-lg font-semibold">
-        <NavLink>Home</NavLink>
-      </li>
+    const { user, logOut } = useContext(AuthContext);
+    // const [profile,setProfile] = useState('')
+    // useEffect(()=>{
+    //     setProfile(user?.photoURL)
+    // },[])
 
-      <li className="text-lg font-semibold">
-        <NavLink>Programs</NavLink>
-      </li>
+    const signOut = () => {
+        logOut();
+    };
+    console.log(user?.photoURL);
 
-      <li className="text-lg font-semibold">
-        <NavLink>Departments</NavLink>
-      </li>
+    return (
+        <div className="navbar bg-base-100 shadow-sm">
+            <div className="navbar-start">
+                <img src={logo} alt="" className="w-12" />
+                <Link to="/" className="btn btn-ghost text-xl">
+                    SM Tech
+                </Link>
+            </div>
+            <div className="navbar-center hidden lg:flex">
+                <ul className="menu menu-horizontal px-1">
+                    <li className="text-lg font-semibold">
+                        <NavLink>Home</NavLink>
+                    </li>
 
-      <li className="text-lg font-semibold">
-        <NavLink>Contact Us</NavLink>
-      </li>
-    </>
-  );
-  return (
-    <div className="navbar bg-base-100 shadow-sm">
-      <div className="navbar-start">
-        <Link to="/" className="btn btn-ghost text-xl">
-          <img
-            src="/logo.png"
-            className="w-8 h-8 md:w-12 md:h-12 rounded-full"
-            alt=""
-          />
-          <span className="hidden md:inline">
-            SM High-Tech Industrial Engineering Care
-          </span>
-        </Link>
-      </div>
+                    <li className="text-lg font-semibold">
+                        <NavLink>Programs</NavLink>
+                    </li>
 
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 justify-end ">{li}</ul>
-      </div>
+                    <li className="text-lg font-semibold">
+                        <NavLink>Departments</NavLink>
+                    </li>
 
-      <div className="navbar-end">
-        <button className="btn btn-neutral bg-[#07a698] hover:bg-[#01998c] border-none rounded-3xl px-6 py-2 text-white">
-          Login
-        </button>
-        <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-          >
-            {li}
-          </ul>
+                    <li className="text-lg font-semibold">
+                        <NavLink>Contact Us</NavLink>
+                    </li>
+                </ul>
+            </div>
+            <div className="navbar-end gap-4">
+                <label className="swap swap-rotate"></label>
+                <div className="dropdown dropdown-end z-50">
+                    <div
+                        tabIndex={1}
+                        className="tooltip tooltip-bottom"
+                        data-tip={user?.displayName}
+                    >
+                        {user?.photoURL ? (
+                            <img
+                                src={user?.photoURL}
+                                className="w-12 h-12 rounded-full"
+                                alt="User"
+                            />
+                        ) : (
+                            <img
+                                src={profile}
+                                className="w-12 h-12 rounded-full"
+                                alt="User"
+                            />
+                        )}
+                    </div>
+                    <ul
+                        tabIndex={1}
+                        className="menu menu-md dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                    >
+                        <li className="text-lg font-semibold">
+                            <NavLink>Home</NavLink>
+                        </li>
+
+                        <li className="text-lg font-semibold">
+                            <NavLink>Programs</NavLink>
+                        </li>
+
+                        <li className="text-lg font-semibold">
+                            <NavLink>Departments</NavLink>
+                        </li>
+
+                        <li className="text-lg font-semibold">
+                            <NavLink>Contact Us</NavLink>
+                        </li>
+                        {user ? (
+                            <li
+                                onClick={signOut}
+                                className="text-lg font-semibold"
+                            >
+                                <Link>Logout</Link>
+                            </li>
+                        ) : (
+                            <li className="text-lg font-semibold">
+                              <Link to="/login">
+                                
+                                    Login
+                                
+                            </Link>
+                            </li>
+                        )}
+                    </ul>
+                </div>
+
+                {user ? <></> : <></>}
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Navbar;
-
-// ----------------> Tanvir Code Without Login Button <----------------
-// import React from "react";
-// import { Link, NavLink } from "react-router-dom";
-
-// const Navbar = () => {
-//   const li = (
-//     <>
-//       <li className="text-lg font-semibold">
-//         <NavLink>Home</NavLink>
-//       </li>
-
-//       <li className="text-lg font-semibold">
-//         <NavLink>Programs</NavLink>
-//       </li>
-
-//       <li className="text-lg font-semibold">
-//         <NavLink>Departments</NavLink>
-//       </li>
-
-//       <li className="text-lg font-semibold">
-//         <NavLink>Contact Us</NavLink>
-//       </li>
-//     </>
-//   );
-//   return (
-//     <div className="navbar bg-base-100 shadow-sm">
-//       <div className="navbar-start">
-//         <Link to="/" className="btn btn-ghost text-xl">
-//           <img
-//             src="/logo.png"
-//             className="w-8 h-8 md:w-12 md:h-12 rounded-full"
-//             alt=""
-//           />
-//           <span className="hidden md:block">
-//             SM High-Tech Industrial Engineering Care
-//           </span>
-//         </Link>
-//       </div>
-//       <div className="navbar-center "></div>
-//       <div className="navbar-end">
-//         <ul className="menu menu-horizontal px-1 hidden lg:flex">{li}</ul>
-
-//         <div className="dropdown dropdown-end">
-//           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-//             <svg
-//               xmlns="http://www.w3.org/2000/svg"
-//               className="h-5 w-5"
-//               fill="none"
-//               viewBox="0 0 24 24"
-//               stroke="currentColor"
-//             >
-//               <path
-//                 strokeLinecap="round"
-//                 strokeLinejoin="round"
-//                 strokeWidth="2"
-//                 d="M4 6h16M4 12h8m-8 6h16"
-//               />
-//             </svg>
-//           </div>
-//           <ul
-//             tabIndex={0}
-//             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-//           >
-//             {li}
-//           </ul>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Navbar;
