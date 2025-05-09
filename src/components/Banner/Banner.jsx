@@ -527,7 +527,7 @@ const Banner = () => {
               >
                 <div className="relative group">
                   <Link
-                    to={course.route}
+                    to={course.category}
                     className="px-6 py-2 border border-white text-white rounded-full font-medium transition-all duration-300 group-hover:bg-white group-hover:text-[#07a698] cursor-pointer "
                   >
                     <span className="inline-block transition-all duration-300 group-hover:-translate-x-2 group-hover:text-transparent  ">
