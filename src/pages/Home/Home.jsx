@@ -1,9 +1,26 @@
-import React from 'react';
+import React from "react";
+import Banner from "../../components/Banner/Banner";
+import AboutUs from "../../components/AboutUs/AboutUs";
+// import Trusted from "../../components/Trusted/Trusted";
+import FeaturedCourses from "../../components/FeaturedCourses/FeaturedCourses";
 
 const Home = () => {
   return (
     <div>
-      <h3 className='text-xl'>This is Home Page</h3>
+      <Banner />
+      <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1600px] mx-auto flex items-center">
+        <AboutUs />
+      </div>
+      {/* <div>
+        <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1600px] mx-auto ">
+          <Trusted></Trusted>
+        </div>
+      </div> */}
+      <div className="bg-[#f5f7f8]">
+        <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1600px] mx-auto ">
+          <FeaturedCourses />
+        </div>
+      </div>
     </div>
   );
 };
