@@ -148,7 +148,7 @@
 //             </div>
 //             <div className="text" data-swiper-parallax="-100">
 //               <p className="text-center">
-//                 Shape the cities of tomorrow with in-depth training in
+//                 Shape the cities of tomorrow with in-courseh training in
 //                 structural design, construction, and surveying. Build a solid
 //                 foundation for a career in civil engineering.
 //               </p>
@@ -421,7 +421,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Parallax, Pagination, Navigation, Autoplay } from "swiper/modules";
 import "./Banner.css";
-import SecondaryButton from "../Button/SecondaryButton";
+import axios from "axios";
 
 // Import your department images
 import electrical from "../../assets/Electrical.jpg";
@@ -430,54 +430,18 @@ import civil from "../../assets/Civil.jpg";
 import Computer from "../../assets/Computer.jpg";
 import textile from "../../assets/Textile.jpg";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Banner = () => {
-  const departments = [
-    {
-      name: "Electrical",
-      image: electrical,
-      tagline: "Learn. Grow. Succeed.",
-      description:
-        "Master the fundamentals of electricity and power systems. Our hands-on courses are designed to equip you with practical skills to lead in today's energy-driven world.",
-      route: "/electrical",
-    },
-
-    {
-      name: "Mechanical",
-      image: mechanical,
-      tagline: "Build Skills. Drive Innovation.",
-      description:
-        "From engines to automation, explore the mechanics that move the world. Learn from industry experts and get real-world experience that powers your engineering journey.",
-      route: "/mechanical",
-    },
-
-    {
-      name: "Civil",
-      image: civil,
-      tagline: "Build Your Future, Brick by Brick.",
-      description:
-        "Shape the cities of tomorrow with in-depth training in structural design, construction, and surveying. Build a solid foundation for a career in civil engineering.",
-      route: "/civil",
-    },
-
-    {
-      name: "Computer",
-      image: Computer,
-      tagline: "Code. Create. Conquer.",
-      description:
-        "Dive into programming, networking, and cybersecurity with structured learning and interactive sessions. Future-proof your career with skills in high demand.",
-      route: "/computer",
-    },
-
-    {
-      name: "Textile",
-      image: textile,
-      tagline: "Fabric of Innovation.",
-      description:
-        "Discover the science behind fabric and fashion. Learn advanced textile technology, design principles, and industry-grade manufacturing techniques.",
-      route: "/textile",
-    },
-  ];
+  // Fetch Data for banner
+  const [courses, setCourses] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await axios(`${import.meta.env.VITE_API_URL}/course`);
+      setCourses(data);
+    };
+    getData();
+  }, []);
 
   return (
     <div className="h-[500px] md:h-[700px] relative">
@@ -507,14 +471,14 @@ const Banner = () => {
         modules={[Parallax, Pagination, Navigation, Autoplay]}
         className="mySwiper"
       >
-        {departments.map((dept, index) => (
+        {courses.map((course, index) => (
           <SwiperSlide key={index}>
             {/* Enhanced Background with Overlay */}
             <div
               slot="container-start"
               className="parallax-bg relative"
               style={{
-                backgroundImage: `url(${dept.image})`,
+                backgroundImage: `url(${mechanical})`,
               }}
               data-swiper-parallax="-23%"
             >
@@ -524,13 +488,13 @@ const Banner = () => {
             {/* Content with Animations */}
             <div className="flex flex-col items-center justify-center h-[500px] md:h-[700px] relative z-10 px-4">
               <motion.div
-                className="text-2xl md:text-4xl font-bold my-7 text-white"
+                className="text-2xl md:text-4xl font-bold my-7  text-white"
                 data-swiper-parallax="-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                {dept.name}
+                {course.course_title}
               </motion.div>
 
               <motion.div
@@ -540,7 +504,7 @@ const Banner = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
-                {dept.tagline}
+                {course.tagline}
               </motion.div>
 
               <motion.div
@@ -551,7 +515,7 @@ const Banner = () => {
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
                 <p className="text-sm md:text-base leading-relaxed">
-                  {dept.description}
+                  {course.course_description}
                 </p>
               </motion.div>
 
@@ -563,7 +527,7 @@ const Banner = () => {
               >
                 <div className="relative group">
                   <Link
-                    to={dept.route}
+                    to={course.route}
                     className="px-6 py-2 border border-white text-white rounded-full font-medium transition-all duration-300 group-hover:bg-white group-hover:text-[#07a698] cursor-pointer "
                   >
                     <span className="inline-block transition-all duration-300 group-hover:-translate-x-2 group-hover:text-transparent  ">
