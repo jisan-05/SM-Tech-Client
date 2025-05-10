@@ -424,11 +424,7 @@ import "./Banner.css";
 import axios from "axios";
 
 // Import your department images
-import electrical from "../../assets/Electrical.jpg";
 import mechanical from "../../assets/Mechanical.jpg";
-import civil from "../../assets/Civil.jpg";
-import Computer from "../../assets/Computer.jpg";
-import textile from "../../assets/Textile.jpg";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
