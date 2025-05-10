@@ -8,6 +8,8 @@ import AddCourse from "../components/AddCourse/AddCourse";
 import CourseDetails from "../components/CourseDetails/CourseDetails";
 import Programs from "../components/Programs/Programs";
 
+import PrivateRoute from "./PrivetRoute";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -36,10 +38,14 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/course/${params.id}`),
       },
+<<<<<<< HEAD
       {
         path: "/programs",
         element: <Programs />,
       },
+=======
+      
+>>>>>>> 53ad1552099eeab28e0915a0431c9f6dc4303699
     ],
   },
 ]);

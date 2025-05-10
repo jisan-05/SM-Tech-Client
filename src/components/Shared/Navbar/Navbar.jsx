@@ -32,11 +32,19 @@ const Navbar = () => {
           </li>
 
           <li className="text-lg font-semibold">
+<<<<<<< HEAD
             <NavLink to={"/programs"}>Programs</NavLink>
           </li>
 
           <li className="text-lg font-semibold">
             <NavLink to="/departments">Departments</NavLink>
+=======
+            <NavLink >Programs</NavLink>
+          </li>
+
+          <li className="text-lg font-semibold">
+            <NavLink to='/Departments'>Departments</NavLink>
+>>>>>>> 53ad1552099eeab28e0915a0431c9f6dc4303699
           </li>
 
           <li className="text-lg font-semibold">

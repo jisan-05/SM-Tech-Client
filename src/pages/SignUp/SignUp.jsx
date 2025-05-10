@@ -1,23 +1,53 @@
 import React, { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../../providers/AuthContext";
-
+import toast from "react-hot-toast";
+import LoadingSpinner from "../../components/Shared/LoadingSpinner";
+import { imageUpload } from "../../utils/utils";
+// import axios from "axios";
 
 const SignUp = () => {
-    const {createUser,signInWithGoogle} = useContext(AuthContext)
+    const { createUser, signInWithGoogle, user, loading,updateUserProfile } =
+        useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location?.state?.from?.pathname || "/";
+    if (loading) return <LoadingSpinner />;
+    if (user) return <Navigate to={from} replace={true} />;
 
-    const handleSubmit = (e) =>{
-        e.preventDefault()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         const name = e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(name,email,password)
-        createUser(email,password)
-    }
-    const handleGoogleSignIn = () =>{
-      signInWithGoogle()
-    }
+        // const image = e.target.image.value;
+
+        const image = e.target.image.files[0];
+
+        const photoURL = await imageUpload(image);
+
+        // image upload to imageBB and then get an url
+        // const imageFile = {image: data.image[0]}
+        // const res = await axios.post(image_hosting_api, imageFile)
+
+        console.log(image);
+        console.log(name, email, password);
+        const result = await createUser(email, password);
+
+        await updateUserProfile(name, photoURL);
+            console.log(result);
+            // save user info in db if user is new
+            // await saveUser({ ...result?.user, displayName: name, photoURL });
+
+        navigate(from, { replace: true });
+        toast.success("User Create Successful");
+    };
+    const handleGoogleSignIn = async () => {
+        await signInWithGoogle();
+        navigate(from, { replace: true });
+        toast.success("Google Login Success");
+    };
 
     return (
         <div className="flex justify-center items-center my-10 bg-white">
@@ -50,7 +80,7 @@ const SignUp = () => {
                             />
                         </div>
                         {/* For upload image from local using imageBB */}
-                        {/* <div>
+                        <div>
                             <label
                                 htmlFor="image"
                                 className="block mb-2 text-sm"
@@ -58,13 +88,14 @@ const SignUp = () => {
                                 Select Image:
                             </label>
                             <input
+                                
                                 required
                                 type="file"
                                 id="image"
                                 name="image"
                                 accept="image/*"
                             />
-                        </div> */}
+                        </div>
                         <div>
                             <label
                                 htmlFor="email"
@@ -108,7 +139,7 @@ const SignUp = () => {
                             type="submit"
                             className="bg-[#07a698] hover:bg-[#01998c]  w-full rounded-md py-3 text-white"
                         >
-                           Continue
+                            Continue
                         </button>
                     </div>
                 </form>
