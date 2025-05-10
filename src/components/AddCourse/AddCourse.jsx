@@ -9,13 +9,13 @@ const AddCourse = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
+    const category = form.category.value;
     const course_title = form.course_title.value;
+    const course_description = form.description.value;
+    const course_duration = form.course_duration.value;
     const course_instructor = form.course_instructor.value;
     const enrollment_deadline = startDate;
-    const category = form.category.value;
     const course_price = form.course_price.value;
-    const course_duration = form.course_duration.value;
-    const description = form.description.value;
     const courseData = {
       course_title,
       course_instructor,
@@ -23,12 +23,12 @@ const AddCourse = () => {
       category,
       course_price,
       course_duration,
-      description,
+      course_description,
     };
+    console.log(courseData);
     try {
       const { data } = await axios.post(
-        `
-        ${import.meta.env.VITE_API_URL}/course`,
+        `${import.meta.env.VITE_API_URL}/course`,
         courseData
       );
       console.log(data);
