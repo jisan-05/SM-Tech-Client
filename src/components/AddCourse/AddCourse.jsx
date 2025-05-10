@@ -32,7 +32,7 @@ const AddCourse = () => {
         courseData
       );
       console.log(data);
-      toast.success("Course Created Successfully");
+      toast.success("New Course Added Successfully");
     } catch (err) {
       console.log(err);
       toast.error("Something are wrong! Tray Again");
