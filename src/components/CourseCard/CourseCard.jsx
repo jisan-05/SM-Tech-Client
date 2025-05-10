@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const CourseCard = ({ course }) => {
-  const { _id, course_title, course_description, course_instructor } = course;
+  const { _id, course_title, course_description, course_instructor,course_banner } = course;
   return (
     <div>
       {/* ---------------- card ------------- */}
@@ -9,6 +9,7 @@ const CourseCard = ({ course }) => {
         <figure className="overflow-hidden rounded-xl">
           <div className="w-full md:h-56">
             <img
+              src={course_banner}
               className="group-hover:scale-105 w-full h-full object-cover transition duration-500 ease-in-out"
               alt="Course Image"
             />
