@@ -7,6 +7,8 @@ import SignUp from "../pages/SignUp/SignUp";
 import AddCourse from "../components/AddCourse/AddCourse";
 import CourseDetails from "../components/CourseDetails/CourseDetails";
 
+import PrivateRoute from "./PrivetRoute";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -35,6 +37,7 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/course/${params.id}`),
       },
+      
     ],
   },
 ]);
