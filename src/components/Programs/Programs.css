@@ -1,0 +1,7 @@
+.react-tabs__tab--selected {
+  background-image: linear-gradient(to right, #307EFF, #9715FA); /* blue-600 to purple-600 */
+  color: white;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+}

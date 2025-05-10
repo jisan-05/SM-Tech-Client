@@ -80,6 +80,7 @@
 // React Tab start
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import './Programs.css'
 // React Tab End
 
 import ProgramCard from "../ProgramCard/ProgramCard";
@@ -105,40 +106,35 @@ const Programs = () => {
         <TabList className="flex flex-wrap gap-2 justify-center mb-12">
           <Tab
             className="px-6 py-3 rounded-full border border-gray-200 cursor-pointer transition-all duration-300 hover:bg-gray-50 focus:outline-none
-                         ui-selected:bg-gradient-to-r ui-selected:from-blue-600 ui-selected:to-purple-600 ui-selected:text-white ui-selected:border-transparent
-                         ui-selected:shadow-lg"
+                        "
           >
             Computer Science & Engineering
           </Tab>
 
           <Tab
             className="px-6 py-3 rounded-full border border-gray-200 cursor-pointer transition-all duration-300 hover:bg-gray-50 focus:outline-none
-                         ui-selected:bg-gradient-to-r ui-selected:from-blue-600 ui-selected:to-purple-600 ui-selected:text-white ui-selected:border-transparent
-                         ui-selected:shadow-lg"
+                        "
           >
             Civil Engineering
           </Tab>
 
           <Tab
             className="px-6 py-3 rounded-full border border-gray-200 cursor-pointer transition-all duration-300 hover:bg-gray-50 focus:outline-none
-                         ui-selected:bg-gradient-to-r ui-selected:from-blue-600 ui-selected:to-purple-600 ui-selected:text-white ui-selected:border-transparent
-                         ui-selected:shadow-lg"
+                        "
           >
             Textile Engineering
           </Tab>
 
           <Tab
             className="px-6 py-3 rounded-full border border-gray-200 cursor-pointer transition-all duration-300 hover:bg-gray-50 focus:outline-none
-                         ui-selected:bg-gradient-to-r ui-selected:from-blue-600 ui-selected:to-purple-600 ui-selected:text-white ui-selected:border-transparent
-                         ui-selected:shadow-lg"
+                        "
           >
             Mechanical Engineering
           </Tab>
 
           <Tab
             className="px-6 py-3 rounded-full border border-gray-200 cursor-pointer transition-all duration-300 hover:bg-gray-50 focus:outline-none
-                         ui-selected:bg-gradient-to-r ui-selected:from-blue-600 ui-selected:to-purple-600 ui-selected:text-white ui-selected:border-transparent
-                         ui-selected:shadow-lg"
+                        "
           >
             Electrical Engineering
           </Tab>
