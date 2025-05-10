@@ -28,15 +28,15 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li className="text-lg font-semibold">
-            <NavLink>Home</NavLink>
+            <NavLink to="/">Home</NavLink>
           </li>
 
           <li className="text-lg font-semibold">
-            <NavLink>Programs</NavLink>
+            <NavLink to={"/programs"}>Programs</NavLink>
           </li>
 
           <li className="text-lg font-semibold">
-            <NavLink>Departments</NavLink>
+            <NavLink to="/departments">Departments</NavLink>
           </li>
 
           <li className="text-lg font-semibold">
@@ -75,11 +75,11 @@ const Navbar = () => {
             </li>
 
             <li className="text-lg font-semibold">
-              <NavLink>Programs</NavLink>
+              <NavLink to={"/programs"}>Programs</NavLink>
             </li>
 
             <li className="text-lg font-semibold">
-              <NavLink>Departments</NavLink>
+              <NavLink to={"/departments"}>Departments</NavLink>
             </li>
 
             <li className="text-lg font-semibold">

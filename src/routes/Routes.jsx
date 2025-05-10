@@ -6,6 +6,7 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import AddCourse from "../components/AddCourse/AddCourse";
 import CourseDetails from "../components/CourseDetails/CourseDetails";
+import Programs from "../components/Programs/Programs";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
         element: <CourseDetails />,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/course/${params.id}`),
+      },
+      {
+        path: "/programs",
+        element: <Programs />,
       },
     ],
   },

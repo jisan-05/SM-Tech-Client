@@ -276,7 +276,8 @@ const CourseDetails = () => {
               <div>
                 <span className="text-sm text-gray-500">Total Price</span>
                 <p className="text-3xl font-bold text-gray-800">
-                  ${course_price}
+                  {course_price}
+                  <small>tk</small>
                 </p>
               </div>
               {course_price > 99 && (
@@ -295,7 +296,7 @@ const CourseDetails = () => {
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">Duration</span>
-                <span className="font-medium">{course_duration}</span>
+                <span className="font-medium">{course_duration} month</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">Instructor</span>
@@ -341,7 +342,7 @@ const CourseDetails = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <span>Lifetime Access</span>
+                <span>One to One Session</span>
               </li>
               <li className="flex items-center">
                 <svg
@@ -355,7 +356,7 @@ const CourseDetails = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <span>Downloadable Resources</span>
+                <span>Note</span>
               </li>
               <li className="flex items-center">
                 <svg
@@ -370,6 +371,20 @@ const CourseDetails = () => {
                   />
                 </svg>
                 <span>Q&A Support</span>
+              </li>
+              <li className="flex items-center">
+                <svg
+                  className="w-5 h-5 text-green-500 mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span>Support Session</span>
               </li>
             </ul>
           </div>
