@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import { imageUpload } from "../../utils/utils";
 // import axios from "axios";
+import './SignUp.css'
 
 const SignUp = () => {
     const { createUser, signInWithGoogle, user, loading,updateUserProfile } =
@@ -85,7 +86,7 @@ const SignUp = () => {
                                 htmlFor="image"
                                 className="block mb-2 text-sm"
                             >
-                                Select Image:
+                                Select Your Image:
                             </label>
                             <input
                                 
