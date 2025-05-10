@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 
 const CourseCard = ({ course }) => {
-  const { category, course_title, course_description, course_instructor } =
-    course;
+  const { _id, course_title, course_description, course_instructor } = course;
   return (
     <div>
       {/* ---------------- card ------------- */}
@@ -21,7 +20,7 @@ const CourseCard = ({ course }) => {
           <div className="divider">Instructor: {course_instructor}</div>
           <div className="card-actions flex justify-between items-center">
             <Link
-              to={`/${category}`}
+              to={`/course/${_id}`}
               className="btn w-full btn-neutral bg-[#07a698] hover:bg-[#01998c] border-none rounded-3xl px-6 py-2 text-white"
             >
               See Details
