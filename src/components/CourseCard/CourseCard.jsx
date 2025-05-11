@@ -5,7 +5,7 @@ const CourseCard = ({ course }) => {
   return (
     <div>
       {/* ---------------- card ------------- */}
-      <div className="card bg-base-100 w-full shadow-sm px-10 py-10 group">
+      <div className="card bg-base-100 w-[95%] shadow-sm px-8 py-8 group">
         <figure className="overflow-hidden rounded-xl">
           <div className="w-full md:h-56">
             <img

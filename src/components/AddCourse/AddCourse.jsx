@@ -4,11 +4,7 @@ import DatePicker from "react-datepicker";
 import toast from "react-hot-toast";
 import { imageUpload } from "../../utils/utils";
 
-
-
-
 import "react-datepicker/dist/react-datepicker.css";
-
 
 const AddCourse = () => {
     const [startDate, setStartDate] = useState(new Date());
@@ -24,7 +20,7 @@ const AddCourse = () => {
         const enrollment_deadline = startDate;
         const course_price = form.course_price.value;
 
-         // image Upload system 
+        // image Upload system
 
         const banner_image = e.target.banner_image.files[0];
 
@@ -38,9 +34,8 @@ const AddCourse = () => {
             course_price,
             course_duration,
             course_description,
-            course_banner
+            course_banner,
         };
-       
 
         console.log(courseData);
         try {
@@ -50,7 +45,7 @@ const AddCourse = () => {
             );
             console.log(data);
             toast.success("New Course Added Successfully");
-            e.target.reset()
+            e.target.reset();
         } catch (err) {
             console.log(err);
             toast.error("Something are wrong! Tray Again");
@@ -74,6 +69,7 @@ const AddCourse = () => {
                                 Course Title
                             </label>
                             <input
+                                required
                                 id="course_title"
                                 placeholder="Computer Science & Engineering"
                                 name="job_title"
@@ -90,6 +86,7 @@ const AddCourse = () => {
                                 Instructor Name
                             </label>
                             <input
+                                required
                                 id="course_instructor"
                                 placeholder="Md. Meherul Islam"
                                 type="text"
@@ -118,6 +115,7 @@ const AddCourse = () => {
                                 Category
                             </label>
                             <select
+                                required
                                 name="category"
                                 id="category"
                                 className="border p-2 rounded-md"
@@ -145,6 +143,7 @@ const AddCourse = () => {
                                 Course Price
                             </label>
                             <input
+                                required
                                 id="course_price"
                                 placeholder="999"
                                 name="course_price"
@@ -161,6 +160,7 @@ const AddCourse = () => {
                                 Course Duration
                             </label>
                             <input
+                                required
                                 id="course_duration"
                                 name="course_duration"
                                 placeholder="Give course duration in month"
@@ -176,6 +176,7 @@ const AddCourse = () => {
                                 Course Banner (Image)
                             </label>
                             <input
+                                required
                                 type="file"
                                 id="course_banner"
                                 name="banner_image"
@@ -189,6 +190,7 @@ const AddCourse = () => {
                             Description
                         </label>
                         <textarea
+                            required
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                             id="description"
                             placeholder="SM-Tech Will provide you best guidance. Here you get................"
