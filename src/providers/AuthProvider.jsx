@@ -11,10 +11,13 @@ import {
     signOut,
     updateProfile,
 } from "firebase/auth";
-import AuthContext from "./AuthContext";
+
 
 
 import { auth } from './../firebase/firebase.config';
+import AuthContext from "./AuthContext";
+import  axios  from 'axios';
+
 
 
 const googleProvider = new GoogleAuthProvider();
@@ -56,8 +59,20 @@ const AuthProvider = ({ children }) => {
             console.log("CurrentUser-->", currentUser);
             if (currentUser?.email) {
                 setUser(currentUser);
+
+                await axios.post(`${import.meta.env.VITE_API_URL}/jwt`,{
+                    email:currentUser?.email
+                },
+                {
+                    withCredentials: true
+                }
+            )
+
             } else {
                 setUser(currentUser);
+                await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
+                    withCredentials: true,
+                });
                 
             }
             setLoading(false);
