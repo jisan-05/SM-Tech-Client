@@ -9,12 +9,10 @@ import CourseDetails from "../components/CourseDetails/CourseDetails";
 import Programs from "../components/Programs/Programs";
 
 import PrivateRoute from "./PrivetRoute";
-<<<<<<< HEAD
 import ManagePost from "../pages/ManagePost/ManagePost";
-=======
 import Departments from "../pages/Departments/Departments";
 import AddDepartments from "../components/AddDepartments/AddDepartments";
->>>>>>> 077e7d2aa61bf9dbbf14392264a99a2728767b2b
+
 
 export const router = createBrowserRouter([
   {
@@ -50,11 +48,10 @@ export const router = createBrowserRouter([
         element: <Programs />,
       },
       {
-<<<<<<< HEAD
         path: "/manageCourse",
         element: <ManagePost />,
       },
-=======
+      {
         path:'/departments',
         element:<Departments></Departments>
       },
@@ -62,7 +59,6 @@ export const router = createBrowserRouter([
         path:'/addDepartments',
         element:<AddDepartments></AddDepartments>
       }
->>>>>>> 077e7d2aa61bf9dbbf14392264a99a2728767b2b
     ],
   },
 ]);
