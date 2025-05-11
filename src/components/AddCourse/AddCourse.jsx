@@ -4,6 +4,12 @@ import DatePicker from "react-datepicker";
 import toast from "react-hot-toast";
 import { imageUpload } from "../../utils/utils";
 
+
+
+
+import "react-datepicker/dist/react-datepicker.css";
+
+
 const AddCourse = () => {
     const [startDate, setStartDate] = useState(new Date());
 
