@@ -40,7 +40,7 @@ const Navbar = () => {
           </li>
 
           <li className="text-lg font-semibold">
-            <NavLink>Contact Us</NavLink>
+            <NavLink to="/contact">Contact Us</NavLink>
           </li>
         </ul>
       </div>
@@ -83,7 +83,7 @@ const Navbar = () => {
             </li>
 
             <li className="text-lg font-semibold">
-              <NavLink>Contact Us</NavLink>
+              <NavLink to='/contact'>Contact Us</NavLink>
             </li>
             {user ? (
               <li onClick={signOut} className="text-lg font-semibold">

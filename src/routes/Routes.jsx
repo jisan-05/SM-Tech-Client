@@ -9,6 +9,8 @@ import CourseDetails from "../components/CourseDetails/CourseDetails";
 import Programs from "../components/Programs/Programs";
 
 import PrivateRoute from "./PrivetRoute";
+import Departments from "../pages/Departments/Departments";
+import AddDepartments from "../components/AddDepartments/AddDepartments";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +45,14 @@ export const router = createBrowserRouter([
         path: "/programs",
         element: <Programs />,
       },
+      {
+        path:'/departments',
+        element:<Departments></Departments>
+      },
+      {
+        path:'/addDepartments',
+        element:<AddDepartments></AddDepartments>
+      }
     ],
   },
 ]);
