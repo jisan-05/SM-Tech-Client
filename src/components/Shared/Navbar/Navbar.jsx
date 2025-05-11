@@ -81,6 +81,9 @@ const Navbar = () => {
             <li className="text-lg font-semibold">
               <NavLink to={"/departments"}>Departments</NavLink>
             </li>
+            <li className="text-lg font-semibold">
+              <NavLink to={"/addDepartments"}>Add Departments</NavLink>
+            </li>
 
             <li className="text-lg font-semibold">
               <NavLink to='/contact'>Contact Us</NavLink>
