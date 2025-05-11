@@ -4,7 +4,7 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../../providers/AuthContext";
 import toast from "react-hot-toast";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
-import { imageUpload } from "../../utils/utils";
+import { imageUpload, saveUser } from "../../utils/utils";
 // import axios from "axios";
 import './SignUp.css'
 
@@ -39,13 +39,14 @@ const SignUp = () => {
         await updateUserProfile(name, photoURL);
             console.log(result);
             // save user info in db if user is new
-            // await saveUser({ ...result?.user, displayName: name, photoURL });
+            await saveUser({ ...result?.user, displayName: name, photoURL });
 
         navigate(from, { replace: true });
         toast.success("User Create Successful");
     };
     const handleGoogleSignIn = async () => {
-        await signInWithGoogle();
+        const data = await signInWithGoogle();
+        await saveUser(data?.user);
         navigate(from, { replace: true });
         toast.success("Google Login Success");
     };
