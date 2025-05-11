@@ -9,6 +9,7 @@ import CourseDetails from "../components/CourseDetails/CourseDetails";
 import Programs from "../components/Programs/Programs";
 
 import PrivateRoute from "./PrivetRoute";
+import ManagePost from "../pages/ManagePost/ManagePost";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: "/programs",
         element: <Programs />,
+      },
+      {
+        path: "/manageCourse",
+        element: <ManagePost />,
       },
     ],
   },
