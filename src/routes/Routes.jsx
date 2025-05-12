@@ -12,6 +12,7 @@ import PrivateRoute from "./PrivetRoute";
 import ManagePost from "../pages/ManagePost/ManagePost";
 import Departments from "../pages/Departments/Departments";
 import AddDepartments from "../components/AddDepartments/AddDepartments";
+import VerifyEmail from "../pages/VerifyEmail/VerifyEmail";
 
 
 export const router = createBrowserRouter([
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path:'/addDepartments',
         element:<AddDepartments></AddDepartments>
+      },
+      {
+        path:'/VerifyEmail',
+        element:<VerifyEmail></VerifyEmail>
       }
     ],
   },

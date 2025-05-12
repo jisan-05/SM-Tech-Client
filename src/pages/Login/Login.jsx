@@ -9,7 +9,7 @@ import useAuth from "../../hooks/useAuth";
 import { saveUser } from "../../utils/utils";
 
 const Login = () => {
-    const { signIn, signInWithGoogle, loading, user } = useAuth();
+    const { signIn, signInWithGoogle, loading, user ,setLoading} = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location?.state?.from?.pathname || "/";
@@ -31,6 +31,7 @@ const Login = () => {
         } catch (err) {
             console.log(err);
             toast.error(err?.message);
+            setLoading(false)
         }
     };
 

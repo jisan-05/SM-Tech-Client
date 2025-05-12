@@ -6,10 +6,10 @@ import toast from "react-hot-toast";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import { imageUpload, saveUser } from "../../utils/utils";
 // import axios from "axios";
-import './SignUp.css'
+import "./SignUp.css";
 
 const SignUp = () => {
-    const { createUser, signInWithGoogle, user, loading,updateUserProfile } =
+    const { createUser, signInWithGoogle, user, loading, updateUserProfile,setLoading } =
         useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
@@ -22,28 +22,26 @@ const SignUp = () => {
         const name = e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-        // const image = e.target.image.value;
-
         const image = e.target.image.files[0];
 
-        const photoURL = await imageUpload(image);
+        try {
+            const photoURL = await imageUpload(image);
+            const result = await createUser(email, password);
 
-        // image upload to imageBB and then get an url
-        // const imageFile = {image: data.image[0]}
-        // const res = await axios.post(image_hosting_api, imageFile)
-
-        console.log(image);
-        console.log(name, email, password);
-        const result = await createUser(email, password);
-
-        await updateUserProfile(name, photoURL);
-            console.log(result);
-            // save user info in db if user is new
+            await updateUserProfile(name, photoURL);
             await saveUser({ ...result?.user, displayName: name, photoURL });
 
-        navigate(from, { replace: true });
-        toast.success("User Create Successful");
+            navigate(from, { replace: true });
+            toast.success("User created successfully!");
+        } catch (error) {
+            console.error(error);
+            toast.error(
+                error.message || "Something went wrong. Please try again."
+            );
+            setLoading(false)
+        }
     };
+
     const handleGoogleSignIn = async () => {
         const data = await signInWithGoogle();
         await saveUser(data?.user);
@@ -90,7 +88,6 @@ const SignUp = () => {
                                 Select Your Image:
                             </label>
                             <input
-                                
                                 required
                                 type="file"
                                 id="image"
