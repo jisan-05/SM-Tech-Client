@@ -80,7 +80,7 @@
 // React Tab start
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import './Programs.css'
+import "./Programs.css";
 // React Tab End
 
 import ProgramCard from "../ProgramCard/ProgramCard";
