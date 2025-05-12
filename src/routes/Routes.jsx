@@ -14,7 +14,6 @@ import Departments from "../pages/Departments/Departments";
 import AddDepartments from "../components/AddDepartments/AddDepartments";
 import VerifyEmail from "../pages/VerifyEmail/VerifyEmail";
 
-
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -53,17 +52,14 @@ export const router = createBrowserRouter([
         element: <ManagePost />,
       },
       {
-        path:'/departments',
-        element:<Departments></Departments>
+        path: "/departments",
+        element: <Departments />,
       },
       {
-        path:'/addDepartments',
-        element:<AddDepartments></AddDepartments>
+        path: "/addDepartments",
+        element: <AddDepartments />,
       },
-      {
-        path:'/VerifyEmail',
-        element:<VerifyEmail></VerifyEmail>
-      }
+
     ],
   },
 ]);
