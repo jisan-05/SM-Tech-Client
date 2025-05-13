@@ -98,7 +98,7 @@ const Programs = () => {
   }, []);
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+      <h1 className="text-4xl font-bold text-center pb-12 bg-teal-600 bg-clip-text text-transparent">
         Explore Our Programs
       </h1>
 

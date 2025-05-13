@@ -271,7 +271,7 @@ const CourseDetails = () => {
 
         {/* Sidebar */}
         <div className="space-y-6">
-          <div className="bg-white rounded-2xl shadow-xl p-6 sticky top-6">
+          <div className="bg-white rounded-2xl shadow-xl p-6 ">
             <div className="flex justify-between items-start mb-4">
               <div>
                 <span className="text-sm text-gray-500">Total Price</span>

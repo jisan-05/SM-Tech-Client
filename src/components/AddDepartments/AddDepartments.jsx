@@ -7,6 +7,7 @@ const AddDepartments = () => {
         e.preventDefault();
         const title = e.target.title.value;
         const description = e.target.description.value;
+        const category = e.target.category.value;
 
         const image = e.target.image.files[0];
         const photoURL = await imageUpload(image);
@@ -15,13 +16,14 @@ const AddDepartments = () => {
             title,
             description,
             photoURL,
+            category
         };
         console.log(departmentData);
 
         try {
             await axios.post(
                 `${import.meta.env.VITE_API_URL}/department`,
-                departmentData,
+                departmentData
             );
             toast.success("Department Added Successfully");
             e.target.reset();
@@ -41,13 +43,36 @@ const AddDepartments = () => {
                         Department Name
                     </label>
                     <input
-                      
                         type="text"
                         name="title"
                         className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
                         placeholder="e.g. Civil Engineering"
                         required
                     />
+                </div>
+
+                <div className="flex flex-col gap-2 ">
+                    <label className="text-gray-700 " htmlFor="category">
+                        Category
+                    </label>
+                    <select
+                        required
+                        name="category"
+                        id="category"
+                        className="border p-2 rounded-md"
+                    >
+                        <option value="electrical">
+                            Electrical Engineering
+                        </option>
+                        <option value="mechanical">
+                            Mechanical Engineering
+                        </option>
+                        <option value="civil">Civil Engineering</option>
+                        <option value="computer">
+                            Computer Science & Engineering
+                        </option>
+                        <option value="textile">Textile Engineering</option>
+                    </select>
                 </div>
 
                 <div>

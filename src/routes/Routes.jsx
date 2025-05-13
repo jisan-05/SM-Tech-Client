@@ -13,6 +13,7 @@ import ManagePost from "../pages/ManagePost/ManagePost";
 import Departments from "../pages/Departments/Departments";
 import AddDepartments from "../components/AddDepartments/AddDepartments";
 import VerifyEmail from "../pages/VerifyEmail/VerifyEmail";
+import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
         path: "/addDepartments",
         element: <AddDepartments />,
       },
+      {
+        path:'/dashboardLayout',
+        element:<DashboardLayout></DashboardLayout>
+      }
 
     ],
   },

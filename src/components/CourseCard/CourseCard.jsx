@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
 const CourseCard = ({ course }) => {
-  const { _id, course_title, course_description, course_instructor,course_banner } = course;
+  const { _id, course_title, course_description, course_instructor, course_banner } = course;
+  
   return (
-    <div>
-      {/* ---------------- card ------------- */}
-      <div className="card bg-base-100 w-[95%] shadow-sm px-8 py-8 group">
-        <figure className="overflow-hidden rounded-xl">
+    <div className="h-full"> {/* Added h-full */}
+      <div className="card bg-base-100 w-[95%] shadow-sm px-8 py-8 group h-full flex flex-col">
+        <figure className="overflow-hidden rounded-xl flex-shrink-0"> {/* Added flex-shrink-0 */}
           <div className="w-full md:h-56">
             <img
               src={course_banner}
@@ -15,9 +15,11 @@ const CourseCard = ({ course }) => {
             />
           </div>
         </figure>
-        <div className="pt-8 space-y-3 ">
+        <div className="pt-8 space-y-3 flex flex-col flex-grow"> {/* Added flex classes */}
           <h2 className="card-title">{course_title}</h2>
-          <p>{course_description}</p>
+          <p className="flex-grow"> {/* Added flex-grow to description */}
+            {course_description}
+          </p>
           <div className="divider">Instructor: {course_instructor}</div>
           <div className="card-actions flex justify-between items-center">
             <Link
