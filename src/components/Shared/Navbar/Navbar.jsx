@@ -88,6 +88,9 @@ const Navbar = () => {
             <li className="text-lg font-semibold">
               <NavLink to='/contact'>Contact Us</NavLink>
             </li>
+            <li className="text-lg font-semibold">
+              <NavLink to='/dashboardLayout'>Admin Dashboard</NavLink>
+            </li>
             {user ? (
               <li onClick={signOut} className="text-lg font-semibold">
                 <Link>Logout</Link>
