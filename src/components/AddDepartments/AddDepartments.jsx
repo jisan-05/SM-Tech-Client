@@ -1,9 +1,12 @@
 import axios from "axios";
 import { imageUpload } from "../../utils/utils";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const AddDepartments = () => {
+    const [isLoading,setIsLoading] = useState(false)
     const handleSubmit = async (e) => {
+        setIsLoading(true)
         e.preventDefault();
         const title = e.target.title.value;
         const description = e.target.description.value;
@@ -26,6 +29,7 @@ const AddDepartments = () => {
                 departmentData
             );
             toast.success("Department Added Successfully");
+            setIsLoading(false)
             e.target.reset();
         } catch {
             toast.error("something went wrong");
@@ -106,9 +110,11 @@ const AddDepartments = () => {
 
                 <button
                     type="submit"
-                    className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg transition"
+                    className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg transition cursor-pointer"
                 >
-                    Add Department
+                    Add Department    {
+                        isLoading? <span className="loading loading-infinity loading-xl"></span> : ""
+                    }
                 </button>
             </form>
         </div>

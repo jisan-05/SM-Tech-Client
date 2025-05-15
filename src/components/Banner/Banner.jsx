@@ -413,7 +413,6 @@
 // };
 
 // export default Banner;
-
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -422,15 +421,12 @@ import "swiper/css/navigation";
 import { Parallax, Pagination, Navigation, Autoplay } from "swiper/modules";
 import "./Banner.css";
 import axios from "axios";
-
-// Import your department images
-
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Banner = () => {
-    // Fetch Data for banner
     const [courses, setCourses] = useState([]);
+
     useEffect(() => {
         const getData = async () => {
             const { data } = await axios(
@@ -442,7 +438,7 @@ const Banner = () => {
     }, []);
 
     return (
-        <div className="h-[500px] md:h-[700px] relative">
+        <div className="h-[50vh] md:h-[70vh] relative">
             <Swiper
                 style={{
                     "--swiper-navigation-color": "#fff",
@@ -471,10 +467,10 @@ const Banner = () => {
             >
                 {courses.map((course, index) => (
                     <SwiperSlide key={index}>
-                        {/* Enhanced Background with Overlay */}
+                        {/* Background Image with Overlay */}
                         <div
                             slot="container-start"
-                            className="parallax-bg relative w-full h-[300px] md:h-[400px] bg-cover bg-center bg-no-repeat"
+                            className="parallax-bg relative w-full h-[50vh] md:h-[70vh] bg-cover bg-center bg-no-repeat"
                             style={{
                                 backgroundImage: `url(${course.course_banner})`,
                             }}
@@ -483,10 +479,10 @@ const Banner = () => {
                             <div className="absolute inset-0 bg-black/40"></div>
                         </div>
 
-                        {/* Content with Animations */}
-                        <div className="flex flex-col items-center justify-center h-[500px] md:h-[700px] relative z-10 px-4">
+                        {/* Banner Content */}
+                        <div className="flex flex-col items-center justify-center h-[50vh] md:h-[70vh] relative z-10 px-4">
                             <motion.div
-                                className="text-2xl md:text-4xl font-bold my-7  text-white"
+                                className="text-2xl md:text-4xl font-bold my-7 text-white text-center"
                                 data-swiper-parallax="-300"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -496,7 +492,7 @@ const Banner = () => {
                             </motion.div>
 
                             <motion.div
-                                className="subtitle font-bold px-4 text-xl md:text-2xl text-green-400 shadow-lg"
+                                className="subtitle font-bold px-4 text-lg md:text-2xl text-green-400 shadow-lg text-center"
                                 data-swiper-parallax="-200"
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
@@ -518,7 +514,7 @@ const Banner = () => {
                             </motion.div>
 
                             <motion.div
-                                className="flex gap-5 mt-8"
+                                className="flex gap-5 mt-6"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.6, duration: 0.5 }}
@@ -526,9 +522,9 @@ const Banner = () => {
                                 <div className="relative group">
                                     <Link
                                         to={`/course/${course._id}`}
-                                        className="px-6 py-2 border border-white text-white rounded-full font-medium transition-all duration-300 group-hover:bg-white group-hover:text-[#07a698] cursor-pointer "
+                                        className="px-6 py-2 border border-white text-white rounded-full font-medium transition-all duration-300 group-hover:bg-white group-hover:text-[#07a698] cursor-pointer"
                                     >
-                                        <span className="inline-block transition-all duration-300 group-hover:-translate-x-2 group-hover:text-transparent  ">
+                                        <span className="inline-block transition-all duration-300 group-hover:-translate-x-2 group-hover:text-transparent">
                                             Course Outline
                                         </span>
                                         <span className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-6 transition-all duration-300">
@@ -545,7 +541,7 @@ const Banner = () => {
                 ))}
             </Swiper>
 
-            {/* Custom Navigation Arrows */}
+            {/* Navigation Arrows */}
             <div className="swiper-button-prev !text-white !opacity-80 hover:!opacity-100 !transition-all !duration-300"></div>
             <div className="swiper-button-next !text-white !opacity-80 hover:!opacity-100 !transition-all !duration-300"></div>
         </div>
@@ -553,3 +549,4 @@ const Banner = () => {
 };
 
 export default Banner;
+
