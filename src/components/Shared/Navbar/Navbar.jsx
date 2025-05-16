@@ -4,6 +4,7 @@ import "./Navbar.css";
 import AuthContext from "../../../providers/AuthContext";
 import logo from "/logo.png";
 import profile from "../../../assets/user.jpg";
+import LoadingSpinner from "../LoadingSpinner";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -16,6 +17,9 @@ const Navbar = () => {
     logOut();
   };
   console.log(user?.photoURL);
+
+ 
+
 
   return (
     <div className="navbar bg-base-100 shadow-sm">

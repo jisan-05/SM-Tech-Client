@@ -6,6 +6,7 @@ import Subscribe from "../../components/Subscribe/Subscribe";
 import WhyChoseUs from "../../components/WhyChoseUs/WhyChoseUs";
 import ScrollToTop from 'react-scroll-to-top';
 import ScrollToTopButton from "../../components/ScrollButton/ScrollButton";
+import StartJourney from "../../components/StartJourney/StartJourney";
 
 const Home = () => {
   return (
@@ -27,6 +28,10 @@ const Home = () => {
       </div>
       <div className="bg-[#182428] py-24">
         <WhyChoseUs></WhyChoseUs>
+      </div>
+        
+      <div>
+        <StartJourney></StartJourney>
       </div>
       <div className="bg-[#142E2C] pt-20 pb-12">
         <Subscribe></Subscribe>

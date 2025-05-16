@@ -95,7 +95,7 @@ const ContactUs = () => {
                 >
                     <div className="flex items-center gap-4 mb-4">
                         <motion.h2
-                            className="text-5xl font-bold bg-gradient-to-r from-[#07a698] to-[#0d8a7e] bg-clip-text text-transparent"
+                            className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#07a698] to-[#0d8a7e] bg-clip-text text-transparent"
                             whileHover={{ scale: 1.05 }}
                             transition={{ type: "spring", stiffness: 300 }}
                         >
