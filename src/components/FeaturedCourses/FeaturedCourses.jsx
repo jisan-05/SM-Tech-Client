@@ -8,7 +8,7 @@ const FeaturedCourses = () => {
   const [courses, setCourses] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const visibleCount = 3;
+  const [visibleCount, setVisibleCount] = useState(3); // Dynamic based on screen size
 
   useEffect(() => {
     const getData = async () => {
@@ -16,13 +16,31 @@ const FeaturedCourses = () => {
       setCourses(data);
     };
     getData();
+
+    // Set initial visible count based on screen width
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const handleResize = () => {
+    const width = window.innerWidth;
+    if (width < 640) {
+      setVisibleCount(1);
+    } else if ( width < 1024) {  // Changed to 1024 to better target tablets
+      setVisibleCount(2);
+    } else {
+      setVisibleCount(3);
+    }
+    // Reset startIndex when screen size changes to avoid out of bounds
+    setStartIndex(0);
+  };
 
   const handlePrev = () => {
     if (startIndex > 0 && !isTransitioning) {
       setIsTransitioning(true);
       setStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-      setTimeout(() => setIsTransitioning(false), 300); // Match this with your CSS transition duration
+      setTimeout(() => setIsTransitioning(false), 300);
     }
   };
 
@@ -32,51 +50,82 @@ const FeaturedCourses = () => {
       setStartIndex((prevIndex) => 
         Math.min(prevIndex + 1, courses.length - visibleCount)
       );
-      setTimeout(() => setIsTransitioning(false), 300); // Match this with your CSS transition duration
+      setTimeout(() => setIsTransitioning(false), 300);
     }
   };
 
   const visibleCourses = courses.slice(startIndex, startIndex + visibleCount);
 
   return (
-    <div className="py-30">
-      <div>
-        <button className="btn btn-outline border-gray-600 px-10 rounded-4xl flex mx-auto cursor-default relative overflow-hidden h-12 transition-all duration-700 ease-in-out w-60">
+    <div className="py-8 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <button className="btn btn-outline border-gray-600 px-6 sm:px-8 md:px-10 rounded-full flex mx-auto cursor-default relative overflow-hidden h-10 sm:h-12 transition-all duration-700 ease-in-out w-48 sm:w-60">
           Top Class Courses
         </button>
 
-        <p className="text-5xl font-semibold text-center mt-8">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center mt-6 sm:mt-8">
           Explore Featured Courses
-        </p>
+        </h2>
       </div>
 
-      {/* Navigation Buttons */}
-      <div className="flex justify-center items-center mt-10 gap-4">
-        <button
-          onClick={handlePrev}
-          disabled={startIndex === 0 || isTransitioning}
-          className="btn btn-circle btn-outline"
-        >
-          <FaChevronLeft />
-        </button>
+      {/* Navigation Buttons and Courses */}
+      <div className=" mx-auto mt-8 sm:mt-10 md:mt-12">
+        <div className="flex items-center">
+          <button
+            onClick={handlePrev}
+            disabled={startIndex === 0 || isTransitioning}
+            className="btn btn-circle btn-outline hidden sm:flex"
+            aria-label="Previous courses"
+          >
+            <FaChevronLeft />
+          </button>
 
-        <div className="flex overflow-hidden w-full ">
-          <div className={`flex gap-4 transition-transform duration-300 ease-in-out`}>
-            {visibleCourses.map((course) => (
-              <div key={course._id} className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
-                <CourseCard course={course} />
-              </div>
-            ))}
+          <div className="flex-1 overflow-hidden px-2 sm:px-4">
+            <div className={`flex justify-center gap-4 transition-transform duration-300 ease-in-out`}>
+              {visibleCourses.map((course) => (
+                <div 
+                  key={course._id} 
+                  className={`flex-shrink-0 ${
+                    visibleCount === 1 ? 'w-full' : 
+                    visibleCount === 2 ? 'w-1/2' : 
+                    'w-1/3'
+                  } px-2`}
+                >
+                  <CourseCard course={course} />
+                </div>
+              ))}
+            </div>
           </div>
+
+          <button
+            onClick={handleNext}
+            disabled={startIndex + visibleCount >= courses.length || isTransitioning}
+            className="btn btn-circle btn-outline hidden sm:flex"
+            aria-label="Next courses"
+          >
+            <FaChevronRight />
+          </button>
         </div>
 
-        <button
-          onClick={handleNext}
-          disabled={startIndex + visibleCount >= courses.length || isTransitioning}
-          className="btn btn-circle btn-outline"
-        >
-          <FaChevronRight />
-        </button>
+        {/* Mobile navigation buttons */}
+        <div className="flex justify-center gap-4 mt-4 sm:hidden">
+          <button
+            onClick={handlePrev}
+            disabled={startIndex === 0 || isTransitioning}
+            className="btn btn-circle btn-outline"
+            aria-label="Previous courses"
+          >
+            <FaChevronLeft />
+          </button>
+          <button
+            onClick={handleNext}
+            disabled={startIndex + visibleCount >= courses.length || isTransitioning}
+            className="btn btn-circle btn-outline"
+            aria-label="Next courses"
+          >
+            <FaChevronRight />
+          </button>
+        </div>
       </div>
     </div>
   );

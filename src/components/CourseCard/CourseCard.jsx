@@ -5,8 +5,8 @@ const CourseCard = ({ course }) => {
   
   return (
     <div className="h-full"> {/* Added h-full */}
-      <div className="card bg-base-100 w-[95%] shadow-sm px-8 py-8 group h-full flex flex-col">
-        <figure className="overflow-hidden rounded-xl flex-shrink-0"> {/* Added flex-shrink-0 */}
+      <div className="card bg-base-100 w-full lg:w-[95%] shadow-sm  group h-full flex flex-col">
+        <figure className="overflow-hidden rounded-t-xl flex-shrink-0"> {/* Added flex-shrink-0 */}
           <div className="w-full md:h-56">
             <img
               src={course_banner}
@@ -15,7 +15,7 @@ const CourseCard = ({ course }) => {
             />
           </div>
         </figure>
-        <div className="pt-8 space-y-3 flex flex-col flex-grow"> {/* Added flex classes */}
+        <div className="pt-8 space-y-3 flex flex-col flex-grow px-4 py-4 lg:px-8 lg:py-8"> {/* Added flex classes */}
           <h2 className="card-title">{course_title}</h2>
           <p className="flex-grow"> {/* Added flex-grow to description */}
             {course_description}

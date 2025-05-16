@@ -2,6 +2,8 @@ import Banner from "../../components/Banner/Banner";
 import AboutUs from "../../components/AboutUs/AboutUs";
 // import Trusted from "../../components/Trusted/Trusted";
 import FeaturedCourses from "../../components/FeaturedCourses/FeaturedCourses";
+import Subscribe from "../../components/Subscribe/Subscribe";
+import WhyChoseUs from "../../components/WhyChoseUs/WhyChoseUs";
 
 const Home = () => {
   return (
@@ -19,6 +21,13 @@ const Home = () => {
         <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1600px] mx-auto ">
           <FeaturedCourses />
         </div>
+          
+      </div>
+      <div className="bg-[#182428] py-24">
+        <WhyChoseUs></WhyChoseUs>
+      </div>
+      <div className="bg-[#142E2C] pt-20 pb-12">
+        <Subscribe></Subscribe>
       </div>
     </div>
   );
