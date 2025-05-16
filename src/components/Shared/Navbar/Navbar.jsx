@@ -40,7 +40,7 @@ const Navbar = () => {
           </li>
 
           <li className="text-lg font-semibold">
-            <NavLink to="/contact">Contact Us</NavLink>
+            <NavLink to="/contactUs">Contact Us</NavLink>
           </li>
         </ul>
       </div>
@@ -84,7 +84,7 @@ const Navbar = () => {
             
 
             <li className="text-lg font-semibold">
-              <NavLink to='/contact'>Contact Us</NavLink>
+              <NavLink to='/contactUs'>Contact Us</NavLink>
             </li>
             <li className="text-lg font-semibold">
               <NavLink to='/dashboardLayout'>Admin Dashboard</NavLink>

@@ -15,6 +15,7 @@ import AddDepartments from "../components/AddDepartments/AddDepartments";
 import VerifyEmail from "../pages/VerifyEmail/VerifyEmail";
 import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
 import ManageDepartment from "../components/ManageDepartment/ManageDepartment";
+import ContactUs from "../components/ContactUs/ContactUs";
 
 export const router = createBrowserRouter([
     {
@@ -53,7 +54,10 @@ export const router = createBrowserRouter([
                 path: "/departments",
                 element: <Departments />,
             },
-
+            {
+                path:"/contactUs",
+                element:<ContactUs></ContactUs>
+            }
             
         ],
     },
