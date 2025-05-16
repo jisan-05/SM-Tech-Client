@@ -16,71 +16,75 @@ import VerifyEmail from "../pages/VerifyEmail/VerifyEmail";
 import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
 import ManageDepartment from "../components/ManageDepartment/ManageDepartment";
 import ContactUs from "../components/ContactUs/ContactUs";
+import UpdateCourse from "../pages/UpdateCourse/UpdateCourse";
 
 export const router = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
         path: "/",
-        element: <MainLayout></MainLayout>,
-        errorElement: <ErrorPage></ErrorPage>,
-        children: [
-            {
-                path: "/",
-                element: <Home />,
-            },
-            {
-                path: "/login",
-                element: <Login />,
-            },
-            {
-                path: "/signup",
-                element: <SignUp />,
-            },
+        element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
 
-            {
-                path: "/course/:id",
-                element: <CourseDetails />,
-                loader: ({ params }) =>
-                    fetch(
-                        `${import.meta.env.VITE_API_URL}/course/${params.id}`
-                    ),
-            },
+      {
+        path: "/course/:id",
+        element: <CourseDetails />,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/course/${params.id}`),
+      },
 
-            {
-                path: "/programs",
-                element: <Programs />,
-            },
-           
-            {
-                path: "/departments",
-                element: <Departments />,
-            },
-            {
-                path:"/contactUs",
-                element:<ContactUs></ContactUs>
-            }
-            
-        ],
-    },
-    {
-        path: "/dashboardLayout",
-        element: <DashboardLayout></DashboardLayout>,
-        children: [
-            {
-                path: "addDepartments",
-                element: <AddDepartments></AddDepartments>,
-            },
-            {
-                path: "addCourse",
-                element: <AddCourse />,
-            },
-             {
-                path: "manageCourse",
-                element: <ManagePost />,
-            },
-            {
-              path:"manageDepartment",
-              element:<ManageDepartment></ManageDepartment>
-            }
-        ],
-    },
+      {
+        path: "/programs",
+        element: <Programs />,
+      },
+
+      {
+        path: "/departments",
+        element: <Departments />,
+      },
+      {
+        path: "/contactUs",
+        element: <ContactUs></ContactUs>,
+      },
+      {
+        path: "/updateCourse/:id",
+        element: <UpdateCourse />,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/course/${params.id}`),
+      },
+    ],
+  },
+  {
+    path: "/dashboardLayout",
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        path: "addDepartments",
+        element: <AddDepartments></AddDepartments>,
+      },
+      {
+        path: "addCourse",
+        element: <AddCourse />,
+      },
+      {
+        path: "manageCourse",
+        element: <ManagePost />,
+      },
+      {
+        path: "manageDepartment",
+        element: <ManageDepartment></ManageDepartment>,
+      },
+    ],
+  },
 ]);

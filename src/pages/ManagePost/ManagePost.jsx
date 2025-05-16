@@ -129,10 +129,7 @@ const ManagePost = () => {
                         className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"
                       >
                         {/* Description */}
-                        {course.course_description
-                          .split(" ")
-                          .slice(0, 5)
-                          .join()}
+                        {course.course_description}
                         ...
                       </td>
                       <td className="px-4 py-4 text-sm whitespace-nowrap">
@@ -157,7 +154,10 @@ const ManagePost = () => {
                             </svg>
                           </button>
 
-                          <Link className="text-gray-500 transition-colors duration-200 hover:text-yellow-500 focus:outline-none cursor-pointer">
+                          <Link
+                            to={`/updateCourse/${course._id}`}
+                            className="text-gray-500 transition-colors duration-200 hover:text-yellow-500 focus:outline-none cursor-pointer"
+                          >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"

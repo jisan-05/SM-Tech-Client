@@ -1,30 +1,34 @@
-import axios from "axios";
 import { useState } from "react";
+import { useLoaderData } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import axios from "axios";
 import toast from "react-hot-toast";
-import { imageUpload } from "../../utils/utils";
 
-import "react-datepicker/dist/react-datepicker.css";
+const UpdateCourse = () => {
+  const course = useLoaderData();
+  const {
+    _id,
+    category,
+    course_description,
+    course_duration,
+    course_instructor,
+    course_price,
+    course_title,
+  } = course;
 
-const AddCourse = () => {
   const [startDate, setStartDate] = useState(new Date());
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const category = form.category.value;
     const course_title = form.course_title.value;
-    const course_description = form.description.value;
-    const course_duration = form.course_duration.value;
     const course_instructor = form.course_instructor.value;
     const enrollment_deadline = startDate;
+    const category = form.category.value;
     const course_price = form.course_price.value;
-
-    // image Upload system
-
-    const banner_image = e.target.banner_image.files[0];
-
-    const course_banner = await imageUpload(banner_image);
+    const course_duration = form.course_duration.value;
+    const course_banner = form.course_banner.value;
+    const course_description = form.description.value;
 
     const courseData = {
       course_title,
@@ -33,29 +37,28 @@ const AddCourse = () => {
       category,
       course_price,
       course_duration,
-      course_description,
       course_banner,
+      course_description,
     };
 
-    console.log(courseData);
     try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/course`,
+      const { data } = await axios.put(
+        `${import.meta.env.VITE_API_URL}/updateCourse/${_id}`,
         courseData
       );
-      console.log(data);
-      toast.success("New Course Added Successfully");
-      e.target.reset();
+      toast.success("Course Updated Successfully");
+      form.reset();
     } catch (err) {
       console.log(err);
-      toast.error("Something are wrong! Tray Again");
+      toast.error(`Course can't update now! Try again`);
     }
   };
+
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
       <section className=" p-2 md:p-6 mx-auto bg-white rounded-md shadow-md ">
         <h2 className="text-lg font-semibold text-gray-700 capitalize justify-center align-middle text-center ">
-          Add A Course
+          Update Your Existing Course
         </h2>
         <hr />
 
@@ -68,8 +71,8 @@ const AddCourse = () => {
               <input
                 required
                 id="course_title"
-                placeholder="Computer Science & Engineering"
-                name="job_title"
+                placeholder={course_title}
+                name="course_title"
                 type="text"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
               />
@@ -82,12 +85,13 @@ const AddCourse = () => {
               <input
                 required
                 id="course_instructor"
-                placeholder="Md. Meherul Islam"
+                placeholder={course_instructor}
                 type="text"
                 name="course_instructor"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
               />
             </div>
+
             <div className="flex flex-col gap-2 ">
               <label className="text-gray-700">Enrollment Deadline</label>
 
@@ -106,6 +110,7 @@ const AddCourse = () => {
               <select
                 required
                 name="category"
+                defaultValue={category}
                 id="category"
                 className="border p-2 rounded-md"
               >
@@ -116,6 +121,7 @@ const AddCourse = () => {
                 <option value="textile">Textile Engineering</option>
               </select>
             </div>
+
             <div>
               <label className="text-gray-700 " htmlFor="min_price">
                 Course Price
@@ -123,7 +129,7 @@ const AddCourse = () => {
               <input
                 required
                 id="course_price"
-                placeholder="999"
+                placeholder={course_price}
                 name="course_price"
                 type="number"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
@@ -138,11 +144,12 @@ const AddCourse = () => {
                 required
                 id="course_duration"
                 name="course_duration"
-                placeholder="Give course duration in month"
+                placeholder={course_duration}
                 type="number"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
               />
             </div>
+
             <div className="flex flex-col gap-2 mt-4">
               <label className="text-gray-700" htmlFor="course_banner">
                 Course Banner (Image)
@@ -157,6 +164,7 @@ const AddCourse = () => {
               />
             </div>
           </div>
+
           <div className="flex flex-col gap-2 mt-4">
             <label className="text-gray-700 " htmlFor="description">
               Description
@@ -165,13 +173,14 @@ const AddCourse = () => {
               required
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
               id="description"
-              placeholder="SM-Tech Will provide you best guidance. Here you get................"
+              placeholder={course_description}
               name="description"
             ></textarea>
           </div>
+
           <div className="flex justify-end mt-6">
             <button className="cursor-pointer px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-              Add Course
+              Update Course
             </button>
           </div>
         </form>
@@ -180,4 +189,4 @@ const AddCourse = () => {
   );
 };
 
-export default AddCourse;
+export default UpdateCourse;
