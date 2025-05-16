@@ -4,6 +4,8 @@ import AboutUs from "../../components/AboutUs/AboutUs";
 import FeaturedCourses from "../../components/FeaturedCourses/FeaturedCourses";
 import Subscribe from "../../components/Subscribe/Subscribe";
 import WhyChoseUs from "../../components/WhyChoseUs/WhyChoseUs";
+import ScrollToTop from 'react-scroll-to-top';
+import ScrollToTopButton from "../../components/ScrollButton/ScrollButton";
 
 const Home = () => {
   return (
@@ -29,6 +31,7 @@ const Home = () => {
       <div className="bg-[#142E2C] pt-20 pb-12">
         <Subscribe></Subscribe>
       </div>
+      <ScrollToTopButton />
     </div>
   );
 };
