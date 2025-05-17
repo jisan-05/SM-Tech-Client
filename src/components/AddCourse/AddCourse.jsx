@@ -8,8 +8,10 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const AddCourse = () => {
   const [startDate, setStartDate] = useState(new Date());
+  const [loading,setLoading] = useState(false)
 
   const handleFormSubmit = async (e) => {
+    setLoading(true)
     e.preventDefault();
     const form = e.target;
     const category = form.category.value;
@@ -41,7 +43,7 @@ const AddCourse = () => {
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/course`,
-        courseData
+        courseData,{withCredentials:true}
       );
       console.log(data);
       toast.success("New Course Added Successfully");
@@ -50,6 +52,10 @@ const AddCourse = () => {
       console.log(err);
       toast.error("Something are wrong! Tray Again");
     }
+    setLoading(false)
+
+    
+
   };
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
@@ -170,9 +176,11 @@ const AddCourse = () => {
             ></textarea>
           </div>
           <div className="flex justify-end mt-6">
-            <button className="cursor-pointer px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+            {loading? <button className="cursor-pointer px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+              Add Course <span className="loading loading-bars loading-md"></span>
+            </button> : <button className="cursor-pointer px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
               Add Course
-            </button>
+            </button>}
           </div>
         </form>
       </section>

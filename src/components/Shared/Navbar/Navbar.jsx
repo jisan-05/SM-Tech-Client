@@ -3,11 +3,13 @@ import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
 import AuthContext from "../../../providers/AuthContext";
 import logo from "/logo.png";
-import profile from "../../../assets/user.jpg";
 import LoadingSpinner from "../LoadingSpinner";
+import PrimaryButton from "./../../Button/PrimaryButton";
+import useRole from "../../../hooks/useRole";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [role, isLoading] = useRole();
     // const [profile,setProfile] = useState('')
     // useEffect(()=>{
     //     setProfile(user?.photoURL)
@@ -43,10 +45,26 @@ const Navbar = () => {
                     <li className="text-lg font-semibold">
                         <NavLink to="/contactUs">Contact Us</NavLink>
                     </li>
+                    {role === "admin" && (
+                        <li className="text-lg font-semibold">
+                            <NavLink to="/dashboardLayout">
+                                Admin Dashboard
+                            </NavLink>
+                        </li>
+                    )}
                 </ul>
             </div>
             <div className="navbar-end gap-4">
                 <label className="swap swap-rotate"></label>
+                {user ? (
+                    ""
+                ) : (
+                    <div className="hidden md:block">
+                        <Link to="/login">
+                            <PrimaryButton buttonText="Login"></PrimaryButton>
+                        </Link>
+                    </div>
+                )}
                 <div className="dropdown dropdown-end z-50">
                     <div
                         tabIndex={1}
@@ -60,11 +78,22 @@ const Navbar = () => {
                                 alt="User"
                             />
                         ) : (
-                            <img
-                                src={profile}
-                                className="w-12 h-12 rounded-full"
-                                alt="User"
-                            />
+                            <button className="btn btn-square btn-ghost md:hidden">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    className="inline-block h-5 w-5 stroke-current"
+                                >
+                                    {" "}
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M4 6h16M4 12h16M4 18h16"
+                                    ></path>{" "}
+                                </svg>
+                            </button>
                         )}
                     </div>
                     <ul
@@ -86,11 +115,13 @@ const Navbar = () => {
                         <li className="text-lg font-semibold">
                             <NavLink to="/contactUs">Contact Us</NavLink>
                         </li>
-                        <li className="text-lg font-semibold">
-                            <NavLink to="/dashboardLayout">
-                                Admin Dashboard
-                            </NavLink>
-                        </li>
+                        {role === "admin" && (
+                            <li className="text-lg font-semibold">
+                                <NavLink to="/dashboardLayout">
+                                    Admin Dashboard
+                                </NavLink>
+                            </li>
+                        )}
                         {user ? (
                             <li
                                 onClick={signOut}

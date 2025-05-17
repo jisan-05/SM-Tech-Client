@@ -26,7 +26,7 @@ const AddDepartments = () => {
         try {
             await axios.post(
                 `${import.meta.env.VITE_API_URL}/department`,
-                departmentData
+                departmentData,{withCredentials:true}
             );
             toast.success("Department Added Successfully");
             setIsLoading(false)

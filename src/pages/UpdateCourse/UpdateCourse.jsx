@@ -6,6 +6,9 @@ import toast from "react-hot-toast";
 import { imageUpload } from "../../utils/utils";
 
 const UpdateCourse = () => {
+
+    const [loading,setLoading] = useState(false)
+
     const courses = useLoaderData();
     const {
         _id,
@@ -21,6 +24,7 @@ const UpdateCourse = () => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)     
         const form = e.target;
         const course_title = form.course_title.value;
         const course_instructor = form.course_instructor.value;
@@ -51,7 +55,7 @@ const UpdateCourse = () => {
         try {
             const { data } = await axios.put(
                 `${import.meta.env.VITE_API_URL}/updateCourse/${_id}`,
-                courseData
+                courseData,{withCredentials:true}
             );
             toast.success("Course Updated Successfully");
             form.reset();
@@ -59,6 +63,7 @@ const UpdateCourse = () => {
             console.log(err);
             toast.error(`Course can't update now! Try again`);
         }
+        setLoading(false)
     };
 
     return (
@@ -219,9 +224,11 @@ const UpdateCourse = () => {
                     </div>
 
                     <div className="flex justify-end mt-6">
-                        <button className="cursor-pointer px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-                            Update Course
-                        </button>
+                        {loading? <button className="cursor-pointer px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+              Update Course <span className="loading loading-bars loading-md"></span>
+            </button> : <button className="cursor-pointer px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+              Update Course
+            </button>}
                     </div>
                 </form>
             </section>

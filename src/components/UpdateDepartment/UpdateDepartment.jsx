@@ -32,7 +32,7 @@ const UpdateDepartment = () => {
         try {
             await axios.put(
                 `${import.meta.env.VITE_API_URL}/updateDepartment/${_id}`,
-                departmentData
+                departmentData,{withCredentials:true}
             );
             toast.success("Update Successfully");
             setIsLoading(false);

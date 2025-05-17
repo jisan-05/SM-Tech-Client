@@ -34,7 +34,7 @@ const ManageDepartment = () => {
                 // confirmation delete
                 try {
                     const { data } = await axios.delete(
-                        `${import.meta.env.VITE_API_URL}/department/${id}`
+                        `${import.meta.env.VITE_API_URL}/department/${id}`,{withCredentials:true}
                     );
                     // Here use get data for auto refresh ui
                     console.log(data);

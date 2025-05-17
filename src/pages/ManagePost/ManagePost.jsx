@@ -31,7 +31,7 @@ const ManagePost = () => {
             if (result.isConfirmed) {
                 try {
                     const { data } = await axios.delete(
-                        `${import.meta.env.VITE_API_URL}/course/${id}`
+                        `${import.meta.env.VITE_API_URL}/course/${id}`,{withCredentials:true}
                     );
                     // Here use get data for auto refresh ui
                     console.log(data);

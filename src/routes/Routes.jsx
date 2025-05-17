@@ -18,6 +18,7 @@ import ManageDepartment from "../components/ManageDepartment/ManageDepartment";
 import ContactUs from "../components/ContactUs/ContactUs";
 import UpdateCourse from "../pages/UpdateCourse/UpdateCourse";
 import UpdateDepartment from "../components/UpdateDepartment/UpdateDepartment";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -74,7 +75,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboardLayout",
-    element: <DashboardLayout></DashboardLayout>,
+    element: <AdminRoute><DashboardLayout></DashboardLayout></AdminRoute>,
     children: [
       {
         path: "addDepartments",
