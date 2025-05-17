@@ -17,6 +17,7 @@ import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
 import ManageDepartment from "../components/ManageDepartment/ManageDepartment";
 import ContactUs from "../components/ContactUs/ContactUs";
 import UpdateCourse from "../pages/UpdateCourse/UpdateCourse";
+import UpdateDepartment from "../components/UpdateDepartment/UpdateDepartment";
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +63,12 @@ export const router = createBrowserRouter([
         element: <UpdateCourse />,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/course/${params.id}`),
+      },
+      {
+        path: "/updateDepartment/:id",
+        element: <UpdateDepartment></UpdateDepartment>,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/department/${params.id}`),
       },
     ],
   },

@@ -2,3 +2,7 @@
   
   color: teal;
 }
+
+body, .navbar {
+  overflow-x: clip; /* Better than 'hidden' (no layout side effects) */
+}
