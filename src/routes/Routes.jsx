@@ -18,6 +18,7 @@ import ManageDepartment from "../components/ManageDepartment/ManageDepartment";
 import ContactUs from "../components/ContactUs/ContactUs";
 import UpdateCourse from "../pages/UpdateCourse/UpdateCourse";
 import UpdateDepartment from "../components/UpdateDepartment/UpdateDepartment";
+import AddStudent from "../components/AddStudent/AddStudent";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
         element: <UpdateDepartment></UpdateDepartment>,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/department/${params.id}`),
+      },
+      {
+        path: "/addStudent",
+        element: <AddStudent />,
       },
     ],
   },
