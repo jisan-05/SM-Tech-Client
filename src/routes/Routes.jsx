@@ -80,7 +80,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboardLayout",
-    element: <AdminRoute><DashboardLayout></DashboardLayout></AdminRoute>,
+    element: (
+      <AdminRoute>
+        <DashboardLayout></DashboardLayout>
+      </AdminRoute>
+    ),
     children: [
       {
         path: "addDepartments",
@@ -97,6 +101,10 @@ export const router = createBrowserRouter([
       {
         path: "manageDepartment",
         element: <ManageDepartment></ManageDepartment>,
+      },
+      {
+        path: "addStudent",
+        element: <AddStudent />,
       },
     ],
   },

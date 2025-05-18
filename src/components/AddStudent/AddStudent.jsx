@@ -152,6 +152,20 @@ const AddStudent = () => {
               </select>
             </div>
           </div>
+
+          <div className="flex flex-col gap-2 mt-4">
+            <label className="text-gray-700" htmlFor="course_banner">
+              Upload Student Image
+            </label>
+            <input
+              required
+              type="file"
+              id="student_image"
+              name="student_image"
+              accept="image/*"
+              className=""
+            />
+          </div>
         </form>
 
         <div className="mt-10">

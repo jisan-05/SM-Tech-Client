@@ -1,5 +1,12 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { School, ListChecks, BookPlus, BookOpenCheck, Home } from 'lucide-react';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  School,
+  ListChecks,
+  BookPlus,
+  BookOpenCheck,
+  Home,
+  BadgePlus,
+} from "lucide-react";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -7,23 +14,28 @@ const Sidebar = () => {
 
   const links = [
     {
-      name: 'Add Departments',
-      path: '/dashboardLayout/addDepartments',
+      name: "Add Departments",
+      path: "/dashboardLayout/addDepartments",
       icon: <School size={20} />,
     },
     {
-      name: 'Manage Departments',
-      path: '/dashboardLayout/manageDepartment',
+      name: "Manage Departments",
+      path: "/dashboardLayout/manageDepartment",
       icon: <ListChecks size={20} />,
     },
     {
-      name: 'Add Courses',
-      path: '/dashboardLayout/addCourse',
+      name: "Add Courses",
+      path: "/dashboardLayout/addCourse",
       icon: <BookPlus size={20} />,
     },
     {
-      name: 'Manage Courses',
-      path: '/dashboardLayout/manageCourse',
+      name: "Add Student",
+      path: "/dashboardLayout/addStudent",
+      icon: <BadgePlus size={20} />,
+    },
+    {
+      name: "Manage Courses",
+      path: "/dashboardLayout/manageCourse",
       icon: <BookOpenCheck size={20} />,
     },
   ];
@@ -35,9 +47,10 @@ const Sidebar = () => {
       </div>
       <nav className="flex-1 px-4 py-4">
         <ul className="space-y-2">
-          <li onClick={()=>navigate("/")}>
-            
-            <Link className='flex items-center gap-3 px-3 py-2 rounded-lg transition hover:bg-gray-200'><Home size={20}></Home> Go Home</Link>
+          <li onClick={() => navigate("/")}>
+            <Link className="flex items-center gap-3 px-3 py-2 rounded-lg transition hover:bg-gray-200">
+              <Home size={20}></Home> Go Home
+            </Link>
           </li>
           {links.map((link) => (
             <li key={link.name}>
@@ -46,8 +59,8 @@ const Sidebar = () => {
                 className={`flex items-center gap-3 px-3 py-2 rounded-lg transition 
                   ${
                     location.pathname === link.path
-                      ? 'bg-primary text-white'
-                      : 'hover:bg-base-300'
+                      ? "bg-primary text-white"
+                      : "hover:bg-base-300"
                   }`}
               >
                 {link.icon}
