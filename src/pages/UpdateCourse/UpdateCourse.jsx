@@ -8,7 +8,7 @@ import { imageUpload } from "../../utils/utils";
 const UpdateCourse = () => {
   const [loading, setLoading] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const courses = useLoaderData();
   const {
@@ -56,9 +56,9 @@ const UpdateCourse = () => {
       );
 
       toast.success("Course Updated Successfully");
-      
+
       form.reset();
-      navigate('/dashboardLayout/manageCourse')
+      navigate("/dashboardLayout/manageCourse");
     } catch (err) {
       console.error(err);
       toast.error("Course can't be updated now! Try again.");

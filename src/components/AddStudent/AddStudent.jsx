@@ -215,7 +215,9 @@
 
 // export default AddStudent;
 
+import axios from "axios";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const AddStudent = () => {
   const [duration, setDuration] = useState("");
@@ -241,7 +243,7 @@ const AddStudent = () => {
     );
     setDuration(durationInMonths);
 
-    console.log(
+    const studentData = {
       studentId,
       studentName,
       fatherName,
@@ -252,8 +254,21 @@ const AddStudent = () => {
       enrollment_date,
       course_complete_date,
       course_status,
-      durationInMonths
-    );
+      durationInMonths,
+    };
+
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/student`,
+        studentData,
+        { withCredentials: true }
+      );
+      toast.success("Add Student Successfully");
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+      toast.error("Cant add student now! Try again");
+    }
   };
 
   const calculateDurationInMonths = (start, end) => {
@@ -293,6 +308,7 @@ const AddStudent = () => {
               <input
                 type="text"
                 name="student_id"
+                required
                 placeholder="e.g. 2025001"
                 className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
               />
@@ -305,6 +321,7 @@ const AddStudent = () => {
               <input
                 type="text"
                 name="student_name"
+                required
                 placeholder="e.g. Hasan Ahmed"
                 className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
               />
@@ -317,6 +334,7 @@ const AddStudent = () => {
               <input
                 type="text"
                 name="father_name"
+                required
                 placeholder="e.g. Mostafizur Rahman"
                 className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
               />
@@ -329,6 +347,7 @@ const AddStudent = () => {
               <input
                 type="text"
                 name="mother_name"
+                required
                 placeholder="e.g. Shirin Akter"
                 className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
               />
@@ -341,6 +360,7 @@ const AddStudent = () => {
               <input
                 type="date"
                 name="date_of_birth"
+                required
                 className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
               />
             </div>
@@ -355,6 +375,7 @@ const AddStudent = () => {
               <input
                 type="number"
                 name="nid_num"
+                required
                 placeholder="e.g. 123456789"
                 className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
               />
@@ -367,6 +388,7 @@ const AddStudent = () => {
               <input
                 type="text"
                 name="course_name"
+                required
                 placeholder="e.g. Civil Engineering"
                 className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
               />
@@ -379,6 +401,7 @@ const AddStudent = () => {
               <input
                 type="date"
                 name="enrollment_date"
+                required
                 onChange={handleDateChange}
                 className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
               />
@@ -391,6 +414,7 @@ const AddStudent = () => {
               <input
                 type="date"
                 name="course_complete_date"
+                required
                 onChange={handleDateChange}
                 className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
               />
@@ -402,6 +426,7 @@ const AddStudent = () => {
               </label>
               <select
                 name="course_status"
+                required
                 className="w-full px-4 py-3 border border-teal-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
               >
                 <option value="">Select status</option>

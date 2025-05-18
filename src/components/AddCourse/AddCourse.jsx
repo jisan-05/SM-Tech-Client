@@ -9,11 +9,11 @@ import { useNavigate } from "react-router-dom";
 
 const AddCourse = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const [loading,setLoading] = useState(false)
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (e) => {
-    setLoading(true)
+    setLoading(true);
     e.preventDefault();
     const form = e.target;
     const category = form.category.value;
@@ -45,20 +45,18 @@ const AddCourse = () => {
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/course`,
-        courseData,{withCredentials:true}
+        courseData,
+        { withCredentials: true }
       );
       console.log(data);
       toast.success("New Course Added Successfully");
-      navigate('/dashboardLayout/manageCourse')
+      navigate("/dashboardLayout/manageCourse");
       e.target.reset();
     } catch (err) {
       console.log(err);
       toast.error("Something are wrong! Tray Again");
     }
-    setLoading(false)
-
-    
-
+    setLoading(false);
   };
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
@@ -179,11 +177,16 @@ const AddCourse = () => {
             ></textarea>
           </div>
           <div className="flex justify-end mt-6">
-            {loading? <button className="cursor-pointer px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-              Add Course <span className="loading loading-bars loading-md"></span>
-            </button> : <button className="cursor-pointer px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-              Add Course
-            </button>}
+            {loading ? (
+              <button className="cursor-pointer px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+                Add Course{" "}
+                <span className="loading loading-bars loading-md"></span>
+              </button>
+            ) : (
+              <button className="cursor-pointer px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+                Add Course
+              </button>
+            )}
           </div>
         </form>
       </section>
