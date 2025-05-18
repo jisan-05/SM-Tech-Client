@@ -129,7 +129,7 @@ const ManageDepartment = () => {
                                                 {/* Description */}
                                                 {department.description
                                                     .split(" ")
-                                                    .slice(0, 5)
+                                                    .slice(0, 3)
                                                     .join()}
                                                 ...
                                             </td>
