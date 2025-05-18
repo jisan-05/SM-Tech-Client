@@ -2,10 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { imageUpload } from "../../utils/utils";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const UpdateDepartment = () => {
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate()
 
     const department = useLoaderData();
     const { _id, title, description, photoURL, category } = department;
@@ -36,6 +37,7 @@ const UpdateDepartment = () => {
             );
             toast.success("Update Successfully");
             setIsLoading(false);
+            navigate("/dashboardLayout/manageDepartment")
             e.target.reset();
         } catch {
             toast.error("something went wrong");

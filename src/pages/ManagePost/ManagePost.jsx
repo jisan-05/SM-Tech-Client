@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 const ManagePost = () => {
     const { user } = useContext(AuthContext);
     const [courses, setCourses] = useState([]);
+    
 
     useEffect(() => {
         getData();
@@ -42,6 +43,7 @@ const ManagePost = () => {
                     console.log(err);
                     toast.error("Something went wrong! Try again.");
                 }
+                
             }
         });
     };
@@ -94,7 +96,7 @@ const ManagePost = () => {
                                             scope="col"
                                             className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
                                         >
-                                            Department
+                                            Duration
                                         </th>
                                         <th
                                             scope="col"
@@ -145,8 +147,7 @@ const ManagePost = () => {
                                                 className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"
                                             >
                                                 {/* Description */}
-                                                {course.course_description}
-                                                ...
+                                               {course.course_description.split(" ").slice(0, 3).join(" ")}...
                                             </td>
                                             <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                 <div className="flex items-center gap-x-6">

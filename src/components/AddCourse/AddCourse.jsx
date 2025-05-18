@@ -5,10 +5,12 @@ import toast from "react-hot-toast";
 import { imageUpload } from "../../utils/utils";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
 
 const AddCourse = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [loading,setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const handleFormSubmit = async (e) => {
     setLoading(true)
@@ -47,6 +49,7 @@ const AddCourse = () => {
       );
       console.log(data);
       toast.success("New Course Added Successfully");
+      navigate('/dashboardLayout/manageCourse')
       e.target.reset();
     } catch (err) {
       console.log(err);

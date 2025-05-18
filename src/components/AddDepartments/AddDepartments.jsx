@@ -2,9 +2,11 @@ import axios from "axios";
 import { imageUpload } from "../../utils/utils";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddDepartments = () => {
     const [isLoading,setIsLoading] = useState(false)
+     const navigate = useNavigate()
     const handleSubmit = async (e) => {
         setIsLoading(true)
         e.preventDefault();
@@ -30,6 +32,7 @@ const AddDepartments = () => {
             );
             toast.success("Department Added Successfully");
             setIsLoading(false)
+            navigate('/dashboardLayout/manageDepartment')
             e.target.reset();
         } catch {
             toast.error("something went wrong");
