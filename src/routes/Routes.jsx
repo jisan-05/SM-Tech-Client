@@ -20,6 +20,8 @@ import UpdateCourse from "../pages/UpdateCourse/UpdateCourse";
 import UpdateDepartment from "../components/UpdateDepartment/UpdateDepartment";
 import AdminRoute from "./AdminRoute";
 import AddStudent from "../components/AddStudent/AddStudent";
+import AddTeacher from "../components/AddTeacher/AddTeacher";
+import AllTeacher from "../components/AllTeacher/AllTeacher";
 
 export const router = createBrowserRouter([
   {
@@ -73,9 +75,14 @@ export const router = createBrowserRouter([
           fetch(`${import.meta.env.VITE_API_URL}/department/${params.id}`),
       },
       {
+        path: "/allTeacher",
+        element: <AllTeacher></AllTeacher>,
+      },
+      {
         path: "/addStudent",
         element: <AddStudent />,
       },
+      
     ],
   },
   {
@@ -106,6 +113,10 @@ export const router = createBrowserRouter([
         path: "addStudent",
         element: <AddStudent />,
       },
+      {
+        path:"addTeacher",
+        element:<AddTeacher></AddTeacher>
+      }
     ],
   },
 ]);

@@ -456,7 +456,7 @@ const Banner = () => {
                     nextEl: ".swiper-button-next",
                     prevEl: ".swiper-button-prev",
                 }}
-                loop={true}
+                 loop={courses.length >= 3}
                 autoplay={{
                     delay: 5000,
                     disableOnInteraction: false,

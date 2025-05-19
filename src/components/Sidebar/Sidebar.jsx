@@ -38,6 +38,11 @@ const Sidebar = () => {
       path: "/dashboardLayout/manageCourse",
       icon: <BookOpenCheck size={20} />,
     },
+    {
+      name: "Add Teacher",
+      path: "/dashboardLayout/addTeacher",
+      icon: <BookOpenCheck size={20} />,
+    },
   ];
 
   return (
