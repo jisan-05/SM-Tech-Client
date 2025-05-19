@@ -28,6 +28,7 @@ import ManageStudent from "../pages/ManageStudent/ManageStudent";
 
 import UpdateStudent from "../components/UpdateStudent/UpdateStudent";
 import ManageRole from "../components/ManageRole/ManageRole";
+import SearchForStudent from "../components/SearchForStudent/SearchForStudent";
 
 export const router = createBrowserRouter([
   {
@@ -97,6 +98,10 @@ export const router = createBrowserRouter([
         element: <UpdateStudent />,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/student/${params.id}`),
+      },
+      {
+        path: "/searchStudent",
+        element: <SearchForStudent />,
       },
     ],
   },
