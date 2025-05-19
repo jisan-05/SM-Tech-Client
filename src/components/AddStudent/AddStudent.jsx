@@ -261,7 +261,8 @@ const AddStudent = () => {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/student`,
         studentData,
-        { withCredentials: true }
+        { withCredentials: true },
+        form.reset()
       );
       toast.success("Add Student Successfully");
       console.log(data);

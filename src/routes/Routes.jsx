@@ -24,6 +24,7 @@ import AddTeacher from "../components/AddTeacher/AddTeacher";
 import AllTeacher from "../components/AllTeacher/AllTeacher";
 import ManageTeacher from "../components/ManageTeacher/ManageTeacher";
 import DepartmentCourse from "../components/DepartmentCourse/DepartmentCourse";
+import ManageStudent from "../pages/ManageStudent/ManageStudent";
 
 export const router = createBrowserRouter([
   {
@@ -61,8 +62,8 @@ export const router = createBrowserRouter([
         element: <Departments />,
       },
       {
-        path:'/departmentCourse/:category',
-        element:<DepartmentCourse></DepartmentCourse>
+        path: "/departmentCourse/:category",
+        element: <DepartmentCourse></DepartmentCourse>,
       },
       {
         path: "/contactUs",
@@ -85,10 +86,9 @@ export const router = createBrowserRouter([
         element: <AllTeacher></AllTeacher>,
       },
       {
-        path: "/addStudent",
-        element: <AddStudent />,
+        path: "/manageStudent",
+        element: <ManageStudent />,
       },
-      
     ],
   },
   {
@@ -119,14 +119,15 @@ export const router = createBrowserRouter([
         path: "addStudent",
         element: <AddStudent />,
       },
+
       {
-        path:"addTeacher",
-        element:<AddTeacher></AddTeacher>
+        path: "addTeacher",
+        element: <AddTeacher></AddTeacher>,
       },
       {
-        path:"manageTeacher",
-        element:<ManageTeacher></ManageTeacher>
-      }
+        path: "manageTeacher",
+        element: <ManageTeacher></ManageTeacher>,
+      },
     ],
   },
 ]);

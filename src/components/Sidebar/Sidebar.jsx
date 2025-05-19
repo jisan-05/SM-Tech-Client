@@ -13,7 +13,6 @@ const Sidebar = () => {
   const location = useLocation();
 
   const links = [
-    
     {
       name: "Manage Departments",
       path: "/dashboardLayout/manageDepartment",
@@ -29,8 +28,7 @@ const Sidebar = () => {
       path: "/dashboardLayout/addStudent",
       icon: <BadgePlus size={20} />,
     },
-    
-    
+
     {
       name: "Manage Teacher",
       path: "/dashboardLayout/manageTeacher",
