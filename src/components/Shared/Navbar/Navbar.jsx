@@ -21,7 +21,7 @@ const Navbar = () => {
     console.log(user?.photoURL);
 
     return (
-        <div className="navbar bg-base-100 shadow-sm ">
+        <div className="navbar bg-base-100  ">
             <div className="navbar-start">
                 <img src={logo} alt="" className="w-12" />
                 <Link to="/" className="btn btn-ghost text-xl">

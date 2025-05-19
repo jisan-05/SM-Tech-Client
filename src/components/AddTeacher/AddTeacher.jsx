@@ -58,6 +58,7 @@ const AddTeacher = () => {
       toast.error("Something went wrong!");
     } finally {
       setIsLoading(false);
+      navigate("/dashboardLayout/manageTeacher")
     }
   };
 
@@ -129,7 +130,7 @@ const AddTeacher = () => {
 
           {/* Social Links */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">WhatsApp</label>
+            <label className="block text-gray-700 font-medium mb-1">WhatsApp (Optional)</label>
             <input
               type="url"
               name="whatsapp"
@@ -139,7 +140,7 @@ const AddTeacher = () => {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium mb-1">Facebook</label>
+            <label className="block text-gray-700 font-medium mb-1">Facebook (Optional)</label>
             <input
               type="url"
               name="facebook"
@@ -163,7 +164,7 @@ const AddTeacher = () => {
 
         {/* Skills */}
         <div>
-          <label className="block text-gray-700 font-medium mb-1">Skills</label>
+          <label className="block text-gray-700 font-medium mb-1">Skills (Optional)</label>
           <div className="flex gap-2 mb-2">
             <input
               type="text"

@@ -57,7 +57,7 @@ const FeaturedCourses = () => {
   const visibleCourses = courses.slice(startIndex, startIndex + visibleCount);
 
   return (
-    <div className="py-8 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+    <div className="">
       <div className="max-w-7xl mx-auto">
         <button className="btn btn-outline border-gray-600 px-6 sm:px-8 md:px-10 rounded-full flex mx-auto cursor-default relative overflow-hidden h-10 sm:h-12 transition-all duration-700 ease-in-out w-48 sm:w-60">
           Top Class Courses

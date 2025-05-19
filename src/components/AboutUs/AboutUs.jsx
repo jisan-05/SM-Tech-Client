@@ -5,7 +5,7 @@ import PrimaryButton from "../Button/PrimaryButton";
 
 const AboutUs = () => {
   return (
-    <div className="pt-24 pb-14">
+    <div className="">
       <div>
         <button className="btn btn-outline border-gray-600 px-10 rounded-4xl flex mx-auto ">
           Get More About Us

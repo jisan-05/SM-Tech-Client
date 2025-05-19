@@ -11,25 +11,28 @@ import Teacher from "../../components/Teacher/Teacher";
 
 const Home = () => {
   return (
-    <div>
+    <div className="">
       <Banner />
-      <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1600px] mx-auto flex items-center">
+      <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1500px] mx-auto flex items-center py-28">
         <AboutUs />
       </div>
       {/* <div>
-        <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1600px] mx-auto ">
+        <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1500px] mx-auto ">
           <Trusted></Trusted>
         </div>
       </div> */}
       <div className="bg-[#f5f7f8]">
-        <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1600px] mx-auto ">
+        <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1500px] mx-auto py-28">
           <FeaturedCourses />
         </div>
           
       </div>
-      <div className="bg-[#182428] py-24">
+      <div className="bg-[#182428]">
+      <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1500px] mx-auto py-28">
         <WhyChoseUs></WhyChoseUs>
       </div>
+      </div>
+
       <div className="bg-gray-200">
         <Teacher></Teacher>
       </div>
@@ -37,8 +40,10 @@ const Home = () => {
       <div>
         <StartJourney></StartJourney>
       </div>
-      <div className="bg-[#142E2C] pt-20 pb-12">
-        <Subscribe></Subscribe>
+      <div className="bg-[#142E2C] py-20">
+        <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1500px] mx-auto border-2 rounded-xl border-[#0e3a36] md:px-14 md:py-16 px-4">
+          <Subscribe></Subscribe>
+        </div>
       </div>
       <ScrollToTopButton />
     </div>
