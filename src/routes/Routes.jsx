@@ -29,6 +29,8 @@ import ManageStudent from "../pages/ManageStudent/ManageStudent";
 import UpdateStudent from "../components/UpdateStudent/UpdateStudent";
 import ManageRole from "../components/ManageRole/ManageRole";
 import SearchForStudent from "../components/SearchForStudent/SearchForStudent";
+import Pdf from "../components/PDF/Pdf";
+import TeacherPdf from "../components/PDF/TeacherPdf";
 
 export const router = createBrowserRouter([
   {
@@ -102,6 +104,14 @@ export const router = createBrowserRouter([
       {
         path: "/searchStudent",
         element: <SearchForStudent />,
+      },
+      {
+        path: "/pdf",
+        element: <Pdf />,
+      },
+      {
+        path: "/teacherPdf",
+        element: <TeacherPdf />,
       },
     ],
   },
