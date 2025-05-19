@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const DepartmentCard = ({ departmentData }) => {
-    const { title, description, photoURL } = departmentData || [];
+    const { title, description, photoURL,category } = departmentData || [];
 
     return (
         <div className="h-full">
@@ -32,7 +32,7 @@ const DepartmentCard = ({ departmentData }) => {
                     </p>
                     <button>
                         <Link
-                            to="/programs"
+                            to={`/departmentCourse/${category}`}
                             className="group inline-block px-6 py-2 bg-teal-600 text-white font-medium rounded-full hover:bg-teal-700 transition-colors duration-300"
                         >
                             See Courses

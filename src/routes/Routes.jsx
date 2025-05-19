@@ -23,6 +23,7 @@ import AddStudent from "../components/AddStudent/AddStudent";
 import AddTeacher from "../components/AddTeacher/AddTeacher";
 import AllTeacher from "../components/AllTeacher/AllTeacher";
 import ManageTeacher from "../components/ManageTeacher/ManageTeacher";
+import DepartmentCourse from "../components/DepartmentCourse/DepartmentCourse";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path: "/departments",
         element: <Departments />,
+      },
+      {
+        path:'/departmentCourse/:category',
+        element:<DepartmentCourse></DepartmentCourse>
       },
       {
         path: "/contactUs",
