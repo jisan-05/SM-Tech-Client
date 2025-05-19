@@ -25,6 +25,8 @@ import AllTeacher from "../components/AllTeacher/AllTeacher";
 import ManageTeacher from "../components/ManageTeacher/ManageTeacher";
 import DepartmentCourse from "../components/DepartmentCourse/DepartmentCourse";
 import ManageStudent from "../pages/ManageStudent/ManageStudent";
+import ManageRole from "../components/ManageRole/ManageRole";
+
 
 export const router = createBrowserRouter([
   {
@@ -128,6 +130,11 @@ export const router = createBrowserRouter([
         path: "manageTeacher",
         element: <ManageTeacher></ManageTeacher>,
       },
+      {
+        path: "manageRole",
+        element: <ManageRole></ManageRole>,
+      },
+      
     ],
   },
 ]);

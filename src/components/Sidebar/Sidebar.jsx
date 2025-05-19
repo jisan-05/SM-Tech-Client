@@ -34,6 +34,11 @@ const Sidebar = () => {
       path: "/dashboardLayout/manageTeacher",
       icon: <BookOpenCheck size={20} />,
     },
+    {
+      name: "Manage Role",
+      path: "/dashboardLayout/manageRole",
+      icon: <BookOpenCheck size={20} />,
+    },
   ];
 
   return (
