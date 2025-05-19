@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 const ManagePost = () => {
     const { user } = useContext(AuthContext);
     const [courses, setCourses] = useState([]);
-    
 
     useEffect(() => {
         getData();
@@ -32,132 +31,94 @@ const ManagePost = () => {
             if (result.isConfirmed) {
                 try {
                     const { data } = await axios.delete(
-                        `${import.meta.env.VITE_API_URL}/course/${id}`,{withCredentials:true}
+                        `${import.meta.env.VITE_API_URL}/course/${id}`,
+                        { withCredentials: true }
                     );
-                    // Here use get data for auto refresh ui
-                    console.log(data);
                     getData();
-
                     toast.success("Delete Course Successfully");
                 } catch (err) {
                     console.log(err);
                     toast.error("Something went wrong! Try again.");
                 }
-                
             }
         });
     };
 
     return (
         <section className="container px-4 mx-auto pt-12">
-            <div className="flex items-center gap-x-3">
-                <h2 className="text-lg font-medium text-gray-800 ">
-                    Total Posted Course
-                </h2>
+            {/* Header Section with Add Button */}
+            <div className="flex justify-between items-center gap-x-3 mb-4">
+                <div className="flex items-center gap-x-3">
+                    <h2 className="text-lg font-medium text-gray-800">
+                        Total Posted Course
+                    </h2>
+                    <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full">
+                        {courses.length}
+                    </span>
+                </div>
 
-                <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">
-                    {courses.length}
-                </span>
+                <Link
+                    to="/dashboardLayout/addCourse"
+                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition duration-300"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 4v16m8-8H4"
+                        />
+                    </svg>
+                    Add Course
+                </Link>
             </div>
 
-            <div className="flex flex-col mt-6">
+            <div className="flex flex-col">
                 <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                        <div className="overflow-hidden border border-gray-200  md:rounded-lg">
+                        <div className="overflow-hidden border border-gray-200 md:rounded-lg">
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead className="bg-gray-50">
                                     <tr>
-                                        <th
-                                            scope="col"
-                                            className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500"
-                                        >
-                                            <div className="flex items-center gap-x-3">
-                                                <span>Course Title</span>
-                                            </div>
-                                        </th>
-
-                                        <th
-                                            scope="col"
-                                            className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
-                                        >
-                                            <span>Deadline</span>
-                                        </th>
-
-                                        <th
-                                            scope="col"
-                                            className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
-                                        >
-                                            <button className="flex items-center gap-x-2">
-                                                <span>Course Price</span>
-                                            </button>
-                                        </th>
-
-                                        <th
-                                            scope="col"
-                                            className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
-                                        >
-                                            Duration
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
-                                        >
-                                            Description
-                                        </th>
-
-                                        <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
-                                            Edit
-                                        </th>
+                                        <th className="py-3.5 px-4 text-sm font-normal text-left text-gray-500">Course Title</th>
+                                        <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">Deadline</th>
+                                        <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">Course Price</th>
+                                        <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">Duration</th>
+                                        <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">Description</th>
+                                        <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">Edit</th>
                                     </tr>
                                 </thead>
-
-                                <tbody className="bg-white divide-y divide-gray-200 ">
+                                <tbody className="bg-white divide-y divide-gray-200">
                                     {courses.map((course) => (
                                         <tr key={course._id}>
-                                            <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
+                                            <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                 {course.course_title}
                                             </td>
-
-                                            <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                                                {new Date(
-                                                    course.enrollment_deadline
-                                                ).toLocaleDateString()}
+                                            <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                                {new Date(course.enrollment_deadline).toLocaleDateString()}
                                             </td>
-
-                                            <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                                                {/* Course Price */}
+                                            <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                 {course.course_price}
                                             </td>
                                             <td className="px-4 py-4 text-sm whitespace-nowrap">
-                                                <div className="flex items-center gap-x-2">
-                                                    <p
-                                                        className="px-3 py-1 rounded-full text-blue-500 bg-blue-100/60
-                         text-xs"
-                                                    >
-                                                        {/* Course Duration */}
-                                                        {
-                                                            course.course_duration
-                                                        }{" "}
-                                                        months
-                                                    </p>
-                                                </div>
+                                                <span className="px-3 py-1 rounded-full text-blue-500 bg-blue-100/60 text-xs">
+                                                    {course.course_duration} months
+                                                </span>
                                             </td>
-                                            <td
-                                                title=""
-                                                className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"
-                                            >
-                                                {/* Description */}
-                                               {course.course_description.split(" ").slice(0, 3).join(" ")}...
+                                            <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                                {course.course_description.split(" ").slice(0, 2).join(" ") + "..."}
                                             </td>
                                             <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                 <div className="flex items-center gap-x-6">
                                                     <button
-                                                        onClick={() =>
-                                                            handleDeleteCourse(
-                                                                course._id
-                                                            )
-                                                        }
-                                                        className="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none cursor-pointer"
+                                                        onClick={() => handleDeleteCourse(course._id)}
+                                                        className="text-gray-500 transition-colors duration-200 hover:text-red-500 focus:outline-none cursor-pointer"
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"

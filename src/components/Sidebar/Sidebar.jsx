@@ -13,25 +13,11 @@ const Sidebar = () => {
   const location = useLocation();
 
   const links = [
-    {
-      name: "Add Departments",
-      path: "/dashboardLayout/addDepartments",
-      icon: <School size={20} />,
-    },
+    
     {
       name: "Manage Departments",
       path: "/dashboardLayout/manageDepartment",
       icon: <ListChecks size={20} />,
-    },
-    {
-      name: "Add Courses",
-      path: "/dashboardLayout/addCourse",
-      icon: <BookPlus size={20} />,
-    },
-    {
-      name: "Add Student",
-      path: "/dashboardLayout/addStudent",
-      icon: <BadgePlus size={20} />,
     },
     {
       name: "Manage Courses",
@@ -39,8 +25,15 @@ const Sidebar = () => {
       icon: <BookOpenCheck size={20} />,
     },
     {
-      name: "Add Teacher",
-      path: "/dashboardLayout/addTeacher",
+      name: "Add Student",
+      path: "/dashboardLayout/addStudent",
+      icon: <BadgePlus size={20} />,
+    },
+    
+    
+    {
+      name: "Manage Teacher",
+      path: "/dashboardLayout/manageTeacher",
       icon: <BookOpenCheck size={20} />,
     },
   ];

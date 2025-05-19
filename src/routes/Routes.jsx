@@ -22,6 +22,7 @@ import AdminRoute from "./AdminRoute";
 import AddStudent from "../components/AddStudent/AddStudent";
 import AddTeacher from "../components/AddTeacher/AddTeacher";
 import AllTeacher from "../components/AllTeacher/AllTeacher";
+import ManageTeacher from "../components/ManageTeacher/ManageTeacher";
 
 export const router = createBrowserRouter([
   {
@@ -116,6 +117,10 @@ export const router = createBrowserRouter([
       {
         path:"addTeacher",
         element:<AddTeacher></AddTeacher>
+      },
+      {
+        path:"manageTeacher",
+        element:<ManageTeacher></ManageTeacher>
       }
     ],
   },

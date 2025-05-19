@@ -34,7 +34,8 @@ const ManageDepartment = () => {
                 // confirmation delete
                 try {
                     const { data } = await axios.delete(
-                        `${import.meta.env.VITE_API_URL}/department/${id}`,{withCredentials:true}
+                        `${import.meta.env.VITE_API_URL}/department/${id}`,
+                        { withCredentials: true }
                     );
                     // Here use get data for auto refresh ui
                     console.log(data);
@@ -45,22 +46,42 @@ const ManageDepartment = () => {
                     console.log(err);
                     toast.error("Something went wrong! Try again.");
                 }
-
-                
             }
         });
     };
 
     return (
         <section className="container px-4 mx-auto pt-12">
-            <div className="flex items-center gap-x-3">
-                <h2 className="text-lg font-medium text-gray-800 ">
-                    Total Posted Department
-                </h2>
+            <div className="flex justify-between items-center gap-x-3">
+                <div className="flex items-center gap-x-3">
+                    <h2 className="text-lg font-medium text-gray-800 ">
+                        Total Posted Departments
+                    </h2>
+                    <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">
+                        {department.length}
+                    </span>
+                </div>
 
-                <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">
-                    {department.length}
-                </span>
+                <Link
+                    to="/dashboardLayout/addDepartments"
+                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition duration-300"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 4v16m8-8H4"
+                        />
+                    </svg>
+                    Add Department
+                </Link>
             </div>
 
             <div className="flex flex-col mt-6">
