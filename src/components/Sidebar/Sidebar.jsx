@@ -24,7 +24,7 @@ const Sidebar = () => {
       icon: <BookOpenCheck size={20} />,
     },
     {
-      name: "Add Student",
+      name: "Manage Student",
       path: "/dashboardLayout/addStudent",
       icon: <BadgePlus size={20} />,
     },
@@ -32,6 +32,11 @@ const Sidebar = () => {
     {
       name: "Manage Teacher",
       path: "/dashboardLayout/manageTeacher",
+      icon: <BookOpenCheck size={20} />,
+    },
+    {
+      name: "Manage Role",
+      path: "/dashboardLayout/manageRole",
       icon: <BookOpenCheck size={20} />,
     },
   ];

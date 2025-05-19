@@ -21,6 +21,8 @@ const UpdateStudent = () => {
     course_status,
   } = studentData;
 
+  console.log(studentId);
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;

@@ -217,6 +217,7 @@
 
 import axios from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const AddStudent = () => {
@@ -292,9 +293,28 @@ const AddStudent = () => {
   return (
     <div className="min-h-screen bg-gradient-to-tr from-amber-100 via-teal-100 to-amber-50 flex items-center justify-center p-6 rounded-2xl">
       <div className="w-full max-w-4xl bg-white rounded-3xl shadow-xl p-10 border border-teal-200">
-        <h2 className="text-4xl font-bold text-teal-800 mb-10 text-center tracking-tight">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-bold text-teal-800 tracking-tight">
+            🎓 Student Registration
+          </h2>
+          <Link
+            to="/manageStudent"
+            className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg shadow transition-colors flex items-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+            Manage All Students Info
+          </Link>
+        </div>
+        {/* <h2 className="text-4xl font-bold text-teal-800 mb-10 text-center tracking-tight">
           🎓 Register a New Student
-        </h2>
+        </h2> */}
 
         <form
           onSubmit={handleFormSubmit}

@@ -8,7 +8,7 @@ import PrimaryButton from "./../../Button/PrimaryButton";
 import useRole from "../../../hooks/useRole";
 
 const Navbar = () => {
-    const { user, logOut } = useContext(AuthContext);
+    const { user, logOut,loading } = useContext(AuthContext);
     const [role, isLoading] = useRole();
     // const [profile,setProfile] = useState('')
     // useEffect(()=>{
@@ -19,6 +19,10 @@ const Navbar = () => {
         logOut();
     };
     console.log(user?.photoURL);
+
+    if(isLoading || loading){
+        return <p>Loading ...</p>
+    }
 
     return (
         <div className="navbar bg-base-100  ">
