@@ -25,6 +25,7 @@ import AllTeacher from "../components/AllTeacher/AllTeacher";
 import ManageTeacher from "../components/ManageTeacher/ManageTeacher";
 import DepartmentCourse from "../components/DepartmentCourse/DepartmentCourse";
 import ManageStudent from "../pages/ManageStudent/ManageStudent";
+import UpdateStudent from "../components/UpdateStudent/UpdateStudent";
 
 export const router = createBrowserRouter([
   {
@@ -88,6 +89,12 @@ export const router = createBrowserRouter([
       {
         path: "/manageStudent",
         element: <ManageStudent />,
+      },
+      {
+        path: "/updateStudent/:id",
+        element: <UpdateStudent />,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/student/${params.id}`),
       },
     ],
   },

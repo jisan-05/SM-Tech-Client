@@ -127,7 +127,7 @@ const ManageStudent = () => {
                           </button>
 
                           <Link
-                            to={`/updateCourse/${student._id}`}
+                            to={`/updateStudent/${student._id}`}
                             className="text-gray-500 transition-colors duration-200 hover:text-yellow-500 focus:outline-none cursor-pointer"
                           >
                             <svg
