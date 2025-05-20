@@ -4,10 +4,13 @@ import { Outlet } from "react-router-dom";
 import Footer from "../../components/Shared/Footer/Footer";
 import AuthContext from "../../providers/AuthContext";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
+import useRole from "../../hooks/useRole";
 
 const MainLayout = () => {
     const { loading } = useContext(AuthContext);
-    if (loading) {
+    const [role, isLoading] = useRole();
+
+    if (loading || isLoading) {
         return <LoadingSpinner></LoadingSpinner>;
     }
     return (

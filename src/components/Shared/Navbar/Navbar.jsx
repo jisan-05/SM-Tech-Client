@@ -8,8 +8,8 @@ import PrimaryButton from "./../../Button/PrimaryButton";
 import useRole from "../../../hooks/useRole";
 
 const Navbar = () => {
-    const { user, logOut, loading } = useContext(AuthContext);
-    const [role, isLoading] = useRole();
+    const { user, logOut } = useContext(AuthContext);
+    const [role] = useRole();
     // const [profile,setProfile] = useState('')
     // useEffect(()=>{
     //     setProfile(user?.photoURL)
@@ -20,9 +20,7 @@ const Navbar = () => {
     };
     console.log(user?.photoURL);
 
-    if (isLoading || loading) {
-        return <p>Loading ...</p>;
-    }
+   
 
     return (
         <div className="navbar bg-base-100  ">
@@ -98,7 +96,7 @@ const Navbar = () => {
                         className="menu menu-md dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
                     >
                         <li className="text-lg font-semibold">
-                            <NavLink>Home</NavLink>
+                            <NavLink to="/">Home</NavLink>
                         </li>
 
                         <li className="text-lg font-semibold">
