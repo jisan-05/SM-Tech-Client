@@ -342,7 +342,7 @@ const PdfGenerator = () => {
         const fetchStudents = async () => {
             try {
                 const response = await axios.get(
-                    `${import.meta.env.VITE_API_URL}/student`
+                    `${import.meta.env.VITE_API_URL}/student`,{withCredentials:true}
                 );
                 setStudents(response.data);
             } catch (err) {
