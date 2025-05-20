@@ -1,8 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import { imageUpload } from "../../utils/utils";
+
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { cloudinaryUploadVeryLow } from "../../utils/utils";
 
 const AddTeacher = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +42,7 @@ const AddTeacher = () => {
     try {
       const image = formData.get("image");
       if (image) {
-        const photoURL = await imageUpload(image);
+        const photoURL = await cloudinaryUploadVeryLow(image);
         teacherData.photoURL = photoURL;
       }
 

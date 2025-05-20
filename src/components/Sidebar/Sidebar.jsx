@@ -1,11 +1,12 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
-  School,
-  ListChecks,
-  BookPlus,
-  BookOpenCheck,
   Home,
+  ListChecks,
+  BookOpenCheck,
+  BookPlus,
   BadgePlus,
+  ShieldCheck,
+  Users,
 } from "lucide-react";
 
 const Sidebar = () => {
@@ -21,23 +22,22 @@ const Sidebar = () => {
     {
       name: "Manage Courses",
       path: "/dashboardLayout/manageCourse",
-      icon: <BookOpenCheck size={20} />,
+      icon: <BookPlus size={20} />,
     },
     {
       name: "Manage Student",
       path: "/dashboardLayout/manageStudent",
-      icon: <BadgePlus size={20} />,
+      icon: <Users size={20} />,
     },
-
     {
       name: "Manage Teacher",
       path: "/dashboardLayout/manageTeacher",
-      icon: <BookOpenCheck size={20} />,
+      icon: <BadgePlus size={20} />,
     },
     {
       name: "Manage Role",
       path: "/dashboardLayout/manageRole",
-      icon: <BookOpenCheck size={20} />,
+      icon: <ShieldCheck size={20} />,
     },
   ];
 
@@ -48,21 +48,24 @@ const Sidebar = () => {
       </div>
       <nav className="flex-1 px-4 py-4">
         <ul className="space-y-2">
-          <li onClick={() => navigate("/")}>
-            <Link className="flex items-center gap-3 px-3 py-2 rounded-lg transition hover:bg-gray-200">
-              <Home size={20}></Home> Go Home
+          <li>
+            <Link
+              to="/"
+              className="flex items-center gap-3 px-3 py-2 rounded-lg transition hover:bg-base-300"
+            >
+              <Home size={20} />
+              Go Home
             </Link>
           </li>
           {links.map((link) => (
             <li key={link.name}>
               <Link
                 to={link.path}
-                className={`flex items-center gap-3 px-3 py-2 rounded-lg transition 
-                  ${
-                    location.pathname === link.path
-                      ? "bg-primary text-white"
-                      : "hover:bg-base-300"
-                  }`}
+                className={`flex items-center gap-3 px-3 py-2 rounded-lg transition ${
+                  location.pathname === link.path
+                    ? "bg-primary text-white"
+                    : "hover:bg-base-300"
+                }`}
               >
                 {link.icon}
                 <span>{link.name}</span>

@@ -2,10 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import toast from "react-hot-toast";
-import { imageUpload } from "../../utils/utils";
+
 
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
+import { cloudinaryUploadHd } from "../../utils/utils";
 
 const AddCourse = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -28,7 +29,7 @@ const AddCourse = () => {
 
     const banner_image = e.target.banner_image.files[0];
 
-    const course_banner = await imageUpload(banner_image);
+    const course_banner = await cloudinaryUploadHd(banner_image);
 
     const courseData = {
       course_title,

@@ -4,7 +4,7 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../../providers/AuthContext";
 import toast from "react-hot-toast";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
-import { imageUpload, saveUser } from "../../utils/utils";
+import { cloudinaryUploadVeryLow, saveUser } from "../../utils/utils";
 // import axios from "axios";
 import "./SignUp.css";
 
@@ -25,7 +25,7 @@ const SignUp = () => {
         const image = e.target.image.files[0];
 
         try {
-            const photoURL = await imageUpload(image);
+            const photoURL = await cloudinaryUploadVeryLow(image);
             const result = await createUser(email, password);
 
             await updateUserProfile(name, photoURL);

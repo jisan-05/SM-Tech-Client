@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { imageUpload } from "../../utils/utils";
+import { cloudinaryUploadLow } from "../../utils/utils";
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 const UpdateDepartment = () => {
@@ -20,7 +20,7 @@ const UpdateDepartment = () => {
         const category = e.target.category.value;
 
         const image = e.target.image.files[0];
-        const photoURL = await imageUpload(image);
+        const photoURL = await cloudinaryUploadLow(image);
 
         const departmentData = {
             title,

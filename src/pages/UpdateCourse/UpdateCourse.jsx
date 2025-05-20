@@ -3,7 +3,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { imageUpload } from "../../utils/utils";
+import { cloudinaryUploadHd } from "../../utils/utils";
 
 const UpdateCourse = () => {
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ const UpdateCourse = () => {
     const banner_image = form.banner_image.files[0];
 
     try {
-      const course_banner = await imageUpload(banner_image);
+      const course_banner = await cloudinaryUploadHd(banner_image);
 
       const courseData = {
         course_title,

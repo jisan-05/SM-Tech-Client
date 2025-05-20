@@ -1,8 +1,8 @@
 import axios from "axios";
-import { imageUpload } from "../../utils/utils";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { cloudinaryUploadLow } from "../../utils/utils";
 
 const AddDepartments = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +15,7 @@ const AddDepartments = () => {
     const category = e.target.category.value;
 
     const image = e.target.image.files[0];
-    const photoURL = await imageUpload(image);
+    const photoURL = await cloudinaryUploadLow(image);
 
     const departmentData = {
       title,

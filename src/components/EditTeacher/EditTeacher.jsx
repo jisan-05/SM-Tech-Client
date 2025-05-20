@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { imageUpload } from "../../utils/utils";
+import { cloudinaryUploadVeryLow } from "../../utils/utils";
 import toast from "react-hot-toast";
 
 const EditTeacher = () => {
@@ -56,7 +56,7 @@ const EditTeacher = () => {
     const image = formData.get("image");
     if (image && image.size > 0) {
       try {
-        const photoURL = await imageUpload(image);
+        const photoURL = await cloudinaryUploadVeryLow(image);
         updatedTeacher.photoURL = photoURL;
       } catch (err) {
         toast.error("Image upload failed");
