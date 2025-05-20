@@ -15,12 +15,13 @@ const CourseCard = ({ course }) => {
             />
           </div>
         </figure>
-        <div className="pt-8 space-y-3 flex flex-col flex-grow px-4 py-4 lg:px-8 lg:py-8"> {/* Added flex classes */}
+        <div className="pt-8 space-y-1 flex flex-col flex-grow px-4 py-4 lg:px-8 lg:py-8"> {/* Added flex classes */}
           <h2 className="card-title">{course_title}</h2>
           <p className="flex-grow"> {/* Added flex-grow to description */}
             {course_description}
           </p>
-          <div className="divider">Instructor: {course_instructor}</div>
+          <p className="mt-6"><span className="font-bold">Instructor :</span> {course_instructor}</p>
+          <div className="divider"></div>
           <div className="card-actions flex justify-between items-center">
             <Link
               to={`/course/${_id}`}

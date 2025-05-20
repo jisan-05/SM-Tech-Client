@@ -8,7 +8,7 @@ import PrimaryButton from "./../../Button/PrimaryButton";
 import useRole from "../../../hooks/useRole";
 
 const Navbar = () => {
-    const { user, logOut,loading } = useContext(AuthContext);
+    const { user, logOut, loading } = useContext(AuthContext);
     const [role, isLoading] = useRole();
     // const [profile,setProfile] = useState('')
     // useEffect(()=>{
@@ -20,8 +20,8 @@ const Navbar = () => {
     };
     console.log(user?.photoURL);
 
-    if(isLoading || loading){
-        return <p>Loading ...</p>
+    if (isLoading || loading) {
+        return <p>Loading ...</p>;
     }
 
     return (
@@ -49,13 +49,6 @@ const Navbar = () => {
                     <li className="text-lg font-semibold">
                         <NavLink to="/contactUs">Contact Us</NavLink>
                     </li>
-                    {role === "admin" && (
-                        <li className="text-lg font-semibold">
-                            <NavLink to="/dashboardLayout">
-                                Admin Dashboard
-                            </NavLink>
-                        </li>
-                    )}
                 </ul>
             </div>
             <div className="navbar-end gap-4">
@@ -119,6 +112,13 @@ const Navbar = () => {
                         <li className="text-lg font-semibold">
                             <NavLink to="/contactUs">Contact Us</NavLink>
                         </li>
+
+                        <li className="text-lg font-semibold">
+                            <NavLink to="/searchStudent">
+                                Search Student
+                            </NavLink>
+                        </li>
+
                         {role === "admin" && (
                             <li className="text-lg font-semibold">
                                 <NavLink to="/dashboardLayout">
