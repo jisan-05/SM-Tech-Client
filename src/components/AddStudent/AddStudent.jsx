@@ -298,7 +298,7 @@ const AddStudent = () => {
             🎓 Student Registration
           </h2>
           <Link
-            to="/manageStudent"
+            to="/dashboardLayout/manageStudent"
             className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg shadow transition-colors flex items-center gap-2"
           >
             <svg

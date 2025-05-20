@@ -48,6 +48,9 @@ const ManageTeacher = () => {
             {/* Header with title and Add Teacher button */}
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold">Manage Teachers</h2>
+                <Link to="/dashboardLayout/teacherPdf">
+                <button className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded hover:bg-green-700">Download Teacher List</button>
+                </Link>
                 <Link
                     to="/dashboardLayout/addTeacher"
                     className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition duration-300"

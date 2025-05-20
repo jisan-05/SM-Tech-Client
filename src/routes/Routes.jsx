@@ -92,10 +92,7 @@ export const router = createBrowserRouter([
         path: "/allTeacher",
         element: <AllTeacher></AllTeacher>,
       },
-      {
-        path: "/manageStudent",
-        element: <ManageStudent />,
-      },
+      
       {
         path: "/updateStudent/:id",
         element: <UpdateStudent />,
@@ -106,14 +103,7 @@ export const router = createBrowserRouter([
         path: "/searchStudent",
         element: <SearchForStudent />,
       },
-      {
-        path: "/pdf",
-        element: <Pdf />,
-      },
-      {
-        path: "/teacherPdf",
-        element: <TeacherPdf />,
-      },
+      
     ],
   },
   {
@@ -144,6 +134,10 @@ export const router = createBrowserRouter([
         path: "addStudent",
         element: <AddStudent />,
       },
+      {
+        path: "manageStudent",
+        element: <ManageStudent />,
+      },
 
       {
         path: "addTeacher",
@@ -161,6 +155,14 @@ export const router = createBrowserRouter([
       {
         path: "editTeacher/:id",
         element: <EditTeacher></EditTeacher>,
+      },
+      {
+        path: "pdf",
+        element: <Pdf />,
+      },
+      {
+        path: "teacherPdf",
+        element: <TeacherPdf />,
       },
     ],
   },

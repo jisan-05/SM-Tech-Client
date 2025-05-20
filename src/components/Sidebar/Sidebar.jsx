@@ -25,7 +25,7 @@ const Sidebar = () => {
     },
     {
       name: "Manage Student",
-      path: "/dashboardLayout/addStudent",
+      path: "/dashboardLayout/manageStudent",
       icon: <BadgePlus size={20} />,
     },
 
