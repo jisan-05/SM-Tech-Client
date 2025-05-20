@@ -1,0 +1,277 @@
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { imageUpload } from "../../utils/utils";
+import toast from "react-hot-toast";
+
+const EditTeacher = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [teacher, setTeacher] = useState(null);
+  const [skills, setSkills] = useState([]);
+  const [currentSkill, setCurrentSkill] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/teachers/${id}`)
+      .then((res) => {
+        setTeacher(res.data);
+        setSkills(res.data.skills || []);
+      })
+      .catch((err) => {
+        toast.error("Failed to load teacher data");
+        console.error(err);
+      });
+  }, [id]);
+
+  const handleSkillAdd = () => {
+    if (currentSkill && !skills.includes(currentSkill)) {
+      setSkills([...skills, currentSkill]);
+      setCurrentSkill("");
+    }
+  };
+
+  const handleSkillRemove = (skill) => {
+    setSkills(skills.filter((s) => s !== skill));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const formData = new FormData(e.target);
+    const updatedTeacher = {
+      name: formData.get("name"),
+      designation: formData.get("designation"),
+      specialization: formData.get("specialization"),
+      education: formData.get("education"),
+      experience: formData.get("experience"),
+      bio: formData.get("bio"),
+      whatsapp: formData.get("whatsapp"),
+      facebook: formData.get("facebook"),
+      skills,
+    };
+
+    const image = formData.get("image");
+    if (image && image.size > 0) {
+      try {
+        const photoURL = await imageUpload(image);
+        updatedTeacher.photoURL = photoURL;
+      } catch (err) {
+        toast.error("Image upload failed");
+        setIsLoading(false);
+        return;
+      }
+    }
+
+    try {
+      await axios.put(
+        `${import.meta.env.VITE_API_URL}/teachers/${id}`,
+        updatedTeacher,
+        { withCredentials: true }
+      );
+      toast.success("Teacher updated successfully!");
+      navigate("/dashboardLayout/manageTeacher");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to update teacher");
+    }
+    setIsLoading(false);
+  };
+
+  if (!teacher) return <p className="text-center mt-6">Loading...</p>;
+
+  return (
+    <div className="max-w-2xl mx-auto mt-8 p-8 bg-white shadow-lg rounded-lg">
+      <h2 className="text-2xl font-bold mb-6">Edit Teacher</h2>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {/* Name */}
+          <div className="col-span-2">
+            <label className="block text-gray-700 font-medium mb-1">
+              Full Name*
+            </label>
+            <input
+              type="text"
+              name="name"
+              defaultValue={teacher.name}
+              placeholder="e.g. Sadia Rahman"
+              required
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          {/* Designation */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">
+              Designation*
+            </label>
+            <input
+              type="text"
+              name="designation"
+              defaultValue={teacher.designation}
+              placeholder="e.g. Web Instructor"
+              required
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          {/* Specialization */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">
+              Specialization*
+            </label>
+            <input
+              type="text"
+              name="specialization"
+              defaultValue={teacher.specialization}
+              placeholder="e.g. MERN Stack Developer"
+              required
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          {/* Education */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">
+              Education*
+            </label>
+            <input
+              type="text"
+              name="education"
+              defaultValue={teacher.education}
+              placeholder="e.g. MSc in Computer Science"
+              required
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          {/* Experience */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">
+              Experience*
+            </label>
+            <input
+              type="text"
+              name="experience"
+              defaultValue={teacher.experience}
+              placeholder="e.g. 5+ years industry experience"
+              required
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          {/* WhatsApp */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">
+              WhatsApp (Optional)
+            </label>
+            <input
+              type="url"
+              name="whatsapp"
+              defaultValue={teacher.whatsapp}
+              placeholder="https://wa.me/+88017******"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          {/* Facebook */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">
+              Facebook (Optional)
+            </label>
+            <input
+              type="url"
+              name="facebook"
+              defaultValue={teacher.facebook}
+              placeholder="https://facebook.com/username"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+
+        {/* Bio */}
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Bio*</label>
+          <textarea
+            name="bio"
+            rows="3"
+            defaultValue={teacher.bio}
+            placeholder="Short professional bio..."
+            required
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          ></textarea>
+        </div>
+
+        {/* Skills */}
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">
+            Skills (Optional)
+          </label>
+          <div className="flex gap-2 mb-2">
+            <input
+              type="text"
+              value={currentSkill}
+              onChange={(e) => setCurrentSkill(e.target.value)}
+              placeholder="Add a skill"
+              className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="button"
+              onClick={handleSkillAdd}
+              className="bg-blue-100 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-200 transition"
+            >
+              Add
+            </button>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {skills.map((skill) => (
+              <div
+                key={skill}
+                className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full flex items-center"
+              >
+                {skill}
+                <button
+                  type="button"
+                  onClick={() => handleSkillRemove(skill)}
+                  className="ml-2 text-blue-400 hover:text-blue-700"
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Profile Image */}
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">
+            Profile Image
+          </label>
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition flex justify-center items-center"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <span className="loading loading-spinner text-white"></span>
+          ) : (
+            "Update Teacher"
+          )}
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default EditTeacher;

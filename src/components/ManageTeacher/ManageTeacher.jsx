@@ -13,9 +13,7 @@ const ManageTeacher = () => {
 
     const fetchTeachers = async () => {
         try {
-            const res = await axios.get(
-                `${import.meta.env.VITE_API_URL}/teachers`
-            );
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/teachers`);
             setTeachers(res.data);
         } catch (err) {
             console.error("Failed to fetch teachers", err);
@@ -24,7 +22,7 @@ const ManageTeacher = () => {
 
     const handleDeleteTeacher = async (id) => {
         Swal.fire({
-            title: "Are you sure to Delete Teacher ?",
+            title: "Are you sure to Delete Teacher?",
             text: "You won't be able to revert this!",
             icon: "warning",
             showCancelButton: true,
@@ -34,13 +32,11 @@ const ManageTeacher = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const { data } = await axios.delete(
-                        `${import.meta.env.VITE_API_URL}/teachers/${id}`
-                    );
+                    await axios.delete(`${import.meta.env.VITE_API_URL}/teachers/${id}`);
                     fetchTeachers();
                     toast.success("Teacher Deleted Successfully");
                 } catch (err) {
-                    console.log(err);
+                    console.error(err);
                     toast.error("Something went wrong! Try again.");
                 }
             }
@@ -89,42 +85,32 @@ const ManageTeacher = () => {
                             <tr key={teacher._id} className="border-b">
                                 <td className="p-3">
                                     <img
-                                        src={
-                                            teacher.photoURL ||
-                                            "/default-instructor.jpg"
-                                        }
+                                        src={teacher.photoURL || "/default-instructor.jpg"}
                                         alt={teacher.name}
                                         className="w-12 h-12 object-cover rounded-full"
                                     />
                                 </td>
                                 <td className="p-3">{teacher.name}</td>
                                 <td className="p-3">{teacher.designation}</td>
-                                <td className="p-3">
-                                    <td className="p-3 flex gap-2">
-                                        {/* <Link
-                                            to={`/dashboardLayout/editTeacher/${teacher._id}`}
-                                            className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition"
-                                        >
-                                            Edit
-                                        </Link> */}
-                                        <button
-                                            onClick={() =>
-                                                handleDeleteTeacher(teacher._id)
-                                            }
-                                            className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
+                                <td className="p-3 flex gap-2">
+                                    <Link
+                                        to={`/dashboardLayout/editTeacher/${teacher._id}`}
+                                        className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition"
+                                    >
+                                        Edit
+                                    </Link>
+                                    <button
+                                        onClick={() => handleDeleteTeacher(teacher._id)}
+                                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+                                    >
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                         ))}
                         {teachers.length === 0 && (
                             <tr>
-                                <td
-                                    colSpan="4"
-                                    className="text-center py-6 text-gray-500"
-                                >
+                                <td colSpan="4" className="text-center py-6 text-gray-500">
                                     No teachers found.
                                 </td>
                             </tr>
