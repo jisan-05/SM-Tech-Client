@@ -14,7 +14,7 @@ const ManageStudent = () => {
   }, [user]);
 
   const getData = async () => {
-    const { data } = await axios(`${import.meta.env.VITE_API_URL}/student`);
+    const { data } = await axios(`${import.meta.env.VITE_API_URL}/student`,{withCredentials:true});
     setStudents(data);
   };
 
