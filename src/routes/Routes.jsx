@@ -33,7 +33,6 @@ import Pdf from "../components/PDF/Pdf";
 import TeacherPdf from "../components/PDF/TeacherPdf";
 import EditTeacher from "../components/EditTeacher/EditTeacher";
 
-
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -57,7 +56,7 @@ export const router = createBrowserRouter([
         path: "/course/:id",
         element: <CourseDetails />,
         loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/course/${params.id}`),
+          fetch(`${import.meta.env.VITE_API_URL}/course/details/${params.id}`),
       },
 
       {
@@ -115,7 +114,6 @@ export const router = createBrowserRouter([
         path: "/teacherPdf",
         element: <TeacherPdf />,
       },
-       
     ],
   },
   {
@@ -155,7 +153,7 @@ export const router = createBrowserRouter([
         path: "manageTeacher",
         element: <ManageTeacher></ManageTeacher>,
       },
-     
+
       {
         path: "manageRole",
         element: <ManageRole></ManageRole>,

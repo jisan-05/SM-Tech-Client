@@ -93,6 +93,8 @@ const CourseDetails = () => {
     course_description,
   } = course;
 
+  console.log(course_title);
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Hero Section */}
