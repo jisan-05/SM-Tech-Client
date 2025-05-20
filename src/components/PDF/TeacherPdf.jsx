@@ -10,7 +10,7 @@ import {
 } from "@react-pdf/renderer";
 import axios from "axios";
 import { FaFilePdf, FaSpinner } from "react-icons/fa";
-import logo from "../../../public/logo.png";
+import logo from "../../assets/logo.png";
 
 // PDF styles for Teachers
 const styles = StyleSheet.create({

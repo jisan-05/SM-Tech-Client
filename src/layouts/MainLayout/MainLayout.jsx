@@ -12,7 +12,7 @@ const MainLayout = () => {
     }
     return (
         <div>
-            <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1600px] mx-auto">
+            <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1500px] mx-auto">
             <Navbar />
             </div>
 
