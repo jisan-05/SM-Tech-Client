@@ -32,7 +32,7 @@ const ManageTeacher = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`${import.meta.env.VITE_API_URL}/teachers/${id}`);
+                    await axios.delete(`${import.meta.env.VITE_API_URL}/teachers/${id}`,{withCredentials:true});
                     fetchTeachers();
                     toast.success("Teacher Deleted Successfully");
                 } catch (err) {

@@ -10,7 +10,7 @@ const ManageRole = () => {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/users`)
+      .get(`${import.meta.env.VITE_API_URL}/users`,{withCredentials:true})
       .then((res) => setUsers(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -19,7 +19,7 @@ const ManageRole = () => {
     axios
       .patch(`${import.meta.env.VITE_API_URL}/users/${id}/role`, {
         role: newRole,
-      })
+      },{withCredentials:true})
       .then((res) => {
         if (res.data.success) {
           setUsers(

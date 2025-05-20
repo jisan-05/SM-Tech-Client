@@ -12,7 +12,7 @@ const useRole = () => {
         queryKey: ["role", user?.email],
         enabled: !loading && !!user?.email,
         queryFn: async () => {
-            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/users/role/${user?.email}`);
+            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/users/role/${user?.email}`,{withCredentials:true});
             return data.role;
         },
     });

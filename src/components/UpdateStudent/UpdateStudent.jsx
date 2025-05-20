@@ -61,7 +61,7 @@ const UpdateStudent = () => {
     try {
       const { data } = await axios.put(
         `${import.meta.env.VITE_API_URL}/student/${_id}`,
-        studentData
+        studentData,{withCredentials:true}
       );
       toast.success("Update Student Info Successfully");
       console.log(data);

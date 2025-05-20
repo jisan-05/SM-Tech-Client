@@ -25,6 +25,7 @@ export const saveUser = async(user)=>{
             name: user?.displayName,
             image: user?.photoURL,
             email: user?.email,
-        }
+        },
+        {withCredentials:true}
     );
 }
