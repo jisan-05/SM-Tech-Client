@@ -22,7 +22,7 @@ const Home = () => {
         </div>
       </div> */}
       <div className="bg-[#f5f7f8]">
-        <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1500px] mx-auto py-28">
+        <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1500px] mx-auto pt-28 pb-24">
           <FeaturedCourses />
         </div>
           
