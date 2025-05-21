@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import * as XLSX from "xlsx";
 
 const ManageTeacher = () => {
   const [teachers, setTeachers] = useState([]);
@@ -45,17 +46,45 @@ const ManageTeacher = () => {
     });
   };
 
+  const exportToExcel = () => {
+    // Prepare the data for Excel
+    const excelData = teachers.map((teacher, index) => ({
+      "No.": index + 1,
+      "Name": teacher.name,
+      "Designation": teacher.designation,
+      "Education": teacher.education,
+      
+    }));
+
+    // Create a new workbook
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(excelData);
+
+    // Add the worksheet to the workbook
+    XLSX.utils.book_append_sheet(wb, ws, "Teachers");
+
+    // Generate the Excel file and trigger download
+    XLSX.writeFile(wb, "teachers_list.xlsx");
+  };
+
   return (
     <div className="max-w-5xl mx-auto p-4">
       {/* Header with title and Add Teacher button */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">Manage Teachers</h2>
 
-        <Link to="/dashboardLayout/teacherPdf">
-          <button className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded hover:bg-green-700">
-            Download Teacher List
+        <div className="flex gap-2">
+          <button 
+            onClick={exportToExcel}
+            className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded hover:bg-green-700"
+          >
+            Download Excel
           </button>
-        </Link>
+
+          <Link to="/dashboardLayout/teacherPdf" className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600">
+            Download PDF
+          </Link>
+        </div>
 
         <Link
           to="/dashboardLayout/addTeacher"
