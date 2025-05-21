@@ -219,6 +219,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { cloudinaryUploadVeryLow } from "../../utils/utils";
 
 const AddStudent = () => {
   const [duration, setDuration] = useState("");
@@ -236,6 +237,10 @@ const AddStudent = () => {
     const enrollment_date = form.enrollment_date.value;
     const course_complete_date = form.course_complete_date.value;
     const course_status = form.course_status.value;
+
+    // image Upload system
+    const banner_image = e.target.banner_image.files[0];
+    const student_url = await cloudinaryUploadVeryLow(banner_image);
 
     // Calculate course duration
     const durationInMonths = calculateDurationInMonths(
@@ -256,6 +261,7 @@ const AddStudent = () => {
       course_complete_date,
       course_status,
       durationInMonths,
+      student_url,
     };
 
     try {
@@ -462,6 +468,20 @@ const AddStudent = () => {
                 📅 Course Duration: {duration}
               </div>
             )}
+          </div>
+
+          <div className="flex flex-col gap-2 mt-4">
+            <label className="text-gray-700" htmlFor="course_banner">
+              Course Banner (Image)
+            </label>
+            <input
+              required
+              type="file"
+              id="course_banner"
+              name="banner_image"
+              accept="image/*"
+              className=""
+            />
           </div>
 
           <div className="mt-10 col-span-1 md:col-span-2">

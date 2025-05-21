@@ -138,7 +138,7 @@ const StudentCard = ({ student }) => {
     course_complete_date,
     course_status,
     durationInMonths,
-    student_picture,
+    student_url,
   } = student;
 
   return (
@@ -158,7 +158,7 @@ const StudentCard = ({ student }) => {
           <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-3xl overflow-hidden shadow-2xl">
             {/* Student Header with Image */}
             <div className="relative h-48 mt-20 bg-indigo-700 flex items-end justify-center">
-              {student_picture ? (
+              {student_url ? (
                 <motion.div
                   initial={{ scale: 0.9 }}
                   animate={{ scale: 1 }}
@@ -167,7 +167,7 @@ const StudentCard = ({ student }) => {
                 >
                   <div className="h-32 w-32 rounded-full border-4 border-white bg-white overflow-hidden shadow-lg">
                     <img
-                      src={student_picture}
+                      src={student_url}
                       alt={studentName}
                       className="h-full w-full object-cover"
                     />
