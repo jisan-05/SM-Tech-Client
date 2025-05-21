@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import toast from 'react-hot-toast';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import { cloudinaryUploadLow } from '../../utils/utils';
 
 const AddEvent = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -15,16 +15,18 @@ const AddEvent = () => {
     setLoading(true);
     e.preventDefault();
     const form = e.target;
+
     const headline = form.headline.value;
     const subHeadline = form.subHeadline.value;
+    const time = form.time.value;
+    const location = form.location.value;
 
-    // Image upload system
-    const imageFile = e.target.image.files[0];
+    const imageFile = form.image.files[0];
     let imageUrl = '';
 
     try {
       if (imageFile) {
-        imageUrl = await cloudinaryUploadl(imageFile);
+        imageUrl = await cloudinaryUploadLow(imageFile);
       } else {
         toast.error('Please select an image');
         setLoading(false);
@@ -35,18 +37,21 @@ const AddEvent = () => {
         headline,
         subHeadline,
         image: imageUrl,
-        date: startDate
+        date: startDate,
+        time,
+        location,
       };
 
-      const { data } = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_API_URL}/events`,
         eventData,
         { withCredentials: true }
       );
 
       toast.success('New Event Added Successfully');
-      navigate('/dashboard/manage-events');
-      e.target.reset();
+      form.reset();
+      setStartDate(new Date());
+      // navigate('/dashboard/manage-events');
     } catch (err) {
       console.error(err);
       toast.error('Something went wrong! Try Again');
@@ -72,10 +77,10 @@ const AddEvent = () => {
               <input
                 required
                 id="headline"
-                placeholder="Web Development Workshop"
                 name="headline"
+                placeholder="Web Development Bootcamp"
                 type="text"
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-[#07a698] focus:ring-[#07a698] focus:ring-opacity-40 focus:outline-none focus:ring"
+                className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-200 rounded-md focus:border-[#07a698] focus:ring-[#07a698] focus:outline-none focus:ring"
               />
             </div>
 
@@ -86,23 +91,52 @@ const AddEvent = () => {
               <input
                 required
                 id="subHeadline"
-                placeholder="Learn modern web technologies"
                 name="subHeadline"
+                placeholder="Master modern web tools"
                 type="text"
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-[#07a698] focus:ring-[#07a698] focus:ring-opacity-40 focus:outline-none focus:ring"
+                className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-200 rounded-md focus:border-[#07a698] focus:ring-[#07a698] focus:outline-none focus:ring"
               />
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div>
+              <label className="text-gray-700" htmlFor="time">
+                Event Time
+              </label>
+              <input
+                required
+                id="time"
+                name="time"
+                placeholder="2:00 PM"
+                type="text"
+                className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-200 rounded-md focus:border-[#07a698] focus:ring-[#07a698] focus:outline-none focus:ring"
+              />
+            </div>
+
+            <div>
+              <label className="text-gray-700" htmlFor="location">
+                Event Location
+              </label>
+              <input
+                required
+                id="location"
+                name="location"
+                placeholder="Online / Zoom / Hall Room B"
+                type="text"
+                className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-200 rounded-md focus:border-[#07a698] focus:ring-[#07a698] focus:outline-none focus:ring"
+              />
+            </div>
+
+            <div>
               <label className="text-gray-700">Event Date</label>
               <DatePicker
                 className="text-black border p-2 rounded-md w-full"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
+                minDate={new Date()}
               />
             </div>
 
-            <div className="flex flex-col gap-2 mt-4">
+            <div>
               <label className="text-gray-700" htmlFor="image">
                 Event Image
               </label>

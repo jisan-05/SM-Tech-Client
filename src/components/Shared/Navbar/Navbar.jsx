@@ -23,7 +23,7 @@ const Navbar = () => {
    
 
     return (
-        <div className="navbar bg-base-100  ">
+        <div className="navbar bg-base-100 ">
             <div className="navbar-start">
                 <img src={logo} alt="" className="w-12" />
                 <Link to="/" className="btn btn-ghost text-xl">

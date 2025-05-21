@@ -35,6 +35,11 @@ const Sidebar = () => {
       icon: <BadgePlus size={20} />,
     },
     {
+      name: "Manage Events",
+      path: "/dashboardLayout/manageEvents",
+      icon: <BadgePlus size={20} />,
+    },
+    {
       name: "Manage Role",
       path: "/dashboardLayout/manageRole",
       icon: <ShieldCheck size={20} />,

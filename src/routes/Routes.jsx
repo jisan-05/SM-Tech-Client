@@ -33,6 +33,8 @@ import Pdf from "../components/PDF/Pdf";
 import TeacherPdf from "../components/PDF/TeacherPdf";
 import EditTeacher from "../components/EditTeacher/EditTeacher";
 import StudentExcel from "../components/Excel/StudentExce";
+import AddEvent from "../components/AddEvent/AddEvent";
+import ManageEvents from "../components/ManageEvents/ManageEvents";
 
 export const router = createBrowserRouter([
   {
@@ -168,6 +170,14 @@ export const router = createBrowserRouter([
         path: "studentExcel",
         element: <StudentExcel />,
       },
+      {
+        path: "manageEvents",
+        element: <ManageEvents></ManageEvents>,
+      },
+      {
+        path:'addEvent',
+        element:<AddEvent></AddEvent>
+      }
     ],
   },
 ]);
