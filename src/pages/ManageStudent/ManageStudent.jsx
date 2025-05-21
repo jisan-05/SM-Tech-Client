@@ -14,7 +14,9 @@ const ManageStudent = () => {
   }, [user]);
 
   const getData = async () => {
-    const { data } = await axios(`${import.meta.env.VITE_API_URL}/student`,{withCredentials:true});
+    const { data } = await axios(`${import.meta.env.VITE_API_URL}/student`, {
+      withCredentials: true,
+    });
     setStudents(data);
   };
 
@@ -55,13 +57,22 @@ const ManageStudent = () => {
             {students.length}
           </span>
         </div>
-        <Link to='/dashboardLayout/pdf'>
-        <button className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded hover:bg-green-700">Download Student List</button>
+        <Link to="/dashboardLayout/pdf">
+          <button className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded hover:bg-green-700">
+            Download Student List (PDF)
+          </button>
+        </Link>
+
+        <Link to="/dashboardLayout/studentExcel">
+          <button className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded hover:bg-green-700">
+            Download Student List (Excel)
+          </button>
         </Link>
         <Link to="/dashboardLayout/addStudent">
-          <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded">+ Add Student</button>
+          <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded">
+            + Add Student
+          </button>
         </Link>
-        
       </div>
 
       <div className="flex flex-col">

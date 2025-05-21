@@ -32,6 +32,7 @@ import SearchForStudent from "../components/SearchForStudent/SearchForStudent";
 import Pdf from "../components/PDF/Pdf";
 import TeacherPdf from "../components/PDF/TeacherPdf";
 import EditTeacher from "../components/EditTeacher/EditTeacher";
+import StudentExcel from "../components/Excel/StudentExce";
 
 export const router = createBrowserRouter([
   {
@@ -92,7 +93,7 @@ export const router = createBrowserRouter([
         path: "/allTeacher",
         element: <AllTeacher></AllTeacher>,
       },
-      
+
       {
         path: "/updateStudent/:id",
         element: <UpdateStudent />,
@@ -103,7 +104,6 @@ export const router = createBrowserRouter([
         path: "/searchStudent",
         element: <SearchForStudent />,
       },
-      
     ],
   },
   {
@@ -163,6 +163,10 @@ export const router = createBrowserRouter([
       {
         path: "teacherPdf",
         element: <TeacherPdf />,
+      },
+      {
+        path: "studentExcel",
+        element: <StudentExcel />,
       },
     ],
   },
