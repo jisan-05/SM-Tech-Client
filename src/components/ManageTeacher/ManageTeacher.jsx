@@ -47,25 +47,35 @@ const ManageTeacher = () => {
   };
 
   const exportToExcel = () => {
-    // Prepare the data for Excel
-    const excelData = teachers.map((teacher, index) => ({
-      "No.": index + 1,
-      "Name": teacher.name,
-      "Designation": teacher.designation,
-      "Education": teacher.education,
-      
-    }));
+  // Prepare the data for Excel
+  const excelData = teachers.map((teacher, index) => ({
+    "No.": index + 1,
+    "Name": teacher.name,
+    "Designation": teacher.designation,
+    "Education": teacher.education,
+    "Experience": teacher.experience
+  }));
 
-    // Create a new workbook
-    const wb = XLSX.utils.book_new();
-    const ws = XLSX.utils.json_to_sheet(excelData);
+  // Create a new workbook
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.json_to_sheet(excelData);
 
-    // Add the worksheet to the workbook
-    XLSX.utils.book_append_sheet(wb, ws, "Teachers");
+  // Set column widths (in characters)
+  const colWidths = [
+    { wch: 5 },   // No.
+    { wch: 25 },  // Name
+    { wch: 25 },  // Designation
+    { wch: 25 },  // Education
+    { wch: 30 }   // Experience
+  ];
+  ws['!cols'] = colWidths;
 
-    // Generate the Excel file and trigger download
-    XLSX.writeFile(wb, "teachers_list.xlsx");
-  };
+  // Add the worksheet to the workbook
+  XLSX.utils.book_append_sheet(wb, ws, "Teachers");
+
+  // Generate the Excel file and trigger download
+  XLSX.writeFile(wb, "teachers_list.xlsx");
+};
 
   return (
     <div className="max-w-5xl mx-auto p-4">
@@ -78,11 +88,11 @@ const ManageTeacher = () => {
             onClick={exportToExcel}
             className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded hover:bg-green-700"
           >
-            Download Excel
+            Download Teacher List (Excel)
           </button>
 
           <Link to="/dashboardLayout/teacherPdf" className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600">
-            Download PDF
+            Download Teacher List (PDF)
           </Link>
         </div>
 
