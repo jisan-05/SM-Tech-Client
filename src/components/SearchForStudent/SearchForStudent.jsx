@@ -19,7 +19,6 @@ const SearchForStudent = () => {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    const form = e.target;
     if (!studentId.trim()) {
       setError("Please enter a student ID");
       return;
@@ -57,18 +56,18 @@ const SearchForStudent = () => {
 
           {/* Search Bar */}
           <form onSubmit={handleSearch} className="mt-6 max-w-md mx-auto">
-            <div className="flex shadow-lg rounded-lg overflow-hidden">
+            <div className="flex shadow-md rounded-lg overflow-hidden border border-gray-200">
               <input
                 type="text"
                 value={studentId}
                 onChange={(e) => setStudentId(e.target.value)}
                 placeholder="Enter Student ID"
-                className="flex-grow px-5 py-3 focus:outline-none"
+                className="flex-grow px-5 py-3 focus:outline-none text-sm text-gray-700"
               />
               <button
                 type="submit"
                 disabled={isLoading}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 font-medium flex items-center transition-colors"
+                className="bg-[#07a698] hover:bg-[#059a8e] text-white px-6 py-3 font-medium flex items-center transition-colors"
               >
                 {isLoading ? (
                   "Searching..."
@@ -83,18 +82,18 @@ const SearchForStudent = () => {
           </form>
         </div>
 
-        {/* Results Area */}
+        {/* Results */}
         <div className="mt-8">
           {isLoading ? (
             <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600"></div>
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#07a698]"></div>
               <p className="mt-4 text-gray-600">Searching for student...</p>
             </div>
           ) : error ? (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="bg-red-50 border-l-4 border-red-500 p-4"
+              className="bg-red-50 border-l-4 border-red-500 p-4 rounded"
             >
               <div className="flex">
                 <div className="flex-shrink-0">
@@ -124,7 +123,6 @@ const SearchForStudent = () => {
   );
 };
 
-// Student Card Component (same as before with minor adjustments)
 const StudentCard = ({ student }) => {
   const {
     studentId,
@@ -148,234 +146,165 @@ const StudentCard = ({ student }) => {
       transition={{ duration: 0.5 }}
       className="max-w-2xl w-full mx-auto"
     >
-      <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-3xl overflow-hidden shadow-2xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-2xl w-full mx-auto mt-8 "
-        >
-          <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-3xl overflow-hidden shadow-2xl">
-            {/* Student Header with Image */}
-            <div className="relative h-48 mt-20 bg-indigo-700 flex items-end justify-center">
-              {student_url ? (
+      <div className="bg-gradient-to-br from-[#07a698] to-[#05c2b5] rounded-3xl overflow-hidden shadow-2xl">
+        {/* Profile Image */}
+        <div className="relative h-64 bg-[#059a8e] flex items-center justify-center">
+          {student_url ? (
+            <motion.div
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="absolute left-1/2 transform -translate-x-1/2"
+            >
+              <div className="h-32 w-32 rounded-full border-4 border-white bg-white overflow-hidden shadow-lg">
+                <img
+                  src={student_url}
+                  alt={studentName}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </motion.div>
+          ) : (
+            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 h-32 w-32 rounded-full border-4 border-white bg-[#07a698] flex items-center justify-center shadow-lg">
+              <FaUserGraduate className="text-white text-5xl" />
+            </div>
+          )}
+
+          <div className="w-full pt-52 pb-6 text-center">
+            <motion.h2
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-2xl font-bold text-white"
+            >
+              {studentName}
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="text-white font-medium "
+            >
+              Student ID: {studentId}
+            </motion.p>
+          </div>
+        </div>
+
+        {/* Info Section */}
+        <div className="bg-white p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Left Column */}
+            <div className="space-y-4">
+              {[
+                {
+                  icon: <FaUserGraduate className="text-[#07a698] text-xl" />,
+                  label: "Father's Name",
+                  value: fatherName,
+                },
+                {
+                  icon: <FaUserGraduate className="text-[#07a698] text-xl" />,
+                  label: "Mother's Name",
+                  value: motherName,
+                },
+                {
+                  icon: <FaBirthdayCake className="text-[#07a698] text-xl" />,
+                  label: "Date of Birth",
+                  value: new Date(date_of_birth).toLocaleDateString(),
+                },
+                {
+                  icon: <FaIdCard className="text-[#07a698] text-xl" />,
+                  label: "NID/Birth Certificate",
+                  value: nid_num,
+                },
+              ].map((item, i) => (
                 <motion.div
-                  initial={{ scale: 0.9 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.2 }}
-                  className="absolute left-1/2 transform -translate-x-1/2"
+                  key={i}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.5 + i * 0.1 }}
+                  className="flex items-start"
                 >
-                  <div className="h-32 w-32 rounded-full border-4 border-white bg-white overflow-hidden shadow-lg">
-                    <img
-                      src={student_url}
-                      alt={studentName}
-                      className="h-full w-full object-cover"
-                    />
+                  <div className="bg-[#d3f4ef] p-2 rounded-lg mr-3">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-500">
+                      {item.label}
+                    </h3>
+                    <p className="text-gray-800 font-medium">{item.value}</p>
                   </div>
                 </motion.div>
-              ) : (
-                <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 h-32 w-32 rounded-full border-4 border-white bg-indigo-500 flex items-center justify-center shadow-lg">
-                  <FaUserGraduate className="text-white text-5xl" />
-                </div>
-              )}
-
-              <div className="w-full pt-20 pb-6 text-center">
-                <motion.h2
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                  className="text-2xl font-bold text-white"
-                >
-                  {studentName}
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="text-indigo-100"
-                >
-                  Student ID: {studentId}
-                </motion.p>
-              </div>
+              ))}
             </div>
 
-            {/* Student Details */}
-            <div className="bg-white p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Left Column */}
-                <div className="space-y-4">
-                  <motion.div
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                    className="flex items-start"
-                  >
-                    <div className="bg-indigo-100 p-2 rounded-lg mr-3">
-                      <FaUserGraduate className="text-indigo-600 text-xl" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500">
-                        Father's Name
-                      </h3>
-                      <p className="text-gray-800 font-medium">{fatherName}</p>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.6 }}
-                    className="flex items-start"
-                  >
-                    <div className="bg-indigo-100 p-2 rounded-lg mr-3">
-                      <FaUserGraduate className="text-indigo-600 text-xl" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500">
-                        Mother's Name
-                      </h3>
-                      <p className="text-gray-800 font-medium">{motherName}</p>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.7 }}
-                    className="flex items-start"
-                  >
-                    <div className="bg-indigo-100 p-2 rounded-lg mr-3">
-                      <FaBirthdayCake className="text-indigo-600 text-xl" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500">
-                        Date of Birth
-                      </h3>
-                      <p className="text-gray-800 font-medium">
-                        {new Date(date_of_birth).toLocaleDateString()}
-                      </p>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.8 }}
-                    className="flex items-start"
-                  >
-                    <div className="bg-indigo-100 p-2 rounded-lg mr-3">
-                      <FaIdCard className="text-indigo-600 text-xl" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500">
-                        NID/Birth Certificate
-                      </h3>
-                      <p className="text-gray-800 font-medium">{nid_num}</p>
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Right Column */}
-                <div className="space-y-4">
-                  <motion.div
-                    initial={{ x: 20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                    className="flex items-start"
-                  >
-                    <div className="bg-indigo-100 p-2 rounded-lg mr-3">
-                      <FaBook className="text-indigo-600 text-xl" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500">
-                        Course Name
-                      </h3>
-                      <p className="text-gray-800 font-medium">{course_name}</p>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ x: 20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.6 }}
-                    className="flex items-start"
-                  >
-                    <div className="bg-indigo-100 p-2 rounded-lg mr-3">
-                      <FaCalendarAlt className="text-indigo-600 text-xl" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500">
-                        Enrollment Date
-                      </h3>
-                      <p className="text-gray-800 font-medium">
-                        {new Date(enrollment_date).toLocaleDateString()}
-                      </p>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ x: 20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.7 }}
-                    className="flex items-start"
-                  >
-                    <div className="bg-indigo-100 p-2 rounded-lg mr-3">
-                      <FaCalendarAlt className="text-indigo-600 text-xl" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500">
-                        Completion Date
-                      </h3>
-                      <p className="text-gray-800 font-medium">
-                        {new Date(course_complete_date).toLocaleDateString()}
-                      </p>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ x: 20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.8 }}
-                    className="flex items-start"
-                  >
-                    <div className="bg-indigo-100 p-2 rounded-lg mr-3">
-                      <FaCheckCircle className="text-indigo-600 text-xl" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500">
-                        Course Status
-                      </h3>
-                      <p
-                        className={`font-medium ${
-                          course_status === "completed"
-                            ? "text-green-600"
-                            : course_status === "ongoing"
-                            ? "text-amber-600"
-                            : "text-blue-600"
-                        }`}
-                      >
-                        {course_status.charAt(0).toUpperCase() +
-                          course_status.slice(1)}
-                      </p>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-
-              {/* Duration Badge */}
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.9 }}
-                className="mt-6 bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-2 px-4 rounded-full inline-block"
-              >
-                <span className="font-medium">
-                  Course Duration: {durationInMonths}
-                </span>
-              </motion.div>
+            {/* Right Column */}
+            <div className="space-y-4">
+              {[
+                {
+                  icon: <FaBook className="text-[#07a698] text-xl" />,
+                  label: "Course Name",
+                  value: course_name,
+                },
+                {
+                  icon: <FaCalendarAlt className="text-[#07a698] text-xl" />,
+                  label: "Enrollment Date",
+                  value: new Date(enrollment_date).toLocaleDateString(),
+                },
+                {
+                  icon: <FaCalendarAlt className="text-[#07a698] text-xl" />,
+                  label: "Completion Date",
+                  value: new Date(course_complete_date).toLocaleDateString(),
+                },
+                {
+                  icon: <FaCheckCircle className="text-[#07a698] text-xl" />,
+                  label: "Course Status",
+                  value: (
+                    <span
+                      className={`font-medium ${
+                        course_status === "completed"
+                          ? "text-green-600"
+                          : course_status === "ongoing"
+                          ? "text-amber-600"
+                          : "text-blue-600"
+                      }`}
+                    >
+                      {course_status.charAt(0).toUpperCase() +
+                        course_status.slice(1)}
+                    </span>
+                  ),
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ x: 20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.5 + i * 0.1 }}
+                  className="flex items-start"
+                >
+                  <div className="bg-[#d3f4ef] p-2 rounded-lg mr-3">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-500">
+                      {item.label}
+                    </h3>
+                    <p className="text-gray-800 font-medium">{item.value}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
-        </motion.div>
+
+          {/* Duration Badge */}
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.9 }}
+            className="mt-6 bg-gradient-to-r from-[#07a698] to-[#05c2b5] text-white py-2 px-4 rounded-full inline-block text-sm font-medium"
+          >
+            Course Duration: {durationInMonths}
+          </motion.div>
+        </div>
       </div>
     </motion.div>
   );
