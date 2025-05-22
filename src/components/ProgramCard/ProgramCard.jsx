@@ -26,7 +26,7 @@ const ProgramCard = ({ course }) => {
                         {category}
                     </span>
                     <div className="text-right">
-                        <span className="text-sm text-gray-500">Starts</span>
+                        <span className="text-sm text-gray-500">Deadline </span>
                         <p className="font-medium">
                             {new Date(enrollment_deadline).toLocaleDateString()}
                         </p>

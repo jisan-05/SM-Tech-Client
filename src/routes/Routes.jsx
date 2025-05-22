@@ -84,7 +84,7 @@ export const router = createBrowserRouter([
         path: "/updateCourse/:id",
         element: <UpdateCourse />,
         loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/course/${params.id}`),
+          fetch(`${import.meta.env.VITE_API_URL}/course/details/${params.id}`),
       },
       {
         path: "/updateDepartment/:id",
