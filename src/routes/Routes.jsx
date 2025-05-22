@@ -36,6 +36,7 @@ import StudentExcel from "../components/Excel/StudentExce";
 import AddEvent from "../components/AddEvent/AddEvent";
 import ManageEvents from "../components/ManageEvents/ManageEvents";
 
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -177,7 +178,8 @@ export const router = createBrowserRouter([
       {
         path:'addEvent',
         element:<AddEvent></AddEvent>
-      }
+      },
+     
     ],
   },
 ]);

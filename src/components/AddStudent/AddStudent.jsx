@@ -222,280 +222,298 @@ import toast from "react-hot-toast";
 import { cloudinaryUploadVeryLow } from "../../utils/utils";
 
 const AddStudent = () => {
-  const [duration, setDuration] = useState("");
+    const [duration, setDuration] = useState("");
+    const [loading, setLoading] = useState(false);
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const studentId = form.student_id.value;
-    const studentName = form.student_name.value;
-    const fatherName = form.father_name.value;
-    const motherName = form.mother_name.value;
-    const date_of_birth = form.date_of_birth.value;
-    const nid_num = form.nid_num.value;
-    const course_name = form.course_name.value;
-    const enrollment_date = form.enrollment_date.value;
-    const course_complete_date = form.course_complete_date.value;
-    const course_status = form.course_status.value;
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        const form = e.target;
+        const studentId = form.student_id.value;
+        const studentName = form.student_name.value;
+        const fatherName = form.father_name.value;
+        const motherName = form.mother_name.value;
+        const date_of_birth = form.date_of_birth.value;
+        const nid_num = form.nid_num.value;
+        const course_name = form.course_name.value;
+        const enrollment_date = form.enrollment_date.value;
+        const course_complete_date = form.course_complete_date.value;
+        const course_status = form.course_status.value;
 
-    // image Upload system
-    const banner_image = e.target.banner_image.files[0];
-    const student_url = await cloudinaryUploadVeryLow(banner_image);
+        // image Upload system
+        const banner_image = e.target.banner_image.files[0];
+        const student_url = await cloudinaryUploadVeryLow(banner_image);
 
-    // Calculate course duration
-    const durationInMonths = calculateDurationInMonths(
-      enrollment_date,
-      course_complete_date
-    );
-    setDuration(durationInMonths);
+        // Calculate course duration
+        const durationInMonths = calculateDurationInMonths(
+            enrollment_date,
+            course_complete_date
+        );
+        setDuration(durationInMonths);
 
-    const studentData = {
-      studentId,
-      studentName,
-      fatherName,
-      motherName,
-      date_of_birth,
-      nid_num,
-      course_name,
-      enrollment_date,
-      course_complete_date,
-      course_status,
-      durationInMonths,
-      student_url,
+        const studentData = {
+            studentId,
+            studentName,
+            fatherName,
+            motherName,
+            date_of_birth,
+            nid_num,
+            course_name,
+            enrollment_date,
+            course_complete_date,
+            course_status,
+            durationInMonths,
+            student_url,
+        };
+
+        try {
+            const { data } = await axios.post(
+                `${import.meta.env.VITE_API_URL}/student`,
+                studentData,
+                { withCredentials: true },
+                form.reset()
+            );
+            setLoading(false);
+            toast.success("Add Student Successfully");
+            console.log(data);
+        } catch (err) {
+            console.log(err);
+            toast.error("Cant add student now! Try again");
+        }
     };
 
-    try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/student`,
-        studentData,
-        { withCredentials: true },
-        form.reset()
-      );
-      toast.success("Add Student Successfully");
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-      toast.error("Cant add student now! Try again");
-    }
-  };
+    const calculateDurationInMonths = (start, end) => {
+        if (!start || !end) return "";
+        const startDate = new Date(start);
+        const endDate = new Date(end);
+        const diffYears = endDate.getFullYear() - startDate.getFullYear();
+        const diffMonths = endDate.getMonth() - startDate.getMonth();
+        const totalMonths = diffYears * 12 + diffMonths;
+        return `${totalMonths} month(s)`;
+    };
 
-  const calculateDurationInMonths = (start, end) => {
-    if (!start || !end) return "";
-    const startDate = new Date(start);
-    const endDate = new Date(end);
-    const diffYears = endDate.getFullYear() - startDate.getFullYear();
-    const diffMonths = endDate.getMonth() - startDate.getMonth();
-    const totalMonths = diffYears * 12 + diffMonths;
-    return `${totalMonths} month(s)`;
-  };
+    const handleDateChange = (e) => {
+        const form = e.target.form;
+        const start = form.enrollment_date.value;
+        const end = form.course_complete_date.value;
+        setDuration(calculateDurationInMonths(start, end));
+    };
 
-  const handleDateChange = (e) => {
-    const form = e.target.form;
-    const start = form.enrollment_date.value;
-    const end = form.course_complete_date.value;
-    setDuration(calculateDurationInMonths(start, end));
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-tr from-amber-100 via-teal-100 to-amber-50 flex items-center justify-center p-6 rounded-2xl">
-      <div className="w-full max-w-4xl bg-white rounded-3xl shadow-xl p-10 border border-teal-200">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-teal-800 tracking-tight">
-            🎓 Student Registration
-          </h2>
-          <Link
-            to="/dashboardLayout/manageStudent"
-            className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg shadow transition-colors flex items-center gap-2"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-            </svg>
-            Manage All Students Info
-          </Link>
-        </div>
-        {/* <h2 className="text-4xl font-bold text-teal-800 mb-10 text-center tracking-tight">
+    return (
+        <div className="min-h-screen bg-gradient-to-tr from-amber-100 via-teal-100 to-amber-50 flex items-center justify-center p-6 rounded-2xl">
+            <div className="w-full max-w-4xl bg-white rounded-3xl shadow-xl p-10 border border-teal-200">
+                <div className="flex justify-between items-center mb-8">
+                    <h2 className="text-3xl font-bold text-teal-800 tracking-tight">
+                        🎓 Student Registration
+                    </h2>
+                    <Link
+                        to="/dashboardLayout/manageStudent"
+                        className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg shadow transition-colors flex items-center gap-2"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                        </svg>
+                        Manage All Students Info
+                    </Link>
+                </div>
+                {/* <h2 className="text-4xl font-bold text-teal-800 mb-10 text-center tracking-tight">
           🎓 Register a New Student
         </h2> */}
 
-        <form
-          onSubmit={handleFormSubmit}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
-        >
-          {/* Left Column */}
-          <div className="space-y-6">
-            <div>
-              <label className="block text-teal-900 font-medium mb-1">
-                Student ID
-              </label>
-              <input
-                type="text"
-                name="student_id"
-                required
-                placeholder="e.g. 2025001"
-                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
-              />
+                <form
+                    onSubmit={handleFormSubmit}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                >
+                    {/* Left Column */}
+                    <div className="space-y-6">
+                        <div>
+                            <label className="block text-teal-900 font-medium mb-1">
+                                Student ID
+                            </label>
+                            <input
+                                type="text"
+                                name="student_id"
+                                required
+                                placeholder="e.g. 2025001"
+                                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-teal-900 font-medium mb-1">
+                                Student Name
+                            </label>
+                            <input
+                                type="text"
+                                name="student_name"
+                                required
+                                placeholder="e.g. Hasan Ahmed"
+                                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-teal-900 font-medium mb-1">
+                                Father Name
+                            </label>
+                            <input
+                                type="text"
+                                name="father_name"
+                                required
+                                placeholder="e.g. Mostafizur Rahman"
+                                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-teal-900 font-medium mb-1">
+                                Mother Name
+                            </label>
+                            <input
+                                type="text"
+                                name="mother_name"
+                                required
+                                placeholder="e.g. Shirin Akter"
+                                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-teal-900 font-medium mb-1">
+                                Date of Birth
+                            </label>
+                            <input
+                                type="date"
+                                name="date_of_birth"
+                                required
+                                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Right Column */}
+                    <div className="space-y-6">
+                        <div>
+                            <label className="block text-teal-900 font-medium mb-1">
+                                NID / Birth Certificate No.
+                            </label>
+                            <input
+                                type="number"
+                                name="nid_num"
+                                required
+                                placeholder="e.g. 123456789"
+                                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-teal-900 font-medium mb-1">
+                                Course Name
+                            </label>
+                            <input
+                                type="text"
+                                name="course_name"
+                                required
+                                placeholder="e.g. Civil Engineering"
+                                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-teal-900 font-medium mb-1">
+                                Enrollment Date
+                            </label>
+                            <input
+                                type="date"
+                                name="enrollment_date"
+                                required
+                                onChange={handleDateChange}
+                                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-teal-900 font-medium mb-1">
+                                Course Finish Date
+                            </label>
+                            <input
+                                type="date"
+                                name="course_complete_date"
+                                required
+                                onChange={handleDateChange}
+                                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-teal-900 font-medium mb-1">
+                                Course Status
+                            </label>
+                            <select
+                                name="course_status"
+                                required
+                                className="w-full px-4 py-3 border border-teal-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
+                            >
+                                <option value="">Select status</option>
+                                <option value="completed">Completed</option>
+                                <option value="ongoing">Ongoing</option>
+                                <option value="certified">Certified</option>
+                            </select>
+                        </div>
+
+                        {duration && (
+                            <div className="text-amber-700 font-semibold">
+                                📅 Course Duration: {duration}
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="flex flex-col gap-2 mt-4">
+                        <label
+                            className="text-gray-700"
+                            htmlFor="course_banner"
+                        >
+                            Course Banner (Image)
+                        </label>
+                        <input
+                            required
+                            type="file"
+                            id="course_banner"
+                            name="banner_image"
+                            accept="image/*"
+                            className=""
+                        />
+                    </div>
+
+                    <div className="mt-10 col-span-1 md:col-span-2">
+                        <button
+                            type="submit"
+                            className={`w-full bg-teal-600 hover:bg-teal-700 text-white text-lg font-semibold py-3 rounded-xl shadow-md transition-all ${
+                                loading
+                                    ? "opacity-75 cursor-not-allowed"
+                                    : "cursor-pointer"
+                            }`}
+                            disabled={loading}
+                        >
+                            {loading ? (
+                                <span className="flex items-center justify-center gap-2">
+                                    <span className="loading loading-spinner loading-sm"></span>
+                                    Processing...
+                                </span>
+                            ) : (
+                                <span>✅ Register Student</span>
+                            )}
+                        </button>
+                    </div>
+                </form>
             </div>
-
-            <div>
-              <label className="block text-teal-900 font-medium mb-1">
-                Student Name
-              </label>
-              <input
-                type="text"
-                name="student_name"
-                required
-                placeholder="e.g. Hasan Ahmed"
-                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
-              />
-            </div>
-
-            <div>
-              <label className="block text-teal-900 font-medium mb-1">
-                Father Name
-              </label>
-              <input
-                type="text"
-                name="father_name"
-                required
-                placeholder="e.g. Mostafizur Rahman"
-                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
-              />
-            </div>
-
-            <div>
-              <label className="block text-teal-900 font-medium mb-1">
-                Mother Name
-              </label>
-              <input
-                type="text"
-                name="mother_name"
-                required
-                placeholder="e.g. Shirin Akter"
-                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
-              />
-            </div>
-
-            <div>
-              <label className="block text-teal-900 font-medium mb-1">
-                Date of Birth
-              </label>
-              <input
-                type="date"
-                name="date_of_birth"
-                required
-                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
-              />
-            </div>
-          </div>
-
-          {/* Right Column */}
-          <div className="space-y-6">
-            <div>
-              <label className="block text-teal-900 font-medium mb-1">
-                NID / Birth Certificate No.
-              </label>
-              <input
-                type="number"
-                name="nid_num"
-                required
-                placeholder="e.g. 123456789"
-                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
-              />
-            </div>
-
-            <div>
-              <label className="block text-teal-900 font-medium mb-1">
-                Course Name
-              </label>
-              <input
-                type="text"
-                name="course_name"
-                required
-                placeholder="e.g. Civil Engineering"
-                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
-              />
-            </div>
-
-            <div>
-              <label className="block text-teal-900 font-medium mb-1">
-                Enrollment Date
-              </label>
-              <input
-                type="date"
-                name="enrollment_date"
-                required
-                onChange={handleDateChange}
-                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
-              />
-            </div>
-
-            <div>
-              <label className="block text-teal-900 font-medium mb-1">
-                Course Finish Date
-              </label>
-              <input
-                type="date"
-                name="course_complete_date"
-                required
-                onChange={handleDateChange}
-                className="w-full px-4 py-3 border border-teal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
-              />
-            </div>
-
-            <div>
-              <label className="block text-teal-900 font-medium mb-1">
-                Course Status
-              </label>
-              <select
-                name="course_status"
-                required
-                className="w-full px-4 py-3 border border-teal-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
-              >
-                <option value="">Select status</option>
-                <option value="completed">Completed</option>
-                <option value="ongoing">Ongoing</option>
-                <option value="certified">Certified</option>
-              </select>
-            </div>
-
-            {duration && (
-              <div className="text-amber-700 font-semibold">
-                📅 Course Duration: {duration}
-              </div>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-2 mt-4">
-            <label className="text-gray-700" htmlFor="course_banner">
-              Course Banner (Image)
-            </label>
-            <input
-              required
-              type="file"
-              id="course_banner"
-              name="banner_image"
-              accept="image/*"
-              className=""
-            />
-          </div>
-
-          <div className="mt-10 col-span-1 md:col-span-2">
-            <button
-              type="submit"
-              className="w-full bg-teal-600 hover:bg-teal-700 text-white text-lg font-semibold py-3 rounded-xl shadow-md transition-all cursor-pointer"
-            >
-              ✅ Register Student
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default AddStudent;
