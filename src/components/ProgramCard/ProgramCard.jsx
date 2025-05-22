@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
+
 const ProgramCard = ({ course }) => {
     const {
+        _id,
         category,
         course_description,
         course_duration,
@@ -75,9 +78,11 @@ const ProgramCard = ({ course }) => {
                             ${course_price}
                         </p>
                     </div>
+                    <Link to={`/course/${_id}`}>
                     <button className="bg-[#07a698] hover:bg-[#01998c] text-white font-medium py-2 px-6 rounded-lg transition-all duration-300">
-                        Enroll Now
+                        See Details
                     </button>
+                    </Link>
                 </div>
             </div>
         </div>
