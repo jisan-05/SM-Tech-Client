@@ -91,6 +91,8 @@ const CourseDetails = () => {
     course_price,
     course_duration,
     course_description,
+    learn_bio,
+    whatYoullLearn = [], 
   } = course;
 
   console.log(course_title);
@@ -98,7 +100,8 @@ const CourseDetails = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-8 mb-10 overflow-hidden">
+      <div className="relative bg-gradient-to-r from-[#01998c] to-[#07a698]
+ rounded-3xl p-8 mb-10 overflow-hidden">
         <div className="relative z-10 text-white">
           <span className="inline-block bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-medium mb-4">
             {category}
@@ -155,70 +158,89 @@ const CourseDetails = () => {
             </h2>
             <div className="prose prose-lg text-gray-600">
               <p>
-                This comprehensive course will take you from beginner to
-                advanced level with hands-on projects and real-world
-                applications.
+                {
+                  learn_bio
+                }
               </p>
-              <ul className="space-y-3 mt-4">
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>
-                    Master all core concepts through practical examples
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Build portfolio-worthy projects</span>
-                </li>
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Get personalized feedback from instructors</span>
-                </li>
-                <li className="flex items-start">
-                  <svg
-                    className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Access to exclusive community and resources</span>
-                </li>
-              </ul>
+              {whatYoullLearn.length > 0 ? (
+                <ul className="space-y-3 mt-4">
+                  {whatYoullLearn.map((point, index) => (
+                    <li key={index} className="flex items-start">
+                      <svg
+                        className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <ul className="space-y-3 mt-4">
+                  <li className="flex items-start">
+                    <svg
+                      className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>Master all core concepts through practical examples</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>Build portfolio-worthy projects</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>Get personalized feedback from instructors</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg
+                      className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>Access to exclusive community and resources</span>
+                  </li>
+                </ul>
+              )}
             </div>
           </div>
 
@@ -306,7 +328,8 @@ const CourseDetails = () => {
               </div>
             </div>
 
-            <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl">
+            <button className="w-full bg-gradient-to-r from-[#07a698] to-[#07a698] hover:from-[#01998c] hover:to-[#01998c]
+ text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl">
               Enroll Now
             </button>
 
