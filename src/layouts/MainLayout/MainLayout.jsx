@@ -15,8 +15,10 @@ const MainLayout = () => {
     }
     return (
         <div>
-            <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1500px] mx-auto">
-            <Navbar />
+            <div className="shadow-sm">
+                <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1500px] mx-auto">
+                    <Navbar />
+                </div>
             </div>
 
             <div className=" min-h-[calc(100vh-80px)]">

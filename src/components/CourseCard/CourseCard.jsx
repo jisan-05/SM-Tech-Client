@@ -20,7 +20,7 @@ const CourseCard = ({ course }) => {
           <p className="flex-grow"> {/* Added flex-grow to description */}
             {course_description}
           </p>
-          <p className="mt-6"><span className="font-bold">Instructor :</span> {course_instructor}</p>
+          <p className="mt-1"><span className="font-bold">Instructor :</span> {course_instructor}</p>
           <div className="divider"></div>
           <div className="card-actions flex justify-between items-center">
             <Link

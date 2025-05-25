@@ -25,7 +25,7 @@ const Teacher = () => {
     const displayedTeachers = teachers.slice(0, 3);
 
     return (
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 ">
             <div className="text-center mb-12">
                 <h3 className="text-sm font-medium text-[#07a698] uppercase tracking-wider">
                     Our Instructors

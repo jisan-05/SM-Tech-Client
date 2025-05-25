@@ -34,7 +34,7 @@ const Home = () => {
       </div>
       </div>
 
-      <div className="bg-gray-200">
+      <div className="bg-gray-50">
         <Teacher></Teacher>
       </div>
         
