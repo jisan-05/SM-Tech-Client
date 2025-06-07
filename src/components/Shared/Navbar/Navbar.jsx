@@ -20,12 +20,10 @@ const Navbar = () => {
     };
     console.log(user?.photoURL);
 
-   
-
     return (
         <div className="navbar bg-base-100 ">
             <div className="navbar-start">
-                <img src={logo} alt="" className="w-12" />
+                <img src={logo} alt="" loading="lazy" className="w-12" />
                 <Link to="/" className="btn btn-ghost text-xl">
                     SM Tech
                 </Link>
@@ -69,6 +67,8 @@ const Navbar = () => {
                         {user?.photoURL ? (
                             <img
                                 src={user?.photoURL}
+                                loading="lazy"
+
                                 className="w-12 h-12 bg-cover rounded-full"
                                 alt="User"
                             />

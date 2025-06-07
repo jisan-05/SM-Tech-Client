@@ -15,6 +15,8 @@ const DepartmentCard = ({ departmentData }) => {
                     <img
                         src={photoURL}
                         alt={title}
+                        loading="lazy"
+
                         className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent"></div>

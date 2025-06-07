@@ -10,6 +10,8 @@ const CourseCard = ({ course }) => {
           <div className="w-full md:h-56">
             <img
               src={course_banner}
+              loading="lazy"
+
               className="group-hover:scale-105 w-full h-full object-cover transition duration-500 ease-in-out"
               alt="Course Image"
             />

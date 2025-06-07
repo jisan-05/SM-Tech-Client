@@ -159,6 +159,8 @@ const StudentCard = ({ student }) => {
               <div className="h-32 w-32 rounded-full border-4 border-white bg-white overflow-hidden shadow-lg">
                 <img
                   src={student_url}
+                  loading="lazy"
+
                   alt={studentName}
                   className="h-full w-full object-cover"
                 />

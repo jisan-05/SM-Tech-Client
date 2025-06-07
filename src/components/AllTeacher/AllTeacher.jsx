@@ -38,6 +38,8 @@ const AllTeacher = () => {
               <img
                 src={teacher.photoURL || "/default-instructor.jpg"}
                 alt={teacher.name}
+                loading="lazy"
+
                 className="absolute inset-0 w-full h-full object-cover object-top"
                 onError={(e) => {
                   e.target.src = "/default-instructor.jpg";

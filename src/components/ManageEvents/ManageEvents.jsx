@@ -97,6 +97,8 @@ const ManageEvents = () => {
                                     <td className="p-4">
                                         <img
                                             src={event.image}
+                                            loading="lazy"
+
                                             alt={event.headline}
                                             className="w-20 h-16 object-cover rounded"
                                         />

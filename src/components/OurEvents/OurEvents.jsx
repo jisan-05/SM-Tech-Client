@@ -75,6 +75,8 @@ const OurEvents = () => {
                   <div className="relative h-48 w-full overflow-hidden">
                     <img
                       src={event.image}
+                      loading="lazy"
+
                       alt={event.headline}
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                     />

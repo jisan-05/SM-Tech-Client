@@ -78,6 +78,8 @@ const ManageRole = () => {
                   <td className="px-6 py-4">
                     <img
                       src={u.image}
+                      loading="lazy"
+
                       alt={u.name}
                       className="w-10 h-10 rounded-full ring-2 ring-gray-300"
                     />

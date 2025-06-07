@@ -18,6 +18,8 @@ const ProgramCard = ({ course }) => {
             <div className="h-48 ">
                 <img
                     className="w-full h-full object-cover"
+                    loading="lazy"
+
                     src={course_banner}
                     alt=""
                 />

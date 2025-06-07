@@ -135,6 +135,8 @@ const ManageTeacher = () => {
                   <img
                     src={teacher.photoURL || "/default-instructor.jpg"}
                     alt={teacher.name}
+                    loading="lazy"
+
                     className="w-12 h-12 object-cover rounded-full"
                   />
                 </td>

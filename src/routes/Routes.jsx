@@ -1,185 +1,175 @@
+// router.js (lazy loaded version)
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import MainLayout from "../layouts/MainLayout/MainLayout";
-import Home from "../pages/Home/Home";
-import ErrorPage from "../pages/ErrorPage";
-import Login from "../pages/Login/Login";
-import SignUp from "../pages/SignUp/SignUp";
-import AddCourse from "../components/AddCourse/AddCourse";
-import CourseDetails from "../components/CourseDetails/CourseDetails";
-import Programs from "../components/Programs/Programs";
+import LoadingSpinner from "../components/Shared/LoadingSpinner";
+
+const MainLayout = lazy(() => import("../layouts/MainLayout/MainLayout"));
+const DashboardLayout = lazy(() =>
+    import("../layouts/DashboardLayout/DashboardLayout")
+);
+const ErrorPage = lazy(() => import("../pages/ErrorPage"));
+const Home = lazy(() => import("../pages/Home/Home"));
+const Login = lazy(() => import("../pages/Login/Login"));
+const SignUp = lazy(() => import("../pages/SignUp/SignUp"));
+const CourseDetails = lazy(() =>
+    import("../components/CourseDetails/CourseDetails")
+);
+const Programs = lazy(() => import("../components/Programs/Programs"));
+const Departments = lazy(() => import("../pages/Departments/Departments"));
+const DepartmentCourse = lazy(() =>
+    import("../components/DepartmentCourse/DepartmentCourse")
+);
+const ContactUs = lazy(() => import("../components/ContactUs/ContactUs"));
+const UpdateCourse = lazy(() => import("../pages/UpdateCourse/UpdateCourse"));
+const UpdateDepartment = lazy(() =>
+    import("../components/UpdateDepartment/UpdateDepartment")
+);
+const AllTeacher = lazy(() => import("../components/AllTeacher/AllTeacher"));
+const UpdateStudent = lazy(() =>
+    import("../components/UpdateStudent/UpdateStudent")
+);
+const SearchForStudent = lazy(() =>
+    import("../components/SearchForStudent/SearchForStudent")
+);
+
+const AddDepartments = lazy(() =>
+    import("../components/AddDepartments/AddDepartments")
+);
+const AddCourse = lazy(() => import("../components/AddCourse/AddCourse"));
+const ManagePost = lazy(() => import("../pages/ManagePost/ManagePost"));
+const ManageDepartment = lazy(() =>
+    import("../components/ManageDepartment/ManageDepartment")
+);
+const AddStudent = lazy(() => import("../components/AddStudent/AddStudent"));
+const ManageStudent = lazy(() =>
+    import("../pages/ManageStudent/ManageStudent")
+);
+const AddTeacher = lazy(() => import("../components/AddTeacher/AddTeacher"));
+const ManageTeacher = lazy(() =>
+    import("../components/ManageTeacher/ManageTeacher")
+);
+const ManageRole = lazy(() => import("../components/ManageRole/ManageRole"));
+const EditTeacher = lazy(() => import("../components/EditTeacher/EditTeacher"));
+const Pdf = lazy(() => import("../components/PDF/Pdf"));
+const TeacherPdf = lazy(() => import("../components/PDF/TeacherPdf"));
+const StudentExcel = lazy(() => import("../components/Excel/StudentExce"));
+const AddEvent = lazy(() => import("../components/AddEvent/AddEvent"));
+const ManageEvents = lazy(() =>
+    import("../components/ManageEvents/ManageEvents")
+);
 
 import PrivateRoute from "./PrivetRoute";
-import ManagePost from "../pages/ManagePost/ManagePost";
-import Departments from "../pages/Departments/Departments";
-import AddDepartments from "../components/AddDepartments/AddDepartments";
-import VerifyEmail from "../pages/VerifyEmail/VerifyEmail";
-import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
-import ManageDepartment from "../components/ManageDepartment/ManageDepartment";
-import ContactUs from "../components/ContactUs/ContactUs";
-import UpdateCourse from "../pages/UpdateCourse/UpdateCourse";
-import UpdateDepartment from "../components/UpdateDepartment/UpdateDepartment";
 import AdminRoute from "./AdminRoute";
-import AddStudent from "../components/AddStudent/AddStudent";
-import AddTeacher from "../components/AddTeacher/AddTeacher";
-import AllTeacher from "../components/AllTeacher/AllTeacher";
-import ManageTeacher from "../components/ManageTeacher/ManageTeacher";
-import DepartmentCourse from "../components/DepartmentCourse/DepartmentCourse";
-import ManageStudent from "../pages/ManageStudent/ManageStudent";
 
-import UpdateStudent from "../components/UpdateStudent/UpdateStudent";
-import ManageRole from "../components/ManageRole/ManageRole";
-import SearchForStudent from "../components/SearchForStudent/SearchForStudent";
-import Pdf from "../components/PDF/Pdf";
-import TeacherPdf from "../components/PDF/TeacherPdf";
-import EditTeacher from "../components/EditTeacher/EditTeacher";
-import StudentExcel from "../components/Excel/StudentExce";
-import AddEvent from "../components/AddEvent/AddEvent";
-import ManageEvents from "../components/ManageEvents/ManageEvents";
-
+const suspenseWrapper = (Component) => (
+    <Suspense fallback={<LoadingSpinner />}>{Component}</Suspense>
+);
 
 export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <MainLayout></MainLayout>,
-    errorElement: <ErrorPage></ErrorPage>,
-    children: [
-      {
+    {
         path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/signup",
-        element: <SignUp />,
-      },
-
-      {
-        path: "/course/:id",
-        element: <CourseDetails />,
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/course/details/${params.id}`),
-      },
-
-      {
-        path: "/programs",
-        element: <Programs />,
-      },
-
-      {
-        path: "/departments",
-        element: <Departments />,
-      },
-      {
-        path: "/departmentCourse/:category",
-        element: <DepartmentCourse></DepartmentCourse>,
-      },
-      {
-        path: "/contactUs",
-        element: <ContactUs></ContactUs>,
-      },
-      {
-        path: "/updateCourse/:id",
-        element: <UpdateCourse />,
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/course/details/${params.id}`),
-      },
-      {
-        path: "/updateDepartment/:id",
-        element: <UpdateDepartment></UpdateDepartment>,
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/department/${params.id}`),
-      },
-      {
-        path: "/allTeacher",
-        element: <AllTeacher></AllTeacher>,
-      },
-
-      {
-        path: "/updateStudent/:id",
-        element: <UpdateStudent />,
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/student/${params.id}`),
-      },
-      {
-        path: "/searchStudent",
-        element: <SearchForStudent />,
-      },
-    ],
-  },
-  {
-    path: "/dashboardLayout",
-    element: (
-      <AdminRoute>
-        <DashboardLayout></DashboardLayout>
-      </AdminRoute>
-    ),
-    children: [
-      {
-        path: "addDepartments",
-        element: <AddDepartments></AddDepartments>,
-      },
-      {
-        path: "addCourse",
-        element: <AddCourse />,
-      },
-      {
-        path: "manageCourse",
-        element: <ManagePost />,
-      },
-      {
-        path: "manageDepartment",
-        element: <ManageDepartment></ManageDepartment>,
-      },
-      {
-        path: "addStudent",
-        element: <AddStudent />,
-      },
-      {
-        path: "manageStudent",
-        element: <ManageStudent />,
-      },
-
-      {
-        path: "addTeacher",
-        element: <AddTeacher></AddTeacher>,
-      },
-      {
-        path: "manageTeacher",
-        element: <ManageTeacher></ManageTeacher>,
-      },
-
-      {
-        path: "manageRole",
-        element: <ManageRole></ManageRole>,
-      },
-      {
-        path: "editTeacher/:id",
-        element: <EditTeacher></EditTeacher>,
-      },
-      {
-        path: "pdf",
-        element: <Pdf />,
-      },
-      {
-        path: "teacherPdf",
-        element: <TeacherPdf />,
-      },
-      {
-        path: "studentExcel",
-        element: <StudentExcel />,
-      },
-      {
-        path: "manageEvents",
-        element: <ManageEvents></ManageEvents>,
-      },
-      {
-        path:'addEvent',
-        element:<AddEvent></AddEvent>
-      },
-     
-    ],
-  },
+        element: suspenseWrapper(<MainLayout />),
+        errorElement: suspenseWrapper(<ErrorPage />),
+        children: [
+            { path: "/", element: suspenseWrapper(<Home />) },
+            { path: "/login", element: suspenseWrapper(<Login />) },
+            { path: "/signup", element: suspenseWrapper(<SignUp />) },
+            {
+                path: "/course/:id",
+                element: suspenseWrapper(<CourseDetails />),
+                loader: ({ params }) =>
+                    fetch(
+                        `${import.meta.env.VITE_API_URL}/course/details/${
+                            params.id
+                        }`
+                    ),
+            },
+            { path: "/programs", element: suspenseWrapper(<Programs />) },
+            { path: "/departments", element: suspenseWrapper(<Departments />) },
+            {
+                path: "/departmentCourse/:category",
+                element: suspenseWrapper(<DepartmentCourse />),
+            },
+            { path: "/contactUs", element: suspenseWrapper(<ContactUs />) },
+            {
+                path: "/updateCourse/:id",
+                element: suspenseWrapper(<UpdateCourse />),
+                loader: ({ params }) =>
+                    fetch(
+                        `${import.meta.env.VITE_API_URL}/course/details/${
+                            params.id
+                        }`
+                    ),
+            },
+            {
+                path: "/updateDepartment/:id",
+                element: suspenseWrapper(<UpdateDepartment />),
+                loader: ({ params }) =>
+                    fetch(
+                        `${import.meta.env.VITE_API_URL}/department/${
+                            params.id
+                        }`
+                    ),
+            },
+            { path: "/allTeacher", element: suspenseWrapper(<AllTeacher />) },
+            {
+                path: "/updateStudent/:id",
+                element: suspenseWrapper(<UpdateStudent />),
+                loader: ({ params }) =>
+                    fetch(
+                        `${import.meta.env.VITE_API_URL}/student/${params.id}`
+                    ),
+            },
+            {
+                path: "/searchStudent",
+                element: suspenseWrapper(<SearchForStudent />),
+            },
+        ],
+    },
+    {
+        path: "/dashboardLayout",
+        element: suspenseWrapper(
+            <AdminRoute>
+                <DashboardLayout />
+            </AdminRoute>
+        ),
+        children: [
+            {
+                path: "addDepartments",
+                element: suspenseWrapper(<AddDepartments />),
+            },
+            { path: "addCourse", element: suspenseWrapper(<AddCourse />) },
+            { path: "manageCourse", element: suspenseWrapper(<ManagePost />) },
+            {
+                path: "manageDepartment",
+                element: suspenseWrapper(<ManageDepartment />),
+            },
+            { path: "addStudent", element: suspenseWrapper(<AddStudent />) },
+            {
+                path: "manageStudent",
+                element: suspenseWrapper(<ManageStudent />),
+            },
+            { path: "addTeacher", element: suspenseWrapper(<AddTeacher />) },
+            {
+                path: "manageTeacher",
+                element: suspenseWrapper(<ManageTeacher />),
+            },
+            { path: "manageRole", element: suspenseWrapper(<ManageRole />) },
+            {
+                path: "editTeacher/:id",
+                element: suspenseWrapper(<EditTeacher />),
+            },
+            { path: "pdf", element: suspenseWrapper(<Pdf />) },
+            { path: "teacherPdf", element: suspenseWrapper(<TeacherPdf />) },
+            {
+                path: "studentExcel",
+                element: suspenseWrapper(<StudentExcel />),
+            },
+            {
+                path: "manageEvents",
+                element: suspenseWrapper(<ManageEvents />),
+            },
+            { path: "addEvent", element: suspenseWrapper(<AddEvent />) },
+        ],
+    },
 ]);

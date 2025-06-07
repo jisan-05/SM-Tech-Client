@@ -12,6 +12,8 @@ const TeacherCard = ({teacher}) => {
         <div className="flex justify-center mb-6">
           <img
             src={teacher.photoURL || "/default-instructor.jpg"}
+            loading="lazy"
+
             alt={teacher.name}
             className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg"
             onError={(e) => {
