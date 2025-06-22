@@ -7,7 +7,7 @@ import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 
 const MainLayout = () => {
   const { loading } = useContext(AuthContext);
-  if (loading) return <LoadingSpinner />;
+  // if (loading) return <LoadingSpinner />;
 
   return (
     <div>
