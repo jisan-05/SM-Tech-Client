@@ -30,19 +30,21 @@ const Navbar = () => {
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    <li className="text-lg font-semibold">
+                    <li className="text-[18px] font-medium">
                         <NavLink to="/">Home</NavLink>
                     </li>
 
-                    <li className="text-lg font-semibold">
+                    <li className="text-[18px] font-medium">
                         <NavLink to={"/programs"}>Programs</NavLink>
                     </li>
 
-                    <li className="text-lg font-semibold">
+                    <li className="text-[18px] font-medium">
                         <NavLink to="/Departments">Departments</NavLink>
                     </li>
-
-                    <li className="text-lg font-semibold">
+                    <li className="text-[18px] font-medium">
+                        <NavLink to="/searchStudent">Search Student</NavLink>
+                    </li>
+                    <li className="text-[18px] font-medium">
                         <NavLink to="/contactUs">Contact Us</NavLink>
                     </li>
                 </ul>
@@ -68,7 +70,6 @@ const Navbar = () => {
                             <img
                                 src={user?.photoURL}
                                 loading="lazy"
-
                                 className="w-12 h-12 bg-cover rounded-full"
                                 alt="User"
                             />

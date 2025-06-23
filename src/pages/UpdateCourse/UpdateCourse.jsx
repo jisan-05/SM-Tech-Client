@@ -10,6 +10,28 @@ const UpdateCourse = () => {
     const [startDate, setStartDate] = useState(new Date());
     const navigate = useNavigate();
 
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const { data } = await axios.get(
+                    `${import.meta.env.VITE_API_URL}/department`
+                );
+                const uniqueCategories = [
+                    ...new Set(
+                        data.map((dep) => dep.category.toLowerCase().trim())
+                    ),
+                ];
+                setCategories(uniqueCategories);
+            } catch (error) {
+                console.error("Failed to fetch department categories", error);
+            }
+        };
+
+        fetchCategories();
+    }, []);
+
     const course = useLoaderData();
     const {
         _id,
@@ -25,7 +47,9 @@ const UpdateCourse = () => {
     } = course;
 
     // Set default learning points from loader data
-    const [learningPoints, setLearningPoints] = useState(whatYoullLearn.length ? whatYoullLearn : [""]);
+    const [learningPoints, setLearningPoints] = useState(
+        whatYoullLearn.length ? whatYoullLearn : [""]
+    );
 
     const handleAddLearningPoint = () => {
         setLearningPoints([...learningPoints, ""]);
@@ -45,7 +69,9 @@ const UpdateCourse = () => {
 
     // Set default curriculum from loader data
     const [curriculum, setCurriculum] = useState(
-        dataToSend.length ? dataToSend.map((item) => ({ title: item.title })) : [{ title: "" }]
+        dataToSend.length
+            ? dataToSend.map((item) => ({ title: item.title }))
+            : [{ title: "" }]
     );
 
     const handleChange = (index, value) => {
@@ -84,7 +110,9 @@ const UpdateCourse = () => {
             title: item.title,
         }));
 
-        const whatYoullLearn = learningPoints.filter((point) => point.trim() !== "");
+        const whatYoullLearn = learningPoints.filter(
+            (point) => point.trim() !== ""
+        );
 
         try {
             const course_banner = await cloudinaryUploadHd(banner_image);
@@ -131,83 +159,216 @@ const UpdateCourse = () => {
                 <form onSubmit={handleFormSubmit}>
                     <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                         <div>
-                            <label className="text-gray-700" htmlFor="course_title">Course Title</label>
-                            <input required id="course_title" defaultValue={course_title} name="course_title" type="text" className="block w-full px-4 py-2 mt-2 border rounded-md" />
+                            <label
+                                className="text-gray-700"
+                                htmlFor="course_title"
+                            >
+                                Course Title
+                            </label>
+                            <input
+                                required
+                                id="course_title"
+                                defaultValue={course_title}
+                                name="course_title"
+                                type="text"
+                                className="block w-full px-4 py-2 mt-2 border rounded-md"
+                            />
                         </div>
 
                         <div>
-                            <label className="text-gray-700" htmlFor="course_instructor">Instructor Name</label>
-                            <input required defaultValue={course_instructor} id="course_instructor" name="course_instructor" type="text" className="block w-full px-4 py-2 mt-2 border rounded-md" />
+                            <label
+                                className="text-gray-700"
+                                htmlFor="course_instructor"
+                            >
+                                Instructor Name
+                            </label>
+                            <input
+                                required
+                                defaultValue={course_instructor}
+                                id="course_instructor"
+                                name="course_instructor"
+                                type="text"
+                                className="block w-full px-4 py-2 mt-2 border rounded-md"
+                            />
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label className="text-gray-700">Enrollment Deadline</label>
-                            <DatePicker className="text-black border p-2 rounded-md" selected={startDate} onChange={(date) => setStartDate(date)} />
+                            <label className="text-gray-700">
+                                Enrollment Deadline
+                            </label>
+                            <DatePicker
+                                className="text-black border p-2 rounded-md"
+                                selected={startDate}
+                                onChange={(date) => setStartDate(date)}
+                            />
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label className="text-gray-700" htmlFor="category">Category</label>
-                            <select required name="category" defaultValue={category} id="category" className="border p-2 rounded-md">
-                                <option value="electrical">Electrical Engineering</option>
-                                <option value="mechanical">Mechanical Engineering</option>
-                                <option value="civil">Civil Engineering</option>
-                                <option value="computer">Computer Science & Engineering</option>
-                                <option value="textile">Textile Engineering</option>
+                            <label className="text-gray-700" htmlFor="category">
+                                Category
+                            </label>
+                            <select
+                                required
+                                name="category"
+                                id="category"
+                                className="border p-2 rounded-md"
+                            >
+                                <option value="">Select a category</option>
+                                {categories.map((cat, idx) => (
+                                    <option key={idx} value={cat}>
+                                        {cat.replace(/(^|\s)\S/g, (l) =>
+                                            l.toUpperCase()
+                                        )}
+                                    </option>
+                                ))}
                             </select>
                         </div>
 
                         <div>
-                            <label className="text-gray-700" htmlFor="course_price">Course Price</label>
-                            <input required id="course_price" defaultValue={course_price} name="course_price" type="number" className="block w-full px-4 py-2 mt-2 border rounded-md" />
+                            <label
+                                className="text-gray-700"
+                                htmlFor="course_price"
+                            >
+                                Course Price
+                            </label>
+                            <input
+                                required
+                                id="course_price"
+                                defaultValue={course_price}
+                                name="course_price"
+                                type="number"
+                                className="block w-full px-4 py-2 mt-2 border rounded-md"
+                            />
                         </div>
 
                         <div>
-                            <label className="text-gray-700" htmlFor="course_duration">Course Duration</label>
-                            <input required defaultValue={course_duration} id="course_duration" name="course_duration" type="number" className="block w-full px-4 py-2 mt-2 border rounded-md" />
+                            <label
+                                className="text-gray-700"
+                                htmlFor="course_duration"
+                            >
+                                Course Duration
+                            </label>
+                            <input
+                                required
+                                defaultValue={course_duration}
+                                id="course_duration"
+                                name="course_duration"
+                                type="number"
+                                className="block w-full px-4 py-2 mt-2 border rounded-md"
+                            />
                         </div>
 
                         <div className="flex flex-col gap-2 mt-4">
-                            <label className="text-gray-700" htmlFor="course_banner">Course Banner (Image)</label>
-                            <input required type="file" id="course_banner" name="banner_image" accept="image/*" />
+                            <label
+                                className="text-gray-700"
+                                htmlFor="course_banner"
+                            >
+                                Course Banner (Image)
+                            </label>
+                            <input
+                                required
+                                type="file"
+                                id="course_banner"
+                                name="banner_image"
+                                accept="image/*"
+                            />
                         </div>
                     </div>
 
                     <div className="flex flex-col gap-2 mt-4">
-                        <label className="text-gray-700" htmlFor="description">Description</label>
-                        <textarea required defaultValue={course_description} id="description" name="description" className="block w-full px-4 py-2 mt-2 border rounded-md"></textarea>
+                        <label className="text-gray-700" htmlFor="description">
+                            Description
+                        </label>
+                        <textarea
+                            required
+                            defaultValue={course_description}
+                            id="description"
+                            name="description"
+                            className="block w-full px-4 py-2 mt-2 border rounded-md"
+                        ></textarea>
                     </div>
 
                     {/* What You'll Learn Bio */}
                     <div>
-                        <label className="text-gray-700" htmlFor="learn_bio">What You'll Learn Bio</label>
-                        <input required id="learn_bio" name="learn_bio" defaultValue={learn_bio} placeholder="Write What You'll Learn in Bio ..." type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md" />
+                        <label className="text-gray-700" htmlFor="learn_bio">
+                            What You'll Learn Bio
+                        </label>
+                        <input
+                            required
+                            id="learn_bio"
+                            name="learn_bio"
+                            defaultValue={learn_bio}
+                            placeholder="Write What You'll Learn in Bio ..."
+                            type="text"
+                            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
+                        />
                     </div>
 
                     {/* What You'll Learn Section */}
                     <div className="mt-6">
-                        <label className="text-gray-700 block mb-2">What You'll Learn</label>
+                        <label className="text-gray-700 block mb-2">
+                            What You'll Learn
+                        </label>
                         <div className="space-y-3">
                             {learningPoints.map((point, index) => (
-                                <div key={index} className="flex items-center gap-2">
+                                <div
+                                    key={index}
+                                    className="flex items-center gap-2"
+                                >
                                     <input
                                         type="text"
                                         value={point}
-                                        onChange={(e) => handleLearningPointChange(index, e.target.value)}
-                                        placeholder={`Learning point ${index + 1}`}
+                                        onChange={(e) =>
+                                            handleLearningPointChange(
+                                                index,
+                                                e.target.value
+                                            )
+                                        }
+                                        placeholder={`Learning point ${
+                                            index + 1
+                                        }`}
                                         className="flex-1 block w-full px-4 py-2 text-gray-700 bg-white border border-gray-200 rounded-md"
                                     />
                                     {learningPoints.length > 1 && (
-                                        <button type="button" onClick={() => handleRemoveLearningPoint(index)} className="p-2 text-red-500 hover:text-red-700">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                handleRemoveLearningPoint(index)
+                                            }
+                                            className="p-2 text-red-500 hover:text-red-700"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="h-5 w-5"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                    clipRule="evenodd"
+                                                />
                                             </svg>
                                         </button>
                                     )}
                                 </div>
                             ))}
-                            <button type="button" onClick={handleAddLearningPoint} className="mt-2 flex items-center text-blue-600 hover:text-blue-800">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                            <button
+                                type="button"
+                                onClick={handleAddLearningPoint}
+                                className="mt-2 flex items-center text-blue-600 hover:text-blue-800"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5 mr-1"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                                        clipRule="evenodd"
+                                    />
                                 </svg>
                                 Add Learning Point
                             </button>
@@ -216,29 +377,64 @@ const UpdateCourse = () => {
 
                     {/* Course Curriculum */}
                     <div className="mt-6">
-                        <label className="text-gray-700 block mb-2">Add Course Curriculum</label>
+                        <label className="text-gray-700 block mb-2">
+                            Add Course Curriculum
+                        </label>
                         <div className="space-y-3">
                             {curriculum.map((item, index) => (
-                                <div key={index} className="flex items-center gap-2">
+                                <div
+                                    key={index}
+                                    className="flex items-center gap-2"
+                                >
                                     <input
                                         type="text"
                                         value={item.title}
-                                        onChange={(e) => handleChange(index, e.target.value)}
+                                        onChange={(e) =>
+                                            handleChange(index, e.target.value)
+                                        }
                                         placeholder={`Curriculum ${index + 1}`}
                                         className="flex-1 block w-full px-4 py-2 text-gray-700 bg-white border border-gray-200 rounded-md"
                                     />
                                     {curriculum.length > 1 && (
-                                        <button type="button" onClick={() => handleRemoveWeek(index)} className="p-2 text-red-500 hover:text-red-700">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                handleRemoveWeek(index)
+                                            }
+                                            className="p-2 text-red-500 hover:text-red-700"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="h-5 w-5"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                    clipRule="evenodd"
+                                                />
                                             </svg>
                                         </button>
                                     )}
                                 </div>
                             ))}
-                            <button type="button" onClick={handleAddWeek} className="mt-2 flex items-center text-blue-600 hover:text-blue-800">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                            <button
+                                type="button"
+                                onClick={handleAddWeek}
+                                className="mt-2 flex items-center text-blue-600 hover:text-blue-800"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5 mr-1"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                                        clipRule="evenodd"
+                                    />
                                 </svg>
                                 Add Curriculum
                             </button>

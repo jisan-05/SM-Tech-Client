@@ -14,6 +14,7 @@ import {
 } from "react-icons/fa";
 import contactAnimation from "../../assets/contact-us.json";
 import Lottie from "lottie-react";
+import { HiOutlineMail } from "react-icons/hi";
 
 const ContactUs = () => {
     const [formData, setFormData] = useState({
@@ -209,18 +210,16 @@ const ContactUs = () => {
                                         ),
                                         color: "hover:text-[#0077b5]",
                                         url: "https://www.facebook.com/profile.php?id=61573641314411",
-                                        target:'blank'
+                                        target: "blank",
                                     },
                                     {
                                         icon: (
-                                            <FaFacebook className="text-xl" />
+                                            <HiOutlineMail className="text-xl" />
                                         ),
-                                        color: "hover:text-[#0077b5]",
-                                        url: "https://www.facebook.com/profile.php?id=61573641314411",
-                                        target:'blank'
+                                        color: "hover:text-red-500",
+                                        url: "mailto:smhightech2025@gmail.com",
+                                        target: "blank",
                                     },
-                                   
-                                    
                                 ].map((social, index) => (
                                     <motion.a
                                         key={index}

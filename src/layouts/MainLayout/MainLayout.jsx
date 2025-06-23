@@ -20,7 +20,7 @@ const MainLayout = () => {
         <Outlet />
       </div>
       <div className="bg-[#142E2C]">
-        <div className="max-w-[92%] mx-auto py-14">
+        <div className="max-w-[93%] md:max-w-[94%] lg:max-w-[92%] 2xl:max-w-[1500px] mx-auto pb-20 pt-4">
           <Footer />
         </div>
       </div>

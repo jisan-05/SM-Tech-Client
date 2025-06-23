@@ -6,7 +6,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 
 const UpdateDepartment = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const department = useLoaderData();
     const { _id, title, description, photoURL, category } = department;
@@ -33,11 +33,12 @@ const UpdateDepartment = () => {
         try {
             await axios.put(
                 `${import.meta.env.VITE_API_URL}/updateDepartment/${_id}`,
-                departmentData,{withCredentials:true}
+                departmentData,
+                { withCredentials: true }
             );
             toast.success("Update Successfully");
             setIsLoading(false);
-            navigate("/dashboardLayout/manageDepartment")
+            navigate("/dashboardLayout/manageDepartment");
             e.target.reset();
         } catch {
             toast.error("something went wrong");
@@ -47,7 +48,7 @@ const UpdateDepartment = () => {
     return (
         <div className="max-w-xl mx-auto mt-16 p-8 bg-white shadow-lg rounded-lg">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
-                Update Department 
+                Update Department
             </h2>
             <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
@@ -64,29 +65,18 @@ const UpdateDepartment = () => {
                     />
                 </div>
 
-                <div className="flex flex-col gap-2 ">
-                    <label className="text-gray-700 " htmlFor="category">
+                <div className="flex flex-col gap-2">
+                    <label className="text-gray-700" htmlFor="category">
                         Category
                     </label>
-                    <select
-                        required
-                        defaultValue={category}
+                    <input
+                        type="text"
                         name="category"
                         id="category"
+                        placeholder="e.g. computer, civil, textile"
+                        required
                         className="border p-2 rounded-md"
-                    >
-                        <option value="electrical">
-                            Electrical Engineering
-                        </option>
-                        <option value="mechanical">
-                            Mechanical Engineering
-                        </option>
-                        <option value="civil">Civil Engineering</option>
-                        <option value="computer">
-                            Computer Science & Engineering
-                        </option>
-                        <option value="textile">Textile Engineering</option>
-                    </select>
+                    />
                 </div>
 
                 <div>

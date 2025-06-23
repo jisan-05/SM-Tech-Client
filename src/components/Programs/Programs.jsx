@@ -1,202 +1,110 @@
-// // React Tab start
-// import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-// import "react-tabs/style/react-tabs.css";
-// // React Tab End
-
-// import ProgramCard from "../ProgramCard/ProgramCard";
-// import { useEffect, useState } from "react";
-// import axios from "axios";
-
-// const Programs = () => {
-//   const [courses, setCourses] = useState([]);
-//   useEffect(() => {
-//     const getData = async () => {
-//       const { data } = await axios(`${import.meta.env.VITE_API_URL}/course`);
-//       setCourses(data);
-//     };
-//     getData();
-//   }, []);
-//   return (
-//     <Tabs>
-//       <TabList>
-//         <Tab>Computer Science & Engineering</Tab>
-//         <Tab>Civil Engineering</Tab>
-//         <Tab>Textile Engineering</Tab>
-//         <Tab>Mechanical Engineering</Tab>
-//         <Tab>Electrical Engineering</Tab>
-//       </TabList>
-
-//       {/* Computer */}
-//       <TabPanel>
-//         {courses.map((course) => {
-//           if (course.category === "computer") {
-//             return <ProgramCard course={course} key={course._id} />;
-//           }
-//         })}
-//       </TabPanel>
-
-//       {/* Civil */}
-//       <TabPanel>
-//         {courses.map((course) => {
-//           if (course.category === "civil") {
-//             return <ProgramCard course={course} key={course._id} />;
-//           }
-//         })}
-//       </TabPanel>
-
-//       {/* Textile */}
-//       <TabPanel>
-//         {courses.map((course) => {
-//           if (course.category === "textile") {
-//             return <ProgramCard course={course} key={course._id} />;
-//           }
-//         })}
-//       </TabPanel>
-
-//       {/* Mechanical */}
-//       <TabPanel>
-//         {courses.map((course) => {
-//           if (course.category === "mechanical") {
-//             <ProgramCard course={course} key={course._id} />;
-//           }
-//         })}
-//       </TabPanel>
-
-//       {/* Electrical */}
-//       <TabPanel>
-//         {courses.map((course) => {
-//           if (course.category === "electrical") {
-//             return <ProgramCard course={course} key={course._id} />;
-//           }
-//         })}
-//       </TabPanel>
-//     </Tabs>
-//   );
-// };
-
-// export default Programs;
-
-// With Design
-// React Tab start
+import { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import "./Programs.css";
-// React Tab End
-
-import ProgramCard from "../ProgramCard/ProgramCard";
-import { useEffect, useState } from "react";
 import axios from "axios";
+import ProgramCard from "../ProgramCard/ProgramCard";
+import LoadingSpinner from "../Shared/LoadingSpinner";
+import './Programs.css'
 
 const Programs = () => {
-  const [courses, setCourses] = useState([]);
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await axios(`${import.meta.env.VITE_API_URL}/course`);
-      setCourses(data);
-    };
-    getData();
-  }, []);
-  return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold text-center pb-12 bg-teal-600 bg-clip-text text-transparent">
-        Explore Our Programs
-      </h1>
+    const [departments, setDepartments] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState("");
+    const [courses, setCourses] = useState([]);
+    const [loading, setLoading] = useState(false);
 
-      <Tabs className="react-tabs">
-        <TabList className="flex flex-wrap gap-2 justify-center mb-12">
-          <Tab
-            className="px-6 py-3 rounded-full border border-gray-200 cursor-pointer transition-all duration-300 hover:bg-gray-50 focus:outline-none
-                        "
-          >
-            Computer Science & Engineering
-          </Tab>
+    // Fetch department categories
+    useEffect(() => {
+        const fetchDepartments = async () => {
+            const { data } = await axios.get(
+                `${import.meta.env.VITE_API_URL}/department`
+            );
+            setDepartments(data);
 
-          <Tab
-            className="px-6 py-3 rounded-full border border-gray-200 cursor-pointer transition-all duration-300 hover:bg-gray-50 focus:outline-none
-                        "
-          >
-            Civil Engineering
-          </Tab>
+            const uniqueCategories = [
+                ...new Set(
+                    data.map((dep) => dep.category.toLowerCase().trim())
+                ),
+            ];
+            setCategories(uniqueCategories);
 
-          <Tab
-            className="px-6 py-3 rounded-full border border-gray-200 cursor-pointer transition-all duration-300 hover:bg-gray-50 focus:outline-none
-                        "
-          >
-            Textile Engineering
-          </Tab>
+            if (uniqueCategories.length > 0) {
+                setSelectedCategory(uniqueCategories[0]); // Set default selected category
+            }
+        };
 
-          <Tab
-            className="px-6 py-3 rounded-full border border-gray-200 cursor-pointer transition-all duration-300 hover:bg-gray-50 focus:outline-none
-                        "
-          >
-            Mechanical Engineering
-          </Tab>
+        fetchDepartments();
+    }, []);
 
-          <Tab
-            className="px-6 py-3 rounded-full border border-gray-200 cursor-pointer transition-all duration-300 hover:bg-gray-50 focus:outline-none
-                        "
-          >
-            Electrical Engineering
-          </Tab>
-        </TabList>
+    // Fetch courses for selected category
+    useEffect(() => {
+        if (!selectedCategory) return;
 
-        {/* Computer */}
-        <TabPanel>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {courses.map((course) => {
-              if (course.category === "computer") {
-                return <ProgramCard course={course} key={course._id} />;
-              }
-            })}
-          </div>
-        </TabPanel>
+        const fetchCourses = async () => {
+            setLoading(true);
+            const { data } = await axios.get(
+                `${import.meta.env.VITE_API_URL}/course`
+            );
+            const filtered = data.filter(
+                (course) =>
+                    course.category.toLowerCase().trim() === selectedCategory
+            );
+            setCourses(filtered);
+            setLoading(false);
+        };
 
-        {/* Civil */}
-        <TabPanel>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {courses.map((course) => {
-              if (course.category === "civil") {
-                return <ProgramCard course={course} key={course._id} />;
-              }
-            })}
-          </div>
-        </TabPanel>
+        fetchCourses();
+    }, [selectedCategory]);
 
-        {/* Textile */}
-        <TabPanel>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {courses.map((course) => {
-              if (course.category === "textile") {
-                return <ProgramCard course={course} key={course._id} />;
-              }
-            })}
-          </div>
-        </TabPanel>
+    return (
+        <div className="max-w-7xl mx-auto px-4 py-12">
+            <h1 className="text-4xl font-bold text-center pb-12 bg-teal-600 bg-clip-text text-transparent">
+                Explore Our Programs
+            </h1>
 
-        {/* Mechanical */}
-        <TabPanel>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {courses.map((course) => {
-              if (course.category === "mechanical") {
-                return <ProgramCard course={course} key={course._id} />;
-              }
-            })}
-          </div>
-        </TabPanel>
+            <Tabs
+                selectedIndex={categories.indexOf(selectedCategory)}
+                onSelect={(index) => setSelectedCategory(categories[index])}
+            >
+                <TabList className="flex flex-wrap gap-3 justify-center mb-10">
+                    {categories.map((category, idx) => (
+                        <Tab
+                            key={idx}
+                            className="px-5 py-2 rounded-full border border-gray-300 cursor-pointer hover:bg-gray-100 transition-all"
+                        >
+                            {category.replace(/(^|\s)\S/g, (l) =>
+                                l.toUpperCase()
+                            )}
+                        </Tab>
+                    ))}
+                </TabList>
 
-        {/* Electrical */}
-        <TabPanel>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {courses.map((course) => {
-              if (course.category === "electrical") {
-                return <ProgramCard course={course} key={course._id} />;
-              }
-            })}
-          </div>
-        </TabPanel>
-      </Tabs>
-    </div>
-  );
+                {categories.map((category, idx) => (
+                    <TabPanel key={idx}>
+                        {loading ? (
+                            <LoadingSpinner></LoadingSpinner>
+                        ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {courses.length > 0 ? (
+                                    courses.map((course) => (
+                                        <ProgramCard
+                                            key={course._id}
+                                            course={course}
+                                        />
+                                    ))
+                                ) : (
+                                    <p className="text-center text-gray-500 col-span-full text-lg italic">
+                                        No active courses available in this
+                                        department.
+                                    </p>
+                                )}
+                            </div>
+                        )}
+                    </TabPanel>
+                ))}
+            </Tabs>
+        </div>
+    );
 };
 
 export default Programs;

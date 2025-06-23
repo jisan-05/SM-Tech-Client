@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import toast from "react-hot-toast";
 
@@ -12,6 +12,24 @@ const AddCourse = () => {
     const [loading, setLoading] = useState(false);
     const [learningPoints, setLearningPoints] = useState([""]);
     const navigate = useNavigate();
+
+    // new added start
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get(`${import.meta.env.VITE_API_URL}/department`)
+            .then((res) => {
+                const unique = [
+                    ...new Set(
+                        res.data.map((dep) => dep.category.toLowerCase().trim())
+                    ),
+                ];
+                setCategories(unique);
+            })
+            .catch((err) => console.error("Failed to fetch categories:", err));
+    }, []);
+    // new added End
 
     const handleAddLearningPoint = () => {
         setLearningPoints([...learningPoints, ""]);
@@ -163,11 +181,8 @@ const AddCourse = () => {
                             />
                         </div>
 
-                        <div className="flex flex-col gap-2 ">
-                            <label
-                                className="text-gray-700 "
-                                htmlFor="category"
-                            >
+                        <div className="flex flex-col gap-2">
+                            <label className="text-gray-700" htmlFor="category">
                                 Category
                             </label>
                             <select
@@ -176,21 +191,19 @@ const AddCourse = () => {
                                 id="category"
                                 className="border p-2 rounded-md"
                             >
-                                <option value="electrical">
-                                    Electrical Engineering
+                                <option value="" disabled selected>
+                                    Select a category
                                 </option>
-                                <option value="mechanical">
-                                    Mechanical Engineering
-                                </option>
-                                <option value="civil">Civil Engineering</option>
-                                <option value="computer">
-                                    Computer Science & Engineering
-                                </option>
-                                <option value="textile">
-                                    Textile Engineering
-                                </option>
+                                {categories.map((cat) => (
+                                    <option key={cat} value={cat}>
+                                        {cat.replace(/(^|\s)\S/g, (l) =>
+                                            l.toUpperCase()
+                                        )}
+                                    </option>
+                                ))}
                             </select>
                         </div>
+
                         <div>
                             <label
                                 className="text-gray-700 "

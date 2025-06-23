@@ -2,16 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import DepartmentCard from "../../components/DepartmentCard/DepartmentCard";
+import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 
 const Departments = () => {
-    const [department,setDepartment]=useState([])
+    const [department, setDepartment] = useState([]);
+    const [loading, setLoading] = useState(true); // <- new loading state
 
-    useEffect(()=>{
-         axios.get(`${import.meta.env.VITE_API_URL}/department`)
-         .then(res=> setDepartment(res.data))
-    },[])
-    
-    
+    useEffect(() => {
+        axios
+            .get(`${import.meta.env.VITE_API_URL}/department`)
+            .then((res) => {
+                setDepartment(res.data);
+                setLoading(false); // done loading
+            })
+            .catch((err) => {
+                console.error("Failed to load departments", err);
+                setLoading(false); // still stop loading on error
+            });
+    }, []);
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -26,13 +34,21 @@ const Departments = () => {
                     cutting-edge education and research opportunities.
                 </p>
             </div>
-
-            {/* Departments Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {
-                    department.map(departmentData => <DepartmentCard key={departmentData._id} departmentData={departmentData}></DepartmentCard>)
-                }
-            </div>
+            {/* Grid For Department  */}
+            {loading ? (
+                <div className="flex justify-center items-center min-h-[200px]">
+                    <LoadingSpinner></LoadingSpinner>
+                </div>
+            ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {department.map((departmentData) => (
+                        <DepartmentCard
+                            key={departmentData._id}
+                            departmentData={departmentData}
+                        />
+                    ))}
+                </div>
+            )}
 
             {/* View All Button */}
             <div className="text-center mt-12">
