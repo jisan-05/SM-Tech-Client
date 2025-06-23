@@ -1,4 +1,3 @@
-import React from "react";
 import aboutAnimation from "../../assets/about-us.json";
 import Lottie from "lottie-react";
 import PrimaryButton from "../Button/PrimaryButton";

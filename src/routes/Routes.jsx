@@ -35,7 +35,7 @@ import EditTeacher from "../components/EditTeacher/EditTeacher";
 import StudentExcel from "../components/Excel/StudentExce";
 import AddEvent from "../components/AddEvent/AddEvent";
 import ManageEvents from "../components/ManageEvents/ManageEvents";
-
+import AboutUsTwo from "../components/AboutUsTwo/AboutUsTwo";
 
 export const router = createBrowserRouter([
   {
@@ -107,6 +107,10 @@ export const router = createBrowserRouter([
         path: "/searchStudent",
         element: <SearchForStudent />,
       },
+      {
+        path: "/aboutUs",
+        element: <AboutUsTwo />,
+      },
     ],
   },
   {
@@ -176,10 +180,9 @@ export const router = createBrowserRouter([
         element: <ManageEvents></ManageEvents>,
       },
       {
-        path:'addEvent',
-        element:<AddEvent></AddEvent>
+        path: "addEvent",
+        element: <AddEvent></AddEvent>,
       },
-     
     ],
   },
 ]);
