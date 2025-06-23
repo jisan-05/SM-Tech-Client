@@ -71,6 +71,7 @@ const UpdateDepartment = () => {
                     </label>
                     <input
                         type="text"
+                        defaultValue={category}
                         name="category"
                         id="category"
                         placeholder="e.g. computer, civil, textile"
