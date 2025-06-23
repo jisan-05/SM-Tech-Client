@@ -5,13 +5,15 @@ const Footer = () => {
     <footer className="footer sm:footer-horizontal text-white ">
       <nav>
         <h6 className="footer-title">Our Departments</h6>
-        <a>Computer Science & Technology</a>
+        <a>Computer Science & Engineering</a>
         <a>Electrical Engineering</a>
         <a>Civil Engineering</a>
         <a>Mechanical Engineering</a>
       </nav>
       <nav>
-        <Link className="link link-hover">About us</Link>
+        <Link to={"/aboutUs"} className="link link-hover">
+          About us
+        </Link>
         <Link to={"/contactUs"} className="link link-hover">
           Contact
         </Link>
