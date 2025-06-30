@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="footer sm:footer-horizontal text-white ">
+    <footer className="footer sm:footer-horizontal text-white pt-8">
       <nav>
         <h6 className="footer-title">Our Departments</h6>
         <a>Computer Science & Engineering</a>
