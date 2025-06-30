@@ -6,17 +6,20 @@ import axios from "axios";
 
 const useRole = () => {
     const { user, loading } = useAuth();
-    console.log(user, loading);
-    
+    //console.log(user, loading);
+
     const { data: role, isLoading } = useQuery({
         queryKey: ["role", user?.email],
         enabled: !loading && !!user?.email,
         queryFn: async () => {
-            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/users/role/${user?.email}`,{withCredentials:true});
+            const { data } = await axios.get(
+                `${import.meta.env.VITE_API_URL}/users/role/${user?.email}`,
+                { withCredentials: true }
+            );
             return data.role;
         },
     });
-    console.log(role);
+    //console.log(role);
     return [role, isLoading];
 };
 

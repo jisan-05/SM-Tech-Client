@@ -23,7 +23,7 @@ const AddDepartments = () => {
             photoURL,
             category,
         };
-        console.log(departmentData);
+        //console.log(departmentData);
 
         try {
             await axios.post(

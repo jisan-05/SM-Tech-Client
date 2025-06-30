@@ -19,7 +19,7 @@ const Navbar = () => {
     const signOut = () => {
         logOut();
     };
-    console.log(user?.photoURL);
+    //console.log(user?.photoURL);
 
     return (
         <div className="navbar bg-base-100 ">

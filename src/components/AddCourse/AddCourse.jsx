@@ -108,19 +108,19 @@ const AddCourse = () => {
             dataToSend,
         };
 
-        console.log(courseData);
+        //console.log(courseData);
         try {
             const { data } = await axios.post(
                 `${import.meta.env.VITE_API_URL}/course`,
                 courseData,
                 { withCredentials: true }
             );
-            console.log(data);
+            //console.log(data);
             toast.success("New Course Added Successfully");
             navigate("/dashboardLayout/manageCourse");
             e.target.reset();
         } catch (err) {
-            console.log(err);
+            //console.log(err);
             toast.error("Something are wrong! Tray Again");
         }
         setLoading(false);

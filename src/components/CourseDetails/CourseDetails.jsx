@@ -96,7 +96,7 @@ const CourseDetails = () => {
         dataToSend,
     } = course;
 
-    console.log(course_title);
+    //console.log(course_title);
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-8">

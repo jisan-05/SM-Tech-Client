@@ -38,12 +38,12 @@ const ManageDepartment = () => {
                         { withCredentials: true }
                     );
                     // Here use get data for auto refresh ui
-                    console.log(data);
+                    //console.log(data);
                     getData();
 
                     toast.success("Delete Course Successfully");
                 } catch (err) {
-                    console.log(err);
+                    //console.log(err);
                     toast.error("Something went wrong! Try again.");
                 }
             }

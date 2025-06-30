@@ -9,7 +9,7 @@ import useAuth from "../../hooks/useAuth";
 import { saveUser } from "../../utils/utils";
 
 const Login = () => {
-    const { signIn, signInWithGoogle, loading, user ,setLoading} = useAuth();
+    const { signIn, signInWithGoogle, loading, user, setLoading } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location?.state?.from?.pathname || "/";
@@ -29,9 +29,9 @@ const Login = () => {
             navigate(from, { replace: true });
             toast.success("Login Successful");
         } catch (err) {
-            console.log(err);
+            //console.log(err);
             toast.error(err?.message);
-            setLoading(false)
+            setLoading(false);
         }
     };
 
@@ -39,13 +39,13 @@ const Login = () => {
     const handleGoogleSignIn = async () => {
         try {
             //User Registration using google
-            const data = await signInWithGoogle()
+            const data = await signInWithGoogle();
             await saveUser(data?.user);
-            
+
             navigate(from, { replace: true });
             toast.success("Login Successful");
         } catch (err) {
-            console.log(err);
+            //console.log(err);
             toast.error(err?.message);
         }
     };

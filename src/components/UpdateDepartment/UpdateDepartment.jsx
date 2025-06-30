@@ -10,7 +10,7 @@ const UpdateDepartment = () => {
 
     const department = useLoaderData();
     const { _id, title, description, photoURL, category } = department;
-    console.log(department);
+    //console.log(department);
 
     const handleSubmit = async (e) => {
         setIsLoading(true);
@@ -28,7 +28,7 @@ const UpdateDepartment = () => {
             photoURL,
             category,
         };
-        console.log(departmentData);
+        //console.log(departmentData);
 
         try {
             await axios.put(

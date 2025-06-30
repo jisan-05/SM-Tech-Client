@@ -61,7 +61,7 @@
 //     const course_complete_date = form.course_complete_date.value;
 //     const course_status = form.course_status.value;
 
-//     console.log(
+//     //console.log(
 //       studentName,
 //       fatherName,
 //       motherName,
@@ -275,9 +275,9 @@ const AddStudent = () => {
             );
             setLoading(false);
             toast.success("Add Student Successfully");
-            console.log(data);
+            // console.log(data);
         } catch (err) {
-            console.log(err);
+            //console.log(err);
             toast.error("Cant add student now! Try again");
         }
     };
