@@ -1,12 +1,20 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Client Env file sample for test 
+### Firebase Configuration
+```
+VITE_apiKey=Example Api Key
+VITE_authDomain=Example Auth Domain
+VITE_projectId=Example Project ID
+VITE_storageBucket=Example Storage Bucket
+VITE_messagingSenderId=Example Messaging Sender ID
+VITE_appId=Example App ID
+```
+### Backend API URL
+```
+VITE_API_URL=http://localhost:9000
+VITE_API_URL=Your Server Site URL
+```
+### Cloudinary Configuration
+```
+VITE_CLOUDINARY_UPLOAD_PRESET=Cloudinary Upload Preset
+VITE_CLOUDINARY_CLOUD_NAME=Cloudinary Cloud Name
+```
